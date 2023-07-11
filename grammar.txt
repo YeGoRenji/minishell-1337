@@ -1,0 +1,21 @@
+<ALPHA> ::= A-Za-z
+
+<PATH> ::= <ALPHA>
+
+<WORD> ::= 'A-Za-z_/'
+
+<FILE> ::= <WORD>
+
+<DIRECTION> ::= '>' | '<' | '>>'
+
+<REDIRECTION> ::= <DIRECTION> <FILE>
+
+<ARGS> ::= <WORD> <ARGS>
+		|  <WORD>
+
+<COMMANDLINE> ::= [<REDIRECTION>] <EXEC> [<ARGS>]
+
+<PIPELINE> ::= <PIPELINE> '|' <COMMAND>
+			|  <COMMANDLINE>
+
+
