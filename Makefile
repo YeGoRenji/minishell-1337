@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/07/14 04:13:20 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/07/14 19:50:33 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ GLOBAL_HEADERS = Makefile
 all: $(OBJSFOLDER) $(LIBFT) $(NAME)
 
 $(LIBFT):
-	make -C src/libft
+	@echo "Compiling libft..."
+	@make -C src/libft
 
 $(OBJSFOLDER):
 	@mkdir objs

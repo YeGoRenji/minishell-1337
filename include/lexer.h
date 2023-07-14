@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:01:47 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/14 03:45:52 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/14 21:18:33 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "structs.h"
 
+// TODO : Add dollar token
+// TODO : Add wildcard token ?
 typedef enum e_token_type {
 	WORD = 0,
 	STR,

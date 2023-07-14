@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 04:49:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/14 05:00:46 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:46:34 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void print_substr(int start, int end, char *str)
 bool is_word(char c)
 {
 	// TODO : Check if there are other chars for WORD
-	return (ft_isalnum(c) || c == '/' || c == '-' || c == '_');
+	return (ft_isalnum(c) || c == '/' || c == '-' 
+			|| c == '_' || c == '.');
 }
 
 t_token_type get_token_type(char *str)

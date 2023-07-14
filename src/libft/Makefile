@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/23 02:54:46 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/07/14 01:23:23 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/07/14 19:49:01 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = cc
 
 NAME = libft.a
 
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = ft_isalpha.c \
 	  ft_isdigit.c \
@@ -66,7 +66,7 @@ bonus : $(bonus_obj)
 	ar rcs $(NAME) $^
 
 %.o : %.c libft.h
-	$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
 	rm -rf $(OBJ) $(bonus_obj)
