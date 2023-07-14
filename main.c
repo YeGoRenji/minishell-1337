@@ -1,28 +1,21 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "readline/readline.h"
+#include "include/structs.h"
+#include "include/lexer.h"
+#define ORANGE "\033[91m"
+#define NOCOL "\033[0m"
 
 int main(void)
 {
-	char *path = malloc(50);
-	int fd[2];
-	while (69)
+	char *cwd = malloc(50);
+	char *command_line;
+	cwd = getcwd(cwd, 50);
+	while (1)
 	{
-		printf("%s", path);
-		char *lol = readline(" > ");
-		pipe(fd);
-		if (!fork())
-		{
-			close(fd[0]);
-			write(fd[1], "69 lol", 6);
-			system(lol);
-		}
-		else
-		{
-			close(fd[1]);
-			int bytes_read = read(fd[0], path, 50);
-			wait(NULL);
-		}
+		printf(ORANGE"%s"NOCOL, cwd);
+		command_line = readline(" > ");
+		if (!command_line) break;
+		lexer(command_line);
+		free(command_line);
 	}
+	free(command_line);
+	free(cwd);
 }
