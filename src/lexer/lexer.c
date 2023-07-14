@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 04:49:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/14 04:49:36 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/14 05:00:46 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void print_substr(int start, int end, char *str)
 
 bool is_word(char c)
 {
-	// TODO : Check if there is other chars for WORD
+	// TODO : Check if there are other chars for WORD
 	return (ft_isalnum(c) || c == '/' || c == '-' || c == '_');
 }
 
@@ -81,8 +81,11 @@ int	get_token_len(t_token_type type, char *str)
 		pos = ft_strchr(str + 1, '"');
 	else
 		pos = ft_strchr(str + 1, '\'');
+
+	// TODO : This is Unclosed Quote Error !
 	if (pos == NULL)
 		return (1);
+	// TODO : return the content without ' or "
 	return (pos - str + 1);
 }
 
