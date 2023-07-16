@@ -7,5 +7,6 @@
 #include <stdbool.h>
 #include "libft.h"
 #include <readline/readline.h>
+#include <readline/history.h>
 
 #endif // STRUCTS_H
