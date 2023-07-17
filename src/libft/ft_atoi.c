@@ -6,13 +6,13 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 17:38:02 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/14 01:10:47 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:57:45 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 
-static int	ft_iswhitespace(int c)
+bool	ft_iswhitespace(char c)
 {
 	if (c == '\t' || c == '\n' || c == '\f' || c == '\v' || c == ' '
 		|| c == '\r')

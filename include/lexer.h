@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:01:47 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/14 21:18:33 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:35:32 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include "structs.h"
 
-// TODO : Add dollar token
-// TODO : Add wildcard token ?
 typedef enum e_token_type {
 	WORD = 0,
 	STR,
@@ -29,9 +27,20 @@ typedef enum e_token_type {
 	RPREN,
 	PIPE,
 	OR,
-	AND
+	AND,
+	WHITE_SPACE
 } t_token_type;
 
-int lexer(char *command_line);
+typedef struct s_token {
+	t_token_type	type;
+	char			*value;
+	int				len;
+	bool			to_expand;
+} t_token;
+
+bool 			lexer(char *command_line, t_list **tokens);
+void			print_substr(int start, int end, char *str);
+t_token_type	get_token_type(char *str);
+int				get_token_len(t_token_type type, char *str);
 
 #endif // LEXER_H
