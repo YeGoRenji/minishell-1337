@@ -1,23 +1,28 @@
 <ALPHA> ::= A-Za-z
 
-<PATH> ::= <ALPHA>
-
 <WORD> ::= 'A-Za-z_/.*$'
 
 <FILE> ::= <WORD>
 
-<DIRECTION> ::= ">" | "<" | ">>" | "<<"
+<DIRECTION> ::= ">"
+			 | "<" 
+			 | ">>" 
+			 | "<<"
 
 <REDIRECTION> ::= <DIRECTION> <FILE>
 
-<ARGS> ::= <WORD> <ARGS> | <WORD>
+<ARGS> ::= <WORD> <ARGS>
+		| <WORD>
 
-// This means that $"" is not really an env (dont expand)
-<ENV> ::= $<ALPHA>+
+<COMMAND> ::= [<REDIRECTION>] <EXEC> [<ARGS>]
+			| <EXEC> [<REDIRECTION> <ARGS>]
+			| <EXEC> [<ARGS> <REDIRECTION>]
 
-<COMMANDLINE> ::= [<REDIRECTION>] <EXEC> [<ARGS>]
-				| <EXEC> [<REDIRECTION> <ARGS>]
-				| <EXEC> [<ARGS> <REDIRECTION>]
+<PIPELINE> ::= <COMMAND> "|" <PIPELINE>
+			|  <COMMAND>
+			| "(" <COMMAND> ")"
 
-<PIPELINE> ::= <COMMAND> '|' <PIPELINE>
-			|  <COMMANDLINE>
+<COMMANDLINE> ::= <PIPELINE> "&&" <COMMANDLINE>
+			   |  <PIPELINE> "||" <COMMANDLINE>
+			   |  "(" <COMMANDLINE> ")"
+			   |  <PIPELINE>
