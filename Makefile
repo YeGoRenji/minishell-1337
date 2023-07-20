@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/07/17 14:47:25 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/07/20 00:41:59 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,13 @@ OBJSFOLDER = objs/
 SRCS_LEXER = lexer.c \
 			 lexer_utils.c
 
+SRCS_PARSER = parser.c
+
+SRCS_AST = ast.c
+
 OBJS_FILES = $(SRCS_LEXER:.c=.o) \
+			 $(SRCS_PARSER:.c=.o) \
+			 $(SRCS_AST:.c=.o) \
 			 main.o
 
 LIBFT = src/libft/libft.a
@@ -44,6 +50,14 @@ $(OBJSFOLDER)%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJSFOLDER)%.o: src/lexer/%.c include/lexer.h $(GLOBAL_HEADERS)
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJSFOLDER)%.o: src/parser/%.c include/parser.h $(GLOBAL_HEADERS)
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJSFOLDER)%.o: src/parser/ast/%.c include/ast.h $(GLOBAL_HEADERS)
 	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) -c $< -o $@
 

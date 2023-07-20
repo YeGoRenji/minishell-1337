@@ -1,5 +1,6 @@
 #include "include/structs.h"
 #include "include/lexer.h"
+#include "include/parser.h"
 #define RED "\033[91m"
 #define NOCOL "\033[0m"
 
@@ -19,6 +20,8 @@ int main(void)
 		if (!command_line)
 			break;
 		if (!lexer(command_line, &tokens))
+			break ;
+		if (!parser(tokens))
 			break ;
 		add_history(command_line);
 		free(command_line);

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:01:47 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/17 16:35:32 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/19 19:00:57 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_token {
 	char			*value;
 	int				len;
 	bool			to_expand;
+	struct s_token	*nospace_next;
 } t_token;
 
 bool 			lexer(char *command_line, t_list **tokens);
