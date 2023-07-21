@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 04:49:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/19 21:58:01 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/21 01:43:09 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,12 @@ bool	lexer(char *command_line, t_list **tokens)
 		space = this_tok.type == WHITE_SPACE;
 		this_tok.type = get_token_type(command_line + index);
 		this_tok.len = get_token_len(this_tok.type, command_line + index);
-		if (this_tok.type >= 0 && this_tok.type != WHITE_SPACE)
+		if ((int)this_tok.type >= 0 && this_tok.type != WHITE_SPACE)
 		{
 			this_tok.value = ft_substr(command_line, index, this_tok.len);
 			if (!this_tok.value)
 				return (false);
-			add_token(tokens, 
+			add_token(tokens,
 				new_token(this_tok.type, this_tok.value, this_tok.len)
 				, space);
 		}

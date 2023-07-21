@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:54:59 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/19 21:00:07 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/21 01:42:48 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,17 @@ int	get_token_len(t_token_type type, char *str)
 	char	*lengths;
 	char	*pos;
 
-	lengths = "\0\0\0\1\2\1\2\1\1\1\2\0";
+	lengths = "\0\0\0\1\2\1\2\1\1\1\2\2\0";
 	if ((int)type < 0)
 		return (1);
 	if (lengths[type] > 0)
 		return (lengths[type]);
 	if (type == WORD)
+	{
+		if (str[0] == '$' && str[1] == '?')
+			return (2);
 		return (count_with_func(str, is_word));
+	}
 	if (type == WHITE_SPACE)
 		return (count_with_func(str, ft_iswhitespace));
 	if (type == DQSTR)
