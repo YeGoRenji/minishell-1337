@@ -18,9 +18,11 @@
 			| <EXEC> [<REDIRECTION> <ARGS>]
 			| <EXEC> [<ARGS> <REDIRECTION>]
 
-<PIPELINE> ::= <COMMAND> "|" <PIPELINE>
-			|  <COMMAND>
-			| "(" <COMMAND> ")"
+<REDIR> ::= <DIRECTION> <EXEC> {<DIRECTION> <FILE>}*
+
+<PIPELINE> ::= <REDIR> "|" <PIPELINE>
+			|  <REDIR>
+			| "(" <REDIR> ")"
 
 <COMMANDLINE> ::= <PIPELINE> "&&" <COMMANDLINE>
 			   |  <PIPELINE> "||" <COMMANDLINE>

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:36:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/20 00:39:47 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/22 01:05:04 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,48 @@ typedef enum e_node_type
 	P_AND,
 	P_OR,
 	P_PIPE,
-	P_COMMAND
+	P_EXEC,
+	P_REDIR
 }	t_node_type;
 
-typedef struct s_node
+typedef struct s_cmd
 {
 	t_node_type		type;
-	char 			*output;
-	char 			*input;
-	struct s_node 	*right;
-	struct s_node 	*left;
-} t_node;
+} t_ast_cmd;
 
-t_node	*new_node(t_node_type type, t_node *left, t_node *right);
+typedef struct s_ast_and
+{
+	t_node_type		type;
+	t_ast_cmd		*left;
+	t_ast_cmd		*right;
+} t_ast_and;
+
+typedef struct s_ast_or
+{
+	t_node_type		type;
+	t_ast_cmd		*left;
+	t_ast_cmd		*right;
+} t_ast_or;
+
+typedef struct s_ast_pipe
+{
+	t_node_type		type;
+	t_ast_cmd		*left;
+	t_ast_cmd		*right;
+} t_ast_pipe;
+
+typedef struct s_ast_exec
+{
+	t_node_type		type;
+	char			*argv;
+} t_ast_exec;
+
+typedef struct s_ast_redir
+{
+	t_node_type		type;
+	char			*file;
+	int				mode;
+	int				fd;
+} t_ast_redir;
 
 #endif // AST_H
