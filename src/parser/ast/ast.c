@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:36:25 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/22 02:58:17 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:36:04 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,17 @@ t_list	*grab_token(t_token_type type, t_list *tokens, t_list *end)
 
 t_ast_cmd	*parse_redir(t_list *lst_tok, t_list *lst_end)
 {
-	// t_list	*redir;
+	t_list	*redir;
 
 	print_got("parse_redir", lst_tok, lst_end);
 	printf("TODO: BE IMPLEMENTED\n");
-	return (NULL);
+
+	// Just to test
+	redir = grab_token(WORD, lst_tok, lst_end);
+	char *str = ((t_token *) redir->content)->value;
+	char **lol = malloc(sizeof(char *));
+	*lol = str;
+	return (exec_node(lol));
 }
 
 t_ast_cmd	*parse_pipe(t_list *lst_tok, t_list *lst_end)
