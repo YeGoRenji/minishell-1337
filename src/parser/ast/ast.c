@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:36:25 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/23 01:36:04 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/23 03:37:33 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,15 +130,15 @@ t_ast_cmd	*parse_cmd(t_list *lst_tok, t_list *lst_end)
 	t_list		*or_and;
 
 	print_got("parse_cmd", lst_tok, lst_end);
-	or_and = grab_token(OR, lst_tok, lst_end);
-	if (or_and)
-		return (or_node(
-			parse_cmd(lst_tok, or_and), 
-			parse_cmd(or_and->next, lst_end)
-		));
 	or_and = grab_token(AND, lst_tok, lst_end);
 	if (or_and)
 		return (and_node(
+			parse_cmd(lst_tok, or_and), 
+			parse_cmd(or_and->next, lst_end)
+		));
+	or_and = grab_token(OR, lst_tok, lst_end);
+	if (or_and)
+		return (or_node(
 			parse_cmd(lst_tok, or_and), 
 			parse_cmd(or_and->next, lst_end)
 		));
