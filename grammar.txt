@@ -20,9 +20,9 @@
 
 <PIPELINE> ::= <REDIR> "|" <PIPELINE>
 			|  <REDIR>
-			| "(" <REDIR> ")"
 
 <COMMANDLINE> ::= <COMMANDLINE> "&&" <COMMANDLINE>
 			   |  <COMMANDLINE> "||" <COMMANDLINE>
+			   |  "(" <COMMANDLINE> ")"
 			   |  <PIPELINE>
 

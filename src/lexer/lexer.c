@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 04:49:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/21 01:43:09 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/23 19:16:52 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void print_token(void *token) // Debug !
 	printf("\n");
 }
 
-void	add_sub_sublist(t_token **list, t_token *new_tok)
+void	add_to_sublist(t_token **list, t_token *new_tok)
 {
 	t_token	*ptr;
 
@@ -111,7 +111,7 @@ bool add_token(t_list **tokens, t_token *token, bool is_space)
 			return (false);
 		return (ft_lstadd_back(tokens, new_tok), true);
 	}
-	add_sub_sublist(&last_tok->nospace_next, token);
+	add_to_sublist(&last_tok->nospace_next, token);
 	return (true);
 }
 

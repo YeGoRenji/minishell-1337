@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:36:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/22 02:56:55 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/07/24 03:40:25 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,37 +30,25 @@ typedef struct s_cmd
 	t_node_type		type;
 } t_ast_cmd;
 
-typedef struct s_ast_and
+typedef struct s_ast_binary
 {
 	t_node_type		type;
 	t_ast_cmd		*left;
 	t_ast_cmd		*right;
-} t_ast_and;
-
-typedef struct s_ast_or
-{
-	t_node_type		type;
-	t_ast_cmd		*left;
-	t_ast_cmd		*right;
-} t_ast_or;
-
-typedef struct s_ast_pipe
-{
-	t_node_type		type;
-	t_ast_cmd		*left;
-	t_ast_cmd		*right;
-} t_ast_pipe;
+} t_ast_binary;
 
 typedef struct s_ast_exec
 {
 	t_node_type		type;
-	char			**argv;
+	t_list			*argv_tok;
 } t_ast_exec;
 
 typedef struct s_ast_redir
 {
 	t_node_type		type;
-	char			*file;
+	// Just for debug Maybe
+	t_token_type	direction;
+	t_token			*file_tok;
 	int				mode;
 	int				fd;
 	t_ast_cmd		*cmd;
