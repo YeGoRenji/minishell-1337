@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/07/20 00:41:59 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/08/11 03:07:12 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 OBJSFOLDER = objs/
 
 SRCS_LEXER = lexer.c \
-			 lexer_utils.c
+			 lexer_utils.c \
+			 tok_list.c
 
 SRCS_PARSER = parser.c
 

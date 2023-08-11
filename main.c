@@ -8,7 +8,7 @@ int main(void)
 {
 	// TODO : Make an actual Prompt with PWD
 	// Allocate an actual real size
-	t_list	*tokens;
+	t_token	*tokens;
 	char *cwd = malloc(50);
 	char *command_line;
 

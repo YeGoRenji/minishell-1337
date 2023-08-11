@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:36:25 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/24 03:40:46 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/11 03:19:55 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_ast_cmd	*binary_node(t_node_type type, t_ast_cmd *left, t_ast_cmd *right)
 	return ((t_ast_cmd *) node);
 }
 
-t_ast_cmd	*exec_node(t_list *argv_tok)
+t_ast_cmd	*exec_node(t_token *argv_tok)
 {
 	t_ast_exec	*node;
 	node = malloc(sizeof(t_ast_exec));
@@ -54,29 +54,29 @@ t_ast_cmd	*redir_node(t_token_type direction, t_token *file_tok, int mode, int f
 // ------------------------------------
 // cmd1 args | cmd2 args && cmd3
 
-void	print_got(char *str, t_list *lst_tok, t_list *lst_end) // Debug !
+void	print_got(char *str, t_token *lst_tok, t_token *lst_end) // Debug !
 {
 	printf("[%s] Got ", str);
 	while (lst_tok != lst_end) {
-		printf("%s ", ((t_token *)lst_tok->content)->value);
+		printf("%s ", lst_tok->value);
 		lst_tok = lst_tok->next;
 	}
 	printf("\n");
 }
 
-t_list	*grab_token(t_token_type type, t_list *tokens, t_list *end)
+t_token	*grab_token(t_token_type type, t_token *tokens, t_token *end)
 {
-	while (tokens && ((t_token *)tokens->content)->type != type && tokens != end)
+	while (tokens && tokens->type != type && tokens != end)
 		tokens = tokens->next;
 	if (tokens == end)
 		return (NULL);
 	return (tokens);
 }
 
-bool	contains_token(t_token_type types[], t_list *token)
+bool	contains_token(t_token_type types[], t_token *token)
 {
 	int	i;
-	t_token_type type = ((t_token *)token->content)->type;
+	t_token_type type = token->type;
 
 	i = 0;
 	while ((int)types[i] != -1)
@@ -88,7 +88,7 @@ bool	contains_token(t_token_type types[], t_list *token)
 	return (false);
 }
 
-t_list	*grab_tokens(t_token_type types[], t_list *tokens, t_list *end)
+t_token	*grab_tokens(t_token_type types[], t_token *tokens, t_token *end)
 {
 	while (tokens && tokens != end)
 	{
@@ -99,16 +99,16 @@ t_list	*grab_tokens(t_token_type types[], t_list *tokens, t_list *end)
 	return (NULL);
 }
 
-void	null_terminate_lst(t_list *lst_tok, t_list *lst_end)
+void	null_terminate_lst(t_token *lst_tok, t_token *lst_end)
 {
 	while (lst_tok->next != lst_end)
 		lst_tok = lst_tok->next;
 	lst_tok->next = NULL;
 }
 
-t_ast_cmd	*parse_exec(t_list *lst_tok, t_list *lst_end)
+t_ast_cmd	*parse_exec(t_token *lst_tok, t_token *lst_end)
 {
-	t_list	*exec;
+	t_token	*exec;
 
 	// Just to test
 	exec = grab_token(WORD, lst_tok, lst_end);
@@ -125,9 +125,9 @@ void free_tok(void *content)
 	free(tok);
 }
 
-void	consume_redir(t_list *redir, t_list **lst_tok)
+void	consume_redir(t_token *redir, t_token **lst_tok)
 {
-	t_list	*before_redir;
+	t_token	*before_redir;
 
 	if (redir == *lst_tok)
 		*lst_tok = (*lst_tok)->next->next;
@@ -142,35 +142,31 @@ void	consume_redir(t_list *redir, t_list **lst_tok)
 	// ft_lstdelone(redir, free_tok);
 }
 
-t_ast_redir *tok_to_redir(t_list *redir_ptr)
+t_ast_redir *tok_to_redir(t_token *redir_ptr)
 {
-	t_token		*tok_dir;
-	t_token		*tok_file;
 	int			fd;
 	int			mode;
 	t_ast_redir	*redir;
 
-	tok_dir = redir_ptr->content;
-	tok_file = redir_ptr->next->content;
 	mode = 0;
 	fd = 0;
-	mode |= (tok_dir->type == HEREDOC) * (O_CREAT | O_RDWR);
-	mode |= (tok_dir->type == INPUT) * (O_RDONLY);
-	mode |= (tok_dir->type == OUTPUT) * (O_CREAT | O_WRONLY);
-	mode |= (tok_dir->type == APPEND) * (O_CREAT | O_APPEND);
-	fd += (tok_dir->type == OUTPUT || tok_dir->type == APPEND);
+	mode |= (redir_ptr->type == HEREDOC) * (O_CREAT | O_RDWR);
+	mode |= (redir_ptr->type == INPUT) * (O_RDONLY);
+	mode |= (redir_ptr->type == OUTPUT) * (O_CREAT | O_WRONLY);
+	mode |= (redir_ptr->type == APPEND) * (O_CREAT | O_APPEND);
+	fd += (redir_ptr->type == OUTPUT || redir_ptr->type == APPEND);
 	redir = (t_ast_redir *)redir_node(
-		tok_dir->type,
-		tok_file,
+		redir_ptr->type,
+		redir_ptr->next,
 		mode,
 		fd,
 		NULL);
 	return (redir);
 }
 
-t_ast_cmd	*parse_redir(t_list *lst_tok, t_list *lst_end)
+t_ast_cmd	*parse_redir(t_token *lst_tok, t_token *lst_end)
 {
-	t_list			*redir_pos;
+	t_token			*redir_pos;
 	t_ast_redir		*redir;
 
 	print_got("parse_redir", lst_tok, lst_end);
@@ -181,7 +177,7 @@ t_ast_cmd	*parse_redir(t_list *lst_tok, t_list *lst_end)
 	);
 	if (!redir_pos)
 		return (parse_exec(lst_tok, lst_end));
-	if (!redir_pos->next || ((t_token *)redir_pos->next->content)->type > DQSTR)
+	if (!redir_pos->next || redir_pos->next->type > DQSTR)
 		return (NULL);
 	redir = tok_to_redir(redir_pos);
 	consume_redir(redir_pos, &lst_tok);
@@ -190,9 +186,9 @@ t_ast_cmd	*parse_redir(t_list *lst_tok, t_list *lst_end)
 	return ((t_ast_cmd *)redir);
 }
 
-t_ast_cmd	*parse_pipe(t_list *lst_tok, t_list *lst_end)
+t_ast_cmd	*parse_pipe(t_token *lst_tok, t_token *lst_end)
 {
-	t_list	*pipe_c;
+	t_token	*pipe_c;
 
 	print_got("parse_pipe", lst_tok, lst_end);
 	pipe_c = grab_token(PIPE, lst_tok, lst_end);
@@ -206,9 +202,9 @@ t_ast_cmd	*parse_pipe(t_list *lst_tok, t_list *lst_end)
 }
 
 // TODO : Figure out how to do Parentheses
-t_ast_cmd	*parse_cmd(t_list *lst_tok, t_list *lst_end)
+t_ast_cmd	*parse_cmd(t_token *lst_tok, t_token *lst_end)
 {
-	t_list		*or_and;
+	t_token		*or_and;
 
 	print_got("parse_cmd", lst_tok, lst_end);
 	or_and = grab_token(AND, lst_tok, lst_end);

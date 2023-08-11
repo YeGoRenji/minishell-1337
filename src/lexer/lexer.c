@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 04:49:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/23 19:16:52 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/11 03:06:16 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_token	*new_token(t_token_type type, char *value, int len)
 	if (type == DQSTR || type == WORD)
 		token->to_expand = check_expanding(value, type);
 	token->nospace_next = NULL;
+	token->next = NULL;
 	return (token);
 }
 
@@ -91,31 +92,23 @@ void	add_to_sublist(t_token **list, t_token *new_tok)
 	ptr->nospace_next = new_tok;
 }
 
-bool add_token(t_list **tokens, t_token *token, bool is_space)
+bool add_token(t_token **tokens, t_token *token, bool is_space)
 {
-	t_list	*new_tok;
-	t_list	*last_tok_node;
 	t_token	*last_tok;
 
 	if (!token)
 		return (false);
-	last_tok_node = ft_lstlast(*tokens);
-	last_tok = NULL;
-	if (last_tok_node)
-		last_tok = last_tok_node->content;
-	if (!last_tok_node || is_space || last_tok->type >= OUTPUT 
+	last_tok = ft_toklast(*tokens);
+	if (!last_tok || is_space || last_tok->type >= OUTPUT 
 		|| token->type >= OUTPUT)
 	{
-		new_tok = ft_lstnew(token);
-		if (!new_tok)
-			return (false);
-		return (ft_lstadd_back(tokens, new_tok), true);
+		return (ft_tokadd_back(tokens, token), true);
 	}
 	add_to_sublist(&last_tok->nospace_next, token);
 	return (true);
 }
 
-bool	lexer(char *command_line, t_list **tokens)
+bool	lexer(char *command_line, t_token **tokens)
 {
 	int		index;
 	bool	space;
@@ -143,6 +136,6 @@ bool	lexer(char *command_line, t_list **tokens)
 			printf("[%s] %c\n", "UNKNOWN", command_line[index]); // Debug !
 		index += this_tok.len;
 	}
-	ft_lstiter(*tokens, print_token); // Debug !
+	ft_tokiter(*tokens, print_token); // Debug !
 	return (1);
 }

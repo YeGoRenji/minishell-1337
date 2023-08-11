@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:36:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/24 03:40:25 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/11 03:16:49 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_ast_binary
 typedef struct s_ast_exec
 {
 	t_node_type		type;
-	t_list			*argv_tok;
+	t_token			*argv_tok;
 } t_ast_exec;
 
 typedef struct s_ast_redir
@@ -54,6 +54,6 @@ typedef struct s_ast_redir
 	t_ast_cmd		*cmd;
 } t_ast_redir;
 
-t_ast_cmd	*parse_cmd(t_list *lst_tok, t_list *lst_end);
+t_ast_cmd	*parse_cmd(t_token *lst_tok, t_token *lst_end);
 
 #endif // AST_H

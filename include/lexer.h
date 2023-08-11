@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:01:47 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/21 01:20:23 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/11 03:06:02 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,16 @@ typedef struct s_token {
 	int				len;
 	bool			to_expand;
 	struct s_token	*nospace_next;
+	struct s_token	*next;
 } t_token;
 
-bool 			lexer(char *command_line, t_list **tokens);
+bool 			lexer(char *command_line, t_token **tokens);
 void			print_substr(int start, int end, char *str);
 t_token_type	get_token_type(char *str);
 int				get_token_len(t_token_type type, char *str);
+// toklist
+t_token	*ft_toklast(t_token *lst);
+void	ft_tokadd_back(t_token **lst, t_token *new);
+void	ft_tokiter(t_token *lst, void (*f)(void *));
 
 #endif // LEXER_H
