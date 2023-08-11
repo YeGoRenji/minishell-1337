@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 00:32:00 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/11 03:20:41 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/11 04:58:26 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool parser(t_token *tokens)
 {
 	t_ast_cmd *tree;
 	// printf("Hello from parser %s\n", ((t_token *)tokens->content)->value);
-	tree = parse_cmd(tokens, NULL);
+	tree = parse_cmd(&tokens);
 
 	FILE *f = fopen("tree.dot", "w");
 	if (!f)

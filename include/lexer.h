@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:01:47 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/11 03:06:02 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/11 05:04:37 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ int				get_token_len(t_token_type type, char *str);
 t_token	*ft_toklast(t_token *lst);
 void	ft_tokadd_back(t_token **lst, t_token *new);
 void	ft_tokiter(t_token *lst, void (*f)(void *));
+t_token	*new_token(t_token_type type, char *value, int len);
 
 #endif // LEXER_H

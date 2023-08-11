@@ -1,11 +1,11 @@
 digraph yep {
-	n0[label="&&"];
+	n0[label="||"];
 	n0 -> n1;
 	n0 -> n2;
-	n1[label="lets "];
-	n2[label="||"];
-	n2 -> n21;
-	n2 -> n22;
-	n21[label="go "];
-	n22[label="Lol "];
+	n1[label="&&"];
+	n1 -> n11;
+	n1 -> n12;
+	n11[label="echo 1 "];
+	n12[label="echo 2 "];
+	n2[label="echo 3 "];
 }
