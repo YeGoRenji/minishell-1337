@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/08/11 03:07:12 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/08/12 04:02:08 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ SRCS_LEXER = lexer.c \
 
 SRCS_PARSER = parser.c
 
-SRCS_AST = ast.c
+SRCS_AST = ast.c \
+		   ast_utils.c \
+		   rdescent.c
 
 OBJS_FILES = $(SRCS_LEXER:.c=.o) \
 			 $(SRCS_PARSER:.c=.o) \

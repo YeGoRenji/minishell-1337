@@ -5,7 +5,15 @@ digraph yep {
 	n1[label="&&"];
 	n1 -> n11;
 	n1 -> n12;
-	n11[label="echo 1 "];
-	n12[label="echo 2 "];
-	n2[label="echo 3 "];
+	n11[label="> file1"];
+	n11 -> n111;
+	n111[label="alo1 "];
+	n12[label="|"];
+	n12 -> n121;
+	n12 -> n122;
+	n121[label="alo2 "];
+	n122[label="noice "];
+	n2[label="<< END"];
+	n2 -> n21;
+	n21[label="alo3 "];
 }
