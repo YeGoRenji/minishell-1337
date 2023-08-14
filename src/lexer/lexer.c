@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 04:49:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/11 03:06:16 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/14 02:58:56 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void print_token(void *token) // Debug !
 		"PIPE",
 		"OR",
 		"AND",
-		"WHITE_SPACE"
+		"WHITE_SPACE",
+		"NEW_LINE"
 	};
 
 	while (tok)
@@ -136,6 +137,7 @@ bool	lexer(char *command_line, t_token **tokens)
 			printf("[%s] %c\n", "UNKNOWN", command_line[index]); // Debug !
 		index += this_tok.len;
 	}
+	ft_tokadd_back(tokens, new_token(NEW_LINE, "newline", 7));
 	ft_tokiter(*tokens, print_token); // Debug !
 	return (1);
 }

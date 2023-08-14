@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/20 00:33:51 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/14 03:21:32 by ylyoussf         ###   ########.fr       */
+/*   Created: 2023/08/14 03:17:54 by ylyoussf          #+#    #+#             */
+/*   Updated: 2023/08/14 03:21:40 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef ERROR_H
+# define ERROR_H
 
-#include "ast.h"
-#include "lexer.h"
-#include "error.h"
+# include "libft.h"
+# include "structs.h"
 
-bool parser(t_token *tokens);
+void	syntax_error(char *where);
 
-#endif // PARSER_H
+#endif // ERROR_H

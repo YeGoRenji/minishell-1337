@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/20 00:33:51 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/14 03:21:32 by ylyoussf         ###   ########.fr       */
+/*   Created: 2023/08/14 03:15:15 by ylyoussf          #+#    #+#             */
+/*   Updated: 2023/08/14 03:21:16 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "../../include/error.h"
 
-#include "ast.h"
-#include "lexer.h"
-#include "error.h"
-
-bool parser(t_token *tokens);
-
-#endif // PARSER_H
+void	syntax_error(char *where)
+{
+	write(2, "shell69: syntax error near unexpected token `", 45);
+	ft_putstr_fd(where, 2);
+	write(2, "'\n", 2);
+}

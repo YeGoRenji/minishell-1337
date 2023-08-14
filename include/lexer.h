@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:01:47 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/11 05:04:37 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/14 02:56:37 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef enum e_token_type {
 	PIPE,
 	OR,
 	AND,
-	WHITE_SPACE
+	WHITE_SPACE,
+	NEW_LINE
 } t_token_type;
 
 typedef struct s_token {

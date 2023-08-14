@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 00:32:00 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/11 04:58:26 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/14 04:02:18 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,16 @@ int	debug_tree(t_ast_cmd *head, FILE *f, int index) // Debug !
 
 bool parser(t_token *tokens)
 {
-	t_ast_cmd *tree;
+	t_ast_cmd	*tree;
+	t_token		*current;
 	// printf("Hello from parser %s\n", ((t_token *)tokens->content)->value);
-	tree = parse_cmd(&tokens);
+	current = tokens;
+	if (current->type == NEW_LINE)
+		return (true);
+	tree = parse_cmd(&current);
+	if (!tree)
+		syntax_error(current->value);
+
 
 	FILE *f = fopen("tree.dot", "w");
 	if (!f)

@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/08/12 04:02:08 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/08/14 03:23:15 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,12 @@ SRCS_AST = ast.c \
 		   ast_utils.c \
 		   rdescent.c
 
+SRCS_ERR = error.c
+
 OBJS_FILES = $(SRCS_LEXER:.c=.o) \
 			 $(SRCS_PARSER:.c=.o) \
 			 $(SRCS_AST:.c=.o) \
+			 $(SRCS_ERR:.c=.o) \
 			 main.o
 
 LIBFT = src/libft/libft.a
@@ -61,6 +64,10 @@ $(OBJSFOLDER)%.o: src/parser/%.c include/parser.h $(GLOBAL_HEADERS)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJSFOLDER)%.o: src/parser/ast/%.c include/ast.h $(GLOBAL_HEADERS)
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJSFOLDER)%.o: src/error/%.c include/error.h $(GLOBAL_HEADERS)
 	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) -c $< -o $@
 

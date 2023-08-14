@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:11 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/12 03:58:37 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/14 03:58:00 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_ast_cmd	*parse_redir(t_token **current)
 		if (OUTPUT <= (*current)->type && (*current)->type <= HEREDOC)
 		{
 			if (!(*current)->next || !(WORD <= (*current)->next->type && (*current)->next->type <= DQSTR))
-				return (NULL); // ! (EXPECTED file after redir) Free
+				return (advance(current), NULL); // ! (EXPECTED file after redir) Free
 			if (!downwords)
 			{
 				node = (t_ast_cmd *)tok_to_redir(*current);
@@ -78,7 +78,10 @@ t_ast_cmd	*parse_pipe(t_token **current)
 	t_ast_cmd	*node;
 	t_ast_cmd	*next_node;
 
-	node = parse_redir(current);
+	if (*current && (*current)->type == LPREN)
+		node = parse_parenths(current);
+	else
+		node = parse_redir(current);
 	if (!node)
 		return (NULL);
 	while (*current && (*current)->type == PIPE)
@@ -104,18 +107,14 @@ t_ast_cmd	*parse_cmd(t_token **current)
 	node = NULL;
 	if (!*current)
 		return (NULL);
-	if (*current && (*current)->type == LPREN)
-		node = parse_parenths(current);
-	else if (*current)
-		node = parse_pipe(current);
+	node = parse_pipe(current);
+	if (!node)
+		return (NULL);
 	while (*current && ((*current)->type == AND || (*current)->type == OR))
 	{
 		is_or = ((*current)->type == OR);
 		advance(current);
-		if (*current && (*current)->type == LPREN)
-			next_node = parse_parenths(current);
-		else
-			next_node = parse_pipe(current);
+		next_node = parse_pipe(current);
 		// ! Freeing a tree is not this simple lol
 		// TODO : implement recursive free function
 		// TODO : Error info in the node struct maybe ?
