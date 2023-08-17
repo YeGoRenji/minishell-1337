@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:11 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/14 03:58:00 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/17 22:53:45 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_ast_cmd	*parse_redir(t_token **current)
 {
 	t_ast_cmd	*node;
+	t_ast_cmd	*exe;
 	t_token		*lst;
 	t_ast_redir	*downwords;
 
@@ -30,6 +31,7 @@ t_ast_cmd	*parse_redir(t_token **current)
 	{
 		if (OUTPUT <= (*current)->type && (*current)->type <= HEREDOC)
 		{
+			// TODO : make (redir file) a function on its own ?
 			if (!(*current)->next || !(WORD <= (*current)->next->type && (*current)->next->type <= DQSTR))
 				return (advance(current), NULL); // ! (EXPECTED file after redir) Free
 			if (!downwords)
@@ -43,17 +45,19 @@ t_ast_cmd	*parse_redir(t_token **current)
 				downwords = (t_ast_redir *)downwords->cmd;
 			}
 			advance(current);
+			// TODO : End scope of TODO
 		}
 		else
 			ft_tokadd_back(&lst, clone_tok(*current));
 		advance(current);
 	}
-	if (!lst)
-		return (NULL); // ! (EXPECTED EXEC) Free
+	exe = NULL;
+	if (lst)
+		exe = exec_node(lst);
 	if (downwords)
-		downwords->cmd = exec_node(lst);
+		downwords->cmd = exe;
 	else
-		node = exec_node(lst);
+		node = exe;
 	return (node);
 }
 
@@ -84,8 +88,15 @@ t_ast_cmd	*parse_pipe(t_token **current)
 		node = parse_redir(current);
 	if (!node)
 		return (NULL);
-	while (*current && (*current)->type == PIPE)
+	while (*current && (((*current)->type == PIPE)
+			|| (OUTPUT <= (*current)->type && (*current)->type <= HEREDOC)))
 	{
+		if ((OUTPUT <= (*current)->type && (*current)->type <= HEREDOC))
+		{
+			// TODO: Probably use the (redir file) function that u have to use up
+			printf("TODO : Fix this case\n");
+			exit(-1);
+		}
 		advance(current);
 		if (*current && (*current)->type == LPREN)
 			next_node = parse_parenths(current);

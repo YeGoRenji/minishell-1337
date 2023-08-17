@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:01:47 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/14 02:56:37 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/17 22:05:14 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_token_type	get_token_type(char *str);
 int				get_token_len(t_token_type type, char *str);
 // toklist
 t_token	*ft_toklast(t_token *lst);
-void	ft_tokadd_back(t_token **lst, t_token *new);
+void	ft_tokadd_back(t_token **lst, t_token *new_tok);
 void	ft_tokiter(t_token *lst, void (*f)(void *));
 t_token	*new_token(t_token_type type, char *value, int len);
 
