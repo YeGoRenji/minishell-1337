@@ -1,7 +1,5 @@
 digraph yep {
-	n0[label="> lol"];
+	n0[label="<< '<<'"];
 	n0 -> n1;
-	n1[label="> helo"];
-	n1 -> n11;
-	n11[label="NULL"];
+	n1[label="NULL"];
 }

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 00:32:00 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/17 21:45:33 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/22 21:43:11 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	debug_tree(t_ast_cmd *head, FILE *f, int index) // Debug !
 	return (0);
 }
 
-bool parser(t_token *tokens)
+bool	parser(t_token *tokens)
 {
 	t_ast_cmd	*tree;
 	t_token		*current;
@@ -72,10 +72,10 @@ bool parser(t_token *tokens)
 	if (current->type == NEW_LINE)
 		return (true);
 	tree = parse_cmd(&current);
-	if (!tree)
+	if (!tree || current->type != NEW_LINE)
 		syntax_error(current->value);
 
-
+	// ? Debug !
 	FILE *f = fopen("tree.dot", "w");
 	if (!f)
 		return (printf("Couldn't open file !"));
@@ -83,5 +83,6 @@ bool parser(t_token *tokens)
 	debug_tree(tree, f, 0);
 	fprintf(f, "}\n");
 	fclose(f);
+	// ? END Debug !
 	return (true);
 }

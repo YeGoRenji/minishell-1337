@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:36:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/17 21:47:23 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/22 21:20:18 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void		advance(t_token **current);
 bool 		match(t_token *tok, t_token_type types[]);
 t_token		*clone_tok(t_token *tok);
 t_ast_redir	*tok_to_redir(t_token *redir_ptr);
+bool		valid_file_tok(t_token **current);
 
 #endif // AST_H

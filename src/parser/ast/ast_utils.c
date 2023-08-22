@@ -6,11 +6,12 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:53 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/12 03:59:10 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/22 21:19:50 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/ast.h"
+#include <stdbool.h>
 
 void	advance(t_token **current)
 {
@@ -70,3 +71,9 @@ t_ast_redir *tok_to_redir(t_token *redir_ptr)
 	return (redir);
 }
 
+bool	valid_file_tok(t_token **current)
+{
+	if (!(*current))
+		return (false);
+	return (WORD <= (*current)->next->type && (*current)->next->type <= DQSTR);
+}

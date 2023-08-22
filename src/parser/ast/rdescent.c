@@ -6,11 +6,30 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:11 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/17 22:53:45 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/22 22:36:10 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/ast.h"
+
+t_ast_cmd	*redir_file(t_token **current)
+{
+	t_ast_cmd	*node;
+	t_token		*start;
+
+	node = NULL;
+	if (OUTPUT <= (*current)->type && (*current)->type <= HEREDOC)
+	{
+		start = *current;
+		advance(current);
+		if (!valid_file_tok(current))
+			return (advance(current), NULL); // ! (EXPECTED file after redir) Free
+		node = (t_ast_cmd *)tok_to_redir(start);
+	}
+
+
+	return (node);
+}
 
 t_ast_cmd	*parse_redir(t_token **current)
 {
@@ -88,15 +107,14 @@ t_ast_cmd	*parse_pipe(t_token **current)
 		node = parse_redir(current);
 	if (!node)
 		return (NULL);
-	while (*current && (((*current)->type == PIPE)
-			|| (OUTPUT <= (*current)->type && (*current)->type <= HEREDOC)))
+	while (*current && (*current)->type == PIPE)
 	{
-		if ((OUTPUT <= (*current)->type && (*current)->type <= HEREDOC))
-		{
-			// TODO: Probably use the (redir file) function that u have to use up
-			printf("TODO : Fix this case\n");
-			exit(-1);
-		}
+		// if ((OUTPUT <= (*current)->type && (*current)->type <= HEREDOC))
+		// {
+		// 	// TODO: Probably use the (redir file) function that u have to use up
+		// 	printf("TODO : Fix this case\n");
+		// 	exit(-1);
+		// }
 		advance(current);
 		if (*current && (*current)->type == LPREN)
 			next_node = parse_parenths(current);
