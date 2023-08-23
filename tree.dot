@@ -1,5 +1,10 @@
 digraph yep {
-	n0[label="<< '<<'"];
+	label="(ls && dsad) > jamil"
+	n0[label="> jamil"];
 	n0 -> n1;
-	n1[label="NULL"];
+	n1[label="&&"];
+	n1 -> n3;
+	n1 -> n4;
+	n3[label="ls "];
+	n4[label="dsad "];
 }

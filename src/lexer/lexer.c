@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 04:49:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/14 02:58:56 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:01:55 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ bool add_token(t_token **tokens, t_token *token, bool is_space)
 	if (!token)
 		return (false);
 	last_tok = ft_toklast(*tokens);
-	if (!last_tok || is_space || last_tok->type >= OUTPUT 
+	if (!last_tok || is_space || last_tok->type >= OUTPUT
 		|| token->type >= OUTPUT)
 	{
 		return (ft_tokadd_back(tokens, token), true);
@@ -119,6 +119,8 @@ bool	lexer(char *command_line, t_token **tokens)
 	*tokens = NULL;
 	space = true;
 	this_tok.type = WHITE_SPACE;
+	if (!command_line)
+		return (false);
 	while (command_line[index])
 	{
 		space = this_tok.type == WHITE_SPACE;

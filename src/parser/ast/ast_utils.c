@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:53 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/22 21:19:50 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:16:54 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ bool	valid_file_tok(t_token **current)
 {
 	if (!(*current))
 		return (false);
-	return (WORD <= (*current)->next->type && (*current)->next->type <= DQSTR);
+	return (WORD <= (*current)->type && (*current)->type <= DQSTR);
 }

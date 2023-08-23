@@ -17,12 +17,8 @@ int main(void)
 	{
 		printf("["RED"%s"NOCOL"]\n", cwd);
 		command_line = readline("➤ ");
-		if (!command_line)
-			break;
-		if (!lexer(command_line, &tokens))
-			break ;
-		if (!parser(tokens))
-			break ;
+		lexer(command_line, &tokens);
+		parser(tokens, command_line);
 		add_history(command_line);
 		free(command_line);
 	}
