@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:11 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/23 15:34:59 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/23 22:39:04 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_ast_cmd	*parse_parenths(t_token **current)
 		advance(current);
 		node = parse_cmd(current);
 		if (!node || !*current || (*current)->type != RPREN)
-			return (free(node), NULL);
+			return (free_ast(node), NULL);
 		advance(current);
 	}
 	return (node);
@@ -56,20 +56,21 @@ t_ast_cmd	*parse_redir(t_token **current)
 	exe = NULL;
 	lst = NULL;
 	downwords = NULL;
+	to_return = NULL;
 	if ((*current)->type == LPREN)
 	{
 		exe = parse_parenths(current);
 		if (!exe)
 			return (NULL);
 	}
-	// TODO : Stop spaggeti code ?
+	// TODO : Stop spaghetti code ?
 	while (*current && WORD <= (*current)->type && (*current)->type <= HEREDOC)
 	{
 		if (OUTPUT <= (*current)->type && (*current)->type <= HEREDOC)
 		{
 			node = redir_file(current);
 			if (!node)
-				return (NULL);
+				return (free_ast(to_return), free_tok_lst(lst), NULL);
 			if (downwords)
 				downwords->cmd = node;
 			else
@@ -102,7 +103,7 @@ t_ast_cmd	*parse_pipe(t_token **current)
 		advance(current);
 		next_node = parse_redir(current);
 		if (!next_node)
-			return (free(node), NULL); // ! (EXPECTED Expr after PIPE)
+			return (free_ast(node), NULL); // ! (EXPECTED Expr after PIPE)
 		node = binary_node(P_PIPE, node, next_node);
 	}
 	return (node);
@@ -127,11 +128,9 @@ t_ast_cmd	*parse_cmd(t_token **current)
 		next_node = parse_pipe(current);
 		// ! Freeing a tree is not this simple lol
 		// TODO : implement recursive free function
-		// TODO : Error info in the node struct maybe ?
 		if (!next_node)
-			return (free(node), NULL); // ! (EXPECTED Expr after conditional)
+			return (free_ast(node), NULL); // ! (EXPECTED Expr after conditional)
 		node = binary_node(!is_or * P_AND + is_or * P_OR, node, next_node);
 	}
 	return (node);
 }
-

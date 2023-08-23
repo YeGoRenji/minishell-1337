@@ -15,6 +15,7 @@ int main(void)
 	cwd = getcwd(cwd, 50);
 	while (1)
 	{
+		tokens = NULL;
 		printf("["RED"%s"NOCOL"]\n", cwd);
 		command_line = readline("➤ ");
 		lexer(command_line, &tokens);

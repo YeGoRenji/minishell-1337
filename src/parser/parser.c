@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 00:32:00 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/23 16:41:38 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/23 22:47:32 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,14 @@ bool	parser(t_token *tokens, char *cmd)
 {
 	t_ast_cmd	*tree;
 	t_token		*current;
-	// printf("Hello from parser %s\n", ((t_token *)tokens->content)->value);
+
+	if (!tokens)
+		return (false);
 	current = tokens;
 	if (current->type == NEW_LINE)
-		return (true);
+		return (free_tok_lst(tokens), true);
 	tree = parse_cmd(&current);
+	free_tok_lst(tokens);
 	if (!tree || current->type != NEW_LINE)
 	{
 		syntax_error(current->value);
@@ -101,5 +104,6 @@ bool	parser(t_token *tokens, char *cmd)
 	fprintf(f, "}\n");
 	fclose(f);
 	// ? END Debug !
+	free_ast(tree);
 	return (true);
 }

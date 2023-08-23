@@ -6,13 +6,13 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/08/14 03:23:15 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/08/23 19:08:58 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g  
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 OBJSFOLDER = objs/
 
@@ -24,6 +24,7 @@ SRCS_PARSER = parser.c
 
 SRCS_AST = ast.c \
 		   ast_utils.c \
+		   ast_utils2.c \
 		   rdescent.c
 
 SRCS_ERR = error.c

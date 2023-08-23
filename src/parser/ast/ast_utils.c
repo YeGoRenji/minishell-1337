@@ -6,35 +6,34 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:53 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/23 12:16:54 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:48:07 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/ast.h"
-#include <stdbool.h>
 
 void	advance(t_token **current)
 {
 	*current = (*current)->next;
 }
 
-bool match(t_token *tok, t_token_type types[])
+bool	match(t_token *tok, t_token_type types[])
 {
 	if (!tok)
-		return false;
+		return (false);
 	while ((int)*types != -1)
 	{
 		if (tok->type == *types)
-			return true;
+			return (true);
 		types++;
 	}
-	return false;
+	return (false);
 }
 
 t_token	*clone_tok(t_token *tok)
 {
 	t_token	*clone;
-	t_token *no_space;
+	t_token	*no_space;
 
 	if (!tok)
 		return (NULL);
@@ -49,7 +48,7 @@ t_token	*clone_tok(t_token *tok)
 	return (clone);
 }
 
-t_ast_redir *tok_to_redir(t_token *redir_ptr)
+t_ast_redir	*tok_to_redir(t_token *redir_ptr)
 {
 	int			fd;
 	int			mode;
@@ -63,11 +62,10 @@ t_ast_redir *tok_to_redir(t_token *redir_ptr)
 	mode |= (redir_ptr->type == APPEND) * (O_CREAT | O_APPEND);
 	fd += (redir_ptr->type == OUTPUT || redir_ptr->type == APPEND);
 	redir = (t_ast_redir *)redir_node(
-		redir_ptr->type,
-		clone_tok(redir_ptr->next),
-		mode,
-		fd,
-		NULL);
+			redir_ptr->type,
+			clone_tok(redir_ptr->next),
+			(int []){mode, fd},
+			NULL);
 	return (redir);
 }
 

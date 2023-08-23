@@ -1,10 +1,38 @@
 digraph yep {
-	label="(ls && dsad) > jamil"
-	n0[label="> jamil"];
+	label="echads alo && (ls && (ls | wc || ls -lha > out) || (ls -lha && (ls | ls)) && wc Makefile )"
+	n0[label="&&"];
 	n0 -> n1;
-	n1[label="&&"];
-	n1 -> n3;
-	n1 -> n4;
-	n3[label="ls "];
-	n4[label="dsad "];
+	n0 -> n2;
+	n1[label="echads alo "];
+	n2[label="&&"];
+	n2 -> n5;
+	n2 -> n6;
+	n5[label="||"];
+	n5 -> n11;
+	n5 -> n12;
+	n11[label="&&"];
+	n11 -> n23;
+	n11 -> n24;
+	n23[label="ls "];
+	n24[label="||"];
+	n24 -> n49;
+	n24 -> n50;
+	n49[label="|"];
+	n49 -> n99;
+	n49 -> n100;
+	n99[label="ls "];
+	n100[label="wc "];
+	n50[label="> out"];
+	n50 -> n101;
+	n101[label="ls -lha "];
+	n12[label="&&"];
+	n12 -> n25;
+	n12 -> n26;
+	n25[label="ls -lha "];
+	n26[label="|"];
+	n26 -> n53;
+	n26 -> n54;
+	n53[label="ls "];
+	n54[label="ls "];
+	n6[label="wc Makefile "];
 }

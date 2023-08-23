@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:36:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/22 21:20:18 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/23 21:41:02 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,15 @@ t_ast_cmd	*parse_cmd(t_token **current);
 // data
 t_ast_cmd	*binary_node(t_node_type type, t_ast_cmd *left, t_ast_cmd *right);
 t_ast_cmd	*exec_node(t_token *argv_tok);
-t_ast_cmd	*redir_node(t_token_type direction, t_token *file_tok, int mode, int fd, t_ast_cmd *cmd);
+t_ast_cmd	*redir_node(t_token_type direction, t_token *file_tok,
+				int mode_fd[2], t_ast_cmd *cmd);
 // utils
 void		advance(t_token **current);
 bool 		match(t_token *tok, t_token_type types[]);
 t_token		*clone_tok(t_token *tok);
 t_ast_redir	*tok_to_redir(t_token *redir_ptr);
 bool		valid_file_tok(t_token **current);
+void		free_ast(t_ast_cmd *tree);
+void		free_tok_lst(t_token *tok);
 
 #endif // AST_H
