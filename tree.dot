@@ -1,4 +1,14 @@
 digraph yep {
-	label="ls               -la"
-	n0[label="ls -la "];
+	label="( noice && stuff) | lol"
+	n0[fontcolor=chocolate1 label="|"];
+	n0 -> n1;
+	n0 -> n2;
+	n1[fontcolor=darkturquoise label="(SUBSH) "];
+	n1 -> n3;
+	n3[fontcolor=chocolate1 label="&&"];
+	n3 -> n7;
+	n3 -> n8;
+	n7[label="noice "];
+	n8[label="stuff "];
+	n2[label="lol "];
 }
