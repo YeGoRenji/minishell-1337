@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 00:32:00 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/24 00:23:45 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:27:09 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	debug_tree(t_ast_cmd *head, FILE *f, int index) // Debug !
 	char *redirs[4] = {">", ">>", "<", "<<"};
 
 	if (!head)
-		fprintf(f, "	n%d[label=\"NULL\"];\n", index);
+		fprintf(f, "	n%d[fontcolor=blue label=\"NULL\"];\n", index);
 	else if (head->type == P_AND || head->type == P_OR || head->type == P_PIPE)
 	{
-		fprintf(f, "	n%d[label=\"%s\"];\n", index, binaries[head->type]);
+		fprintf(f, "	n%d[fontcolor=chocolate1 label=\"%s\"];\n", index, binaries[head->type]);
 		fprintf(f, "	n%d -> n%d;\n", index, 2 * index + 1);
 		fprintf(f, "	n%d -> n%d;\n", index, 2 * index + 2);
 		debug_tree(((t_ast_binary*) head)->left, f, 2 * index + 1);
@@ -52,7 +52,7 @@ int	debug_tree(t_ast_cmd *head, FILE *f, int index) // Debug !
 	}
 	else if (head->type == P_REDIR)
 	{
-		fprintf(f, "	n%d[label=\"%s ",
+		fprintf(f, "	n%d[fontcolor=crimson label=\"%s ",
 		  index,
 		  redirs[((t_ast_redir *)head)->direction - 3]
 		);
@@ -74,6 +74,16 @@ int	debug_tree(t_ast_cmd *head, FILE *f, int index) // Debug !
 		}
 		fprintf(f, "\"];\n");
 	}
+	else if (head->type == P_SUBSH)
+	{
+		fprintf(f, "	n%d[fontcolor=darkturquoise label=\"%s ",
+		  index,
+		  "(SUBSH)"
+		);
+		fprintf(f, "\"];\n");
+		fprintf(f, "	n%d -> n%d;\n", index, 2 * index + 1);
+		debug_tree(((t_ast_subsh*) head)->cmd, f, 2 * index + 1);
+	}
 	return (0);
 }
 
@@ -82,6 +92,7 @@ bool	parser(t_token *tokens, char *cmd)
 	t_ast_cmd	*tree;
 	t_token		*current;
 
+	printf("----- PARSER ------\n"); // ? Debug !
 	if (!tokens)
 		return (false);
 	current = tokens;

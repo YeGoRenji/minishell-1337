@@ -18,8 +18,10 @@ int main(void)
 		tokens = NULL;
 		printf("["RED"%s"NOCOL"]\n", cwd);
 		command_line = readline("➤ ");
-		lexer(command_line, &tokens);
-		parser(tokens, command_line);
+		if (!command_line)
+			break ; // TODO: Print exit\n
+		if (lexer(command_line, &tokens))
+			parser(tokens, command_line);
 		add_history(command_line);
 		free(command_line);
 	}

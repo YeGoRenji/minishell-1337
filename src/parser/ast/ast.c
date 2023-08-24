@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 04:12:02 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/23 17:44:29 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:47:36 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ t_ast_cmd	*redir_node(t_token_type direction, t_token *file_tok,
 	node->file_tok = file_tok;
 	node->mode = mode_fd[0];
 	node->fd = mode_fd[1];
+	node->cmd = cmd;
+	return ((t_ast_cmd *) node);
+}
+
+t_ast_cmd	*subsh_node(t_ast_cmd *cmd)
+{
+	t_ast_subsh	*node;
+
+	node = malloc(sizeof(t_ast_subsh));
+	if (!node)
+		return (NULL);
+	node->type = P_SUBSH;
 	node->cmd = cmd;
 	return ((t_ast_cmd *) node);
 }

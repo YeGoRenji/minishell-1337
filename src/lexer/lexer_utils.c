@@ -6,29 +6,40 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:54:59 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/21 01:42:48 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:08:27 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/lexer.h"
 
-void	print_substr(int start, int end, char *str)
+void	print_substr(int start, int end, char *str) // ? Debug !
 {
 	while (start < end)
 		printf("%c", str[start++]);
 }
 
-bool	is_word(char c)
+bool	str_contains(char *str, char c)
 {
-	// TODO : Check if there are other chars for WORD
-	return (ft_isalnum(c) || c == '/' || c == '-'
-		|| c == '_' || c == '.' || c == '*' || c == '$');
+	if (!str)
+		return (false);
+	while (*str)
+	{
+		if (*str == c)
+			return (true);
+		str++;
+	}
+	return (false);
+}
+
+bool	not_special(char c)
+{
+	if (c == '\0')
+		return (false);
+	return (!str_contains("|\'\"><()&", c));
 }
 
 t_token_type	get_token_type(char *str)
 {
-	if (is_word(str[0]))
-		return (WORD);
 	if (ft_iswhitespace(str[0]))
 		return (WHITE_SPACE);
 	if (str[0] == '|')
@@ -45,9 +56,13 @@ t_token_type	get_token_type(char *str)
 		return (LPREN);
 	if (str[0] == ')')
 		return (RPREN);
-	if (str[0] == '&' && str[1] == '&')
-		return (AND);
-	return (-1);
+	if (str[0] == '&')
+	{
+		if (str[1] == '&')
+			return (AND);
+		return (-1);
+	}
+	return (WORD);
 }
 
 int	count_with_func(char *str, bool (*test_func)(char))
@@ -74,7 +89,7 @@ int	get_token_len(t_token_type type, char *str)
 	{
 		if (str[0] == '$' && str[1] == '?')
 			return (2);
-		return (count_with_func(str, is_word));
+		return (count_with_func(str, not_special));
 	}
 	if (type == WHITE_SPACE)
 		return (count_with_func(str, ft_iswhitespace));
@@ -87,4 +102,21 @@ int	get_token_len(t_token_type type, char *str)
 		return (1);
 	// TODO : return the content without ' or "
 	return (pos - str + 1);
+}
+
+void	free_tok_lst(t_token *tok)
+{
+	t_token	*tmp;
+
+	if (!tok)
+		return ;
+	while (tok)
+	{
+		printf("Freeing %s\n", tok->value);
+		free(tok->value);
+		free_tok_lst(tok->nospace_next);
+		tmp = tok;
+		tok = tok->next;
+		free(tmp);
+	}
 }

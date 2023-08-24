@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:11 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/23 22:39:04 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/24 13:49:15 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ t_ast_cmd	*parse_parenths(t_token **current)
 			return (free_ast(node), NULL);
 		advance(current);
 	}
+	node = subsh_node(node);
+	if (!node)
+		return (free_ast(node), NULL);
 	return (node);
 }
 

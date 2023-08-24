@@ -6,11 +6,25 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 03:15:15 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/14 03:21:16 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:38:00 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/error.h"
+
+void	tok_error(char which)
+{
+	write(2, "shell69: unexpected token `", 27);
+	write(1, &which, 1);
+	write(2, "'\n", 2);
+}
+
+void	unclosed_error(char which)
+{
+	write(2, "shell69: unclosed quote `", 25);
+	write(1, &which, 1);
+	write(2, "'\n", 2);
+}
 
 void	syntax_error(char *where)
 {

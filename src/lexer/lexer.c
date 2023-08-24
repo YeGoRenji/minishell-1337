@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 04:49:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/23 22:25:48 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:38:35 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,36 +78,6 @@ void print_token(void *token) // Debug !
 	printf("\n");
 }
 
-void	add_to_sublist(t_token **list, t_token *new_tok)
-{
-	t_token	*ptr;
-
-	if (!*list)
-	{
-		*list = new_tok;
-		return ;
-	}
-	ptr = *list;
-	while (ptr->nospace_next)
-		 ptr = ptr->nospace_next;
-	ptr->nospace_next = new_tok;
-}
-
-bool add_token(t_token **tokens, t_token *token, bool is_space)
-{
-	t_token	*last_tok;
-
-	if (!token)
-		return (false);
-	last_tok = ft_toklast(*tokens);
-	if (!last_tok || is_space || last_tok->type >= OUTPUT
-		|| token->type >= OUTPUT)
-	{
-		return (ft_tokadd_back(tokens, token), true);
-	}
-	add_to_sublist(&last_tok->nospace_next, token);
-	return (true);
-}
 
 bool	lexer(char *command_line, t_token **tokens)
 {
@@ -115,6 +85,7 @@ bool	lexer(char *command_line, t_token **tokens)
 	bool	space;
 	t_token	this_tok;
 
+	printf("---- TOKENIZER ----\n"); // ? Debug !
 	index = 0;
 	*tokens = NULL;
 	space = true;
@@ -128,6 +99,8 @@ bool	lexer(char *command_line, t_token **tokens)
 		this_tok.len = get_token_len(this_tok.type, command_line + index);
 		if ((int)this_tok.type >= 0 && this_tok.type != WHITE_SPACE)
 		{
+			if (this_tok.len == 1 && (STR <= this_tok.type && this_tok.type <= DQSTR))
+				return (free_tok_lst(*tokens), unclosed_error(command_line[index]), false);
 			this_tok.value = ft_substr(command_line, index, this_tok.len);
 			if (!this_tok.value)
 				return (false);
@@ -136,7 +109,11 @@ bool	lexer(char *command_line, t_token **tokens)
 				, space);
 		}
 		else if (this_tok.type != WHITE_SPACE)
-			printf("[%s] %c\n", "UNKNOWN", command_line[index]); // Debug !
+		{
+			tok_error(command_line[index]);
+			return (free_tok_lst(*tokens), false);
+			// printf("[%s] %c\n", "UNKNOWN", command_line[index]); // Debug !
+		}
 		index += this_tok.len;
 	}
 	ft_tokadd_back(tokens, new_token(NEW_LINE, ft_strdup("newline"), 7));
