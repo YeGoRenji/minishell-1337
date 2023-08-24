@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 00:32:00 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/23 22:47:32 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/24 00:23:45 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,12 @@ bool	parser(t_token *tokens, char *cmd)
 	if (current->type == NEW_LINE)
 		return (free_tok_lst(tokens), true);
 	tree = parse_cmd(&current);
-	free_tok_lst(tokens);
 	if (!tree || current->type != NEW_LINE)
 	{
 		syntax_error(current->value);
-		return (false);
+		return (free_tok_lst(tokens), false);
 	}
+	free_tok_lst(tokens);
 	// ? Debug !
 	FILE *f = fopen("tree.dot", "w");
 	if (!f)
