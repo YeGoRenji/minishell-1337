@@ -1,22 +1,4 @@
 digraph yep {
-	label="( (ls | wtf) > noice && Hello || wtfs )"
-	n0[fontcolor=darkturquoise label="(SUBSH) "];
-	n0 -> n1;
-	n1[fontcolor=chocolate1 label="||"];
-	n1 -> n3;
-	n1 -> n4;
-	n3[fontcolor=chocolate1 label="&&"];
-	n3 -> n7;
-	n3 -> n8;
-	n7[fontcolor=crimson label="> noice "];
-	n7 -> n15;
-	n15[fontcolor=darkturquoise label="(SUBSH) "];
-	n15 -> n31;
-	n31[fontcolor=chocolate1 label="|"];
-	n31 -> n63;
-	n31 -> n64;
-	n63[label="ls  "];
-	n64[label="wtf "];
-	n8[label="Hello  "];
-	n4[label="wtfs  "];
+	label="ls               -la"
+	n0[label="ls -la "];
 }

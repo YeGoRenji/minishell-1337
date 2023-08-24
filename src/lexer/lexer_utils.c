@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:54:59 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/24 15:08:27 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:11:08 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	str_contains(char *str, char c)
 
 bool	not_special(char c)
 {
-	if (c == '\0')
+	if (c == '\0' || ft_iswhitespace(c))
 		return (false);
 	return (!str_contains("|\'\"><()&", c));
 }

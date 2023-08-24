@@ -7,12 +7,11 @@
 int main(void)
 {
 	// TODO : Make an actual Prompt with PWD
-	// Allocate an actual real size
 	t_token	*tokens;
-	char *cwd = malloc(50);
+	char *cwd;
 	char *command_line;
 
-	cwd = getcwd(cwd, 50);
+	cwd = getcwd(NULL, 0);
 	while (1)
 	{
 		tokens = NULL;

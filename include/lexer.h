@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:01:47 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/24 15:07:50 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:12:40 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef enum e_token_type {
 	AND,
 	WHITE_SPACE,
 	NEW_LINE
-} t_token_type;
+}	t_token_type;
 
 typedef struct s_token {
 	t_token_type	type;
@@ -40,7 +40,7 @@ typedef struct s_token {
 	bool			to_expand;
 	struct s_token	*nospace_next;
 	struct s_token	*next;
-} t_token;
+}	t_token;
 
 bool			lexer(char *command_line, t_token **tokens);
 void			print_substr(int start, int end, char *str);
