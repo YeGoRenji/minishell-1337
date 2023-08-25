@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/08/23 19:08:58 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/08/25 20:48:16 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ LIBFT = src/libft/libft.a
 
 OBJS = $(foreach obj, $(OBJS_FILES), $(OBJSFOLDER)$(obj))
 
-GLOBAL_HEADERS = Makefile
+GLOBAL_HEADERS = structs.h
 
 all: $(OBJSFOLDER) $(LIBFT) $(NAME)
 

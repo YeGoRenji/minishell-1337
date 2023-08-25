@@ -6,11 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:54:59 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/24 18:11:08 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:45:54 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include <lexer.h>
 
 void	print_substr(int start, int end, char *str) // ? Debug !
 {

@@ -6,11 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 00:32:00 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/24 15:27:09 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:45:54 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include <parser.h>
 
 void	print_escape(FILE *f, char *str)
 {

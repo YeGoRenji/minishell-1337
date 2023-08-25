@@ -6,11 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 21:17:25 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/07/14 01:13:11 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:45:54 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include <libft.h>
 
 char	*ft_strchr(const char *s, int c)
 {

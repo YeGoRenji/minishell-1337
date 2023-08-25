@@ -6,11 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 02:56:22 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/24 15:07:29 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/25 18:45:54 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include <lexer.h>
 
 t_token	*ft_toklast(t_token *lst)
 {
