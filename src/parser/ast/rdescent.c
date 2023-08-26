@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:11 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/24 13:49:15 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/26 18:57:21 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,45 @@ t_ast_cmd	*redir_file(t_token **current)
 	return (node);
 }
 
+bool	add_redir_node(t_ast_redir **lst, t_ast_cmd *node)
+{
+	t_ast_redir	*tmp;
+
+	if (!lst || !node)
+		return (false);
+	if (!(*lst))
+	{
+		*lst = (t_ast_redir *)node;
+		return (true);
+	}
+	tmp = *lst;
+	while (tmp && tmp->cmd)
+		tmp = (t_ast_redir *)(tmp)->cmd;
+	tmp->cmd = node;
+	return (true);
+}
+
+void	free_redir(t_ast_cmd *sub_sh, t_ast_redir *redir_lst, t_token *exe_lst)
+{
+	free_ast(sub_sh);
+	free_ast((t_ast_cmd *)redir_lst);
+	free_tok_lst(exe_lst);
+}
+
 t_ast_cmd	*parse_redir(t_token **current)
 {
 	t_ast_cmd	*node;
-	t_ast_cmd	*to_return;
-	t_ast_cmd	*exe;
-	t_token		*lst;
-	t_ast_redir	*downwords;
+	t_ast_cmd	*sub_sh;
+	t_token		*exe_lst;
+	t_ast_redir	*redir_lst;
 
-	exe = NULL;
-	lst = NULL;
-	downwords = NULL;
-	to_return = NULL;
+	sub_sh = NULL;
+	exe_lst = NULL;
+	redir_lst = NULL;
 	if ((*current)->type == LPREN)
 	{
-		exe = parse_parenths(current);
-		if (!exe)
+		sub_sh = parse_parenths(current);
+		if (!sub_sh)
 			return (NULL);
 	}
 	// TODO : Stop spaghetti code ?
@@ -73,24 +96,21 @@ t_ast_cmd	*parse_redir(t_token **current)
 		{
 			node = redir_file(current);
 			if (!node)
-				return (free_ast(to_return), free_tok_lst(lst), NULL);
-			if (downwords)
-				downwords->cmd = node;
-			else
-				to_return = node;
-			downwords = (t_ast_redir *)node;
+				return (free_redir(sub_sh, redir_lst, exe_lst), NULL);
+			add_redir_node(&redir_lst, node);
 		}
 		else
-			ft_tokadd_back(&lst, clone_tok(*current));
+		{
+			if (sub_sh)
+				return (free_redir(sub_sh, redir_lst, exe_lst), NULL);
+			ft_tokadd_back(&exe_lst, clone_tok(*current));
+		}
 		advance(current);
 	}
-	if (lst && !exe)
-		exe = exec_node(lst);
-	if (downwords)
-		downwords->cmd = exe;
-	else
-		to_return = exe;
-	return (to_return);
+	if (exe_lst && !sub_sh)
+		sub_sh = exec_node(exe_lst);
+	add_redir_node(&redir_lst, sub_sh);
+	return ((t_ast_cmd *)redir_lst);
 }
 
 t_ast_cmd	*parse_pipe(t_token **current)
