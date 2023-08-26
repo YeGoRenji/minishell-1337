@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:01:47 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/24 18:12:40 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/26 21:03:23 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ t_token			*new_token(t_token_type type, char *value, int len);
 bool			add_token(t_token **tokens, t_token *token, bool is_space);
 // utils
 void			free_tok_lst(t_token *tok);
+bool			check_expanding(char *str, t_token_type type);
+bool			not_special(char c);
 
 #endif // LEXER_H

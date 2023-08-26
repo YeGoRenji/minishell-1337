@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/08/26 17:34:17 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/08/26 20:29:30 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ OBJSFOLDER = objs/
 
 SRCS_LEXER = lexer.c \
 			 lexer_utils.c \
+			 lexer_utils2.c \
 			 tok_list.c
 
 SRCS_PARSER = parser.c

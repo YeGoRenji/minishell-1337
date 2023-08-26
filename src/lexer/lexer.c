@@ -6,47 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 04:49:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/26 17:16:44 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/26 20:41:35 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
-
-bool	check_expanding(char *str, t_token_type type)
-{
-	char	*wild_pos;
-	char	*dollar_pos;
-
-	wild_pos = NULL;
-	if (type != DQSTR)
-		wild_pos = ft_strchr(str, '*');
-	dollar_pos = ft_strchr(str, '$');
-	if (!wild_pos && !dollar_pos)
-		return (false);
-	if (dollar_pos && ft_isalpha(dollar_pos[1]))
-		return (true);
-	if (wild_pos)
-		return (true);
-	return (false);
-}
-
-t_token	*new_token(t_token_type type, char *value, int len)
-{
-	t_token	*token;
-
-	token = malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
-	token->type = type;
-	token->value = value;
-	token->len = len;
-	token->to_expand = false;
-	if (type == DQSTR || type == WORD)
-		token->to_expand = check_expanding(value, type);
-	token->nospace_next = NULL;
-	token->next = NULL;
-	return (token);
-}
 
 void print_token(void *token) // Debug !
 {

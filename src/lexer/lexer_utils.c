@@ -6,36 +6,28 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:54:59 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/26 18:54:22 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/26 20:40:55 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
-void	print_substr(int start, int end, char *str) // ? Debug !
+t_token	*new_token(t_token_type type, char *value, int len)
 {
-	while (start < end)
-		printf("%c", str[start++]);
-}
+	t_token	*token;
 
-bool	str_contains(char *str, char c)
-{
-	if (!str)
-		return (false);
-	while (*str)
-	{
-		if (*str == c)
-			return (true);
-		str++;
-	}
-	return (false);
-}
-
-bool	not_special(char c)
-{
-	if (c == '\0' || ft_iswhitespace(c))
-		return (false);
-	return (!str_contains("|\'\"><()&", c));
+	token = malloc(sizeof(t_token));
+	if (!token)
+		return (NULL);
+	token->type = type;
+	token->value = value;
+	token->len = len;
+	token->to_expand = false;
+	if (type == DQSTR || type == WORD)
+		token->to_expand = check_expanding(value, type);
+	token->nospace_next = NULL;
+	token->next = NULL;
+	return (token);
 }
 
 t_token_type	get_token_type(char *str)

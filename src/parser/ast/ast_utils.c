@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:53 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/23 17:48:07 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/26 21:36:35 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@ void	advance(t_token **current)
 	*current = (*current)->next;
 }
 
-bool	match(t_token *tok, t_token_type types[])
+bool	match(t_token *tok, t_token_type types[], int size)
 {
+	int	i;
+
 	if (!tok)
 		return (false);
-	while ((int)*types != -1)
+	i = 0;
+	while (i < size)
 	{
-		if (tok->type == *types)
+		if (tok->type == types[i])
 			return (true);
-		types++;
+		i++;
 	}
 	return (false);
 }
@@ -67,11 +70,4 @@ t_ast_redir	*tok_to_redir(t_token *redir_ptr)
 			(int []){mode, fd},
 			NULL);
 	return (redir);
-}
-
-bool	valid_file_tok(t_token **current)
-{
-	if (!(*current))
-		return (false);
-	return (WORD <= (*current)->type && (*current)->type <= DQSTR);
 }
