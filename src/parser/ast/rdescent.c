@@ -6,11 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:11 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/26 21:45:00 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/27 10:43:13 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/ast.h"
+#include <ast.h>
 
 t_ast_cmd	*redir_file(t_token **current)
 {

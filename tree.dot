@@ -1,16 +1,24 @@
 digraph yep {
-	label="ls -la > what + | (lol | yep)"
-	n0[fontcolor=chocolate1 label="|"];
+	label="(hello && ./noice) > chi7aja > yep | lets go || clear << what"
+	n0[fontcolor=chocolate1 label="||"];
 	n0 -> n1;
 	n0 -> n2;
-	n1[fontcolor=crimson label="> what"];
+	n1[fontcolor=chocolate1 label="|"];
 	n1 -> n3;
-	n3[label="ls -la + "];
-	n2[fontcolor=darkturquoise label="(SUBSH) "];
+	n1 -> n4;
+	n3[fontcolor=crimson label="> chi7aja"];
+	n3 -> n7;
+	n7[fontcolor=crimson label="> yep"];
+	n7 -> n15;
+	n15[fontcolor=darkturquoise label="(SUBSH) "];
+	n15 -> n31;
+	n31[fontcolor=chocolate1 label="&&"];
+	n31 -> n63;
+	n31 -> n64;
+	n63[label="hello "];
+	n64[label="./noice "];
+	n4[label="lets go "];
+	n2[fontcolor=crimson label="<< what"];
 	n2 -> n5;
-	n5[fontcolor=chocolate1 label="|"];
-	n5 -> n11;
-	n5 -> n12;
-	n11[label="lol "];
-	n12[label="yep "];
+	n5[label="clear "];
 }

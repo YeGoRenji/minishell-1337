@@ -6,11 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 04:12:02 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/24 13:47:36 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/27 10:43:13 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/ast.h"
+#include <ast.h>
 
 t_ast_cmd	*binary_node(t_node_type type, t_ast_cmd *left, t_ast_cmd *right)
 {

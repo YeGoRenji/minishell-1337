@@ -6,12 +6,13 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 04:49:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/26 20:41:35 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:15:17 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
+#ifdef DEBUG
 void print_token(void *token) // Debug !
 {
 	t_token *tok = (t_token *)token;
@@ -41,6 +42,7 @@ void print_token(void *token) // Debug !
 	}
 	printf("\n");
 }
+#endif // DEBUG
 
 void	get_token(char *where, t_token *tok)
 {
@@ -51,7 +53,7 @@ void	get_token(char *where, t_token *tok)
 bool	check_tok(t_token *this_tok, char *cmd_line,
 		int index_space[2], t_token **tokens)
 {
-	if (this_tok->type < 0)
+	if ((int)this_tok->type < 0)
 		return (tok_error(cmd_line[index_space[0]]), false);
 	if (this_tok->type == WHITE_SPACE)
 		return (true);
@@ -73,7 +75,9 @@ bool	lexer(char *command_line, t_token **tokens)
 	bool	space;
 	t_token	this_tok;
 
+#ifdef DEBUG
 	printf("---- TOKENIZER ----\n"); // ? Debug !
+#endif // DEBUG
 	index = 0;
 	*tokens = NULL;
 	space = true;
@@ -90,6 +94,8 @@ bool	lexer(char *command_line, t_token **tokens)
 		index += this_tok.len;
 	}
 	ft_tokadd_back(tokens, new_token(NEW_LINE, ft_strdup("newline"), 7));
+#ifdef DEBUG
 	ft_tokiter(*tokens, print_token); // Debug !
-	return (1);
+#endif // DEBUG
+	return (true);
 }

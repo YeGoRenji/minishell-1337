@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 00:32:00 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/25 18:45:54 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/27 11:16:23 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_escape(FILE *f, char *str)
 	}
 }
 
-void	print_nosp_tok(FILE *f, t_token *tok) // Debug !
+void	print_nosp_tok(FILE *f, t_token *tok) // ? Debug
 {
 	while (tok)
 	{
@@ -35,7 +35,7 @@ void	print_nosp_tok(FILE *f, t_token *tok) // Debug !
 	}
 }
 
-int	debug_tree(t_ast_cmd *head, FILE *f, int index) // Debug !
+int	debug_tree(t_ast_cmd *head, FILE *f, int index) // ? Debug
 {
 	char *binaries[3] = {"&&", "||", "|"};
 	char *redirs[4] = {">", ">>", "<", "<<"};
@@ -87,34 +87,37 @@ int	debug_tree(t_ast_cmd *head, FILE *f, int index) // Debug !
 	return (0);
 }
 
-bool	parser(t_token *tokens, char *cmd)
+bool	parser(t_token *tokens, char *cmd, t_ast_cmd **tree)
 {
-	t_ast_cmd	*tree;
 	t_token		*current;
 
+#ifdef DEBUG
 	printf("----- PARSER ------\n"); // ? Debug !
+#else
+	(void)cmd;
+#endif // DEBUG
+	*tree = NULL;
 	if (!tokens)
 		return (false);
 	current = tokens;
 	if (current->type == NEW_LINE)
 		return (free_tok_lst(tokens), true);
-	tree = parse_cmd(&current);
-	if (!tree || current->type != NEW_LINE)
+	*tree = parse_cmd(&current);
+	if (!(*tree) || current->type != NEW_LINE)
 	{
 		syntax_error(current->value);
 		return (free_tok_lst(tokens), false);
 	}
 	free_tok_lst(tokens);
-	// ? Debug !
+#ifdef DEBUG
 	FILE *f = fopen("tree.dot", "w");
 	if (!f)
 		return (printf("Couldn't open file !"));
 	fprintf(f, "digraph yep {\n");
 	fprintf(f, "	label=\""); print_escape(f, cmd); fprintf(f, "\"\n");
-	debug_tree(tree, f, 0);
+	debug_tree(*tree, f, 0);
 	fprintf(f, "}\n");
 	fclose(f);
-	// ? END Debug !
-	free_ast(tree);
+#endif // DEBUG
 	return (true);
 }

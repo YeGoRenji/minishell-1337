@@ -6,11 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 17:56:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/24 14:45:54 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/27 10:43:13 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/ast.h"
+#include <ast.h>
 
 void	free_ast(t_ast_cmd *tree)
 {
