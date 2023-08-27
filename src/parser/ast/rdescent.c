@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:11 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/27 10:43:13 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/27 12:57:50 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,29 @@ t_ast_cmd	*parse_parenths(t_token **current)
 	return (node);
 }
 
-t_ast_cmd	*parse_redir(t_token **current)
+bool	parse_term(t_token **current, t_ast_cmd *sub_sh,
+	t_token **exe_lst, t_ast_redir **redir_lst)
 {
 	t_ast_cmd	*node;
+
+	if (match(*current, (t_token_type[]){WORD, STR, DQSTR}, 3))
+	{
+		if (sub_sh)
+			return (false);
+		ft_tokadd_back(exe_lst, clone_tok(*current));
+	}
+	else
+	{
+		node = redir_file(current);
+		if (!node)
+			return (false);
+		add_redir_node(redir_lst, node);
+	}
+	return (true);
+}
+
+t_ast_cmd	*parse_redir(t_token **current)
+{
 	t_ast_cmd	*sub_sh;
 	t_token		*exe_lst;
 	t_ast_redir	*redir_lst;
@@ -89,23 +109,11 @@ t_ast_cmd	*parse_redir(t_token **current)
 		if (!sub_sh)
 			return (NULL);
 	}
-	// TODO : Stop spaghetti code ?
 	while (match(*current, (t_token_type[]){
 			WORD, STR, DQSTR, OUTPUT, APPEND, INPUT, HEREDOC}, 7))
 	{
-		if (match(*current, (t_token_type[]){WORD, STR, DQSTR}, 3))
-		{
-			if (sub_sh)
-				return (free_redir(sub_sh, redir_lst, exe_lst), NULL);
-			ft_tokadd_back(&exe_lst, clone_tok(*current));
-		}
-		else
-		{
-			node = redir_file(current);
-			if (!node)
-				return (free_redir(sub_sh, redir_lst, exe_lst), NULL);
-			add_redir_node(&redir_lst, node);
-		}
+		if (!parse_term(current, sub_sh, &exe_lst, &redir_lst))
+			return (free_redir(sub_sh, redir_lst, exe_lst), NULL);
 		advance(current);
 	}
 	if (exe_lst && !sub_sh)
