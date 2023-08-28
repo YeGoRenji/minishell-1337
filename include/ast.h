@@ -6,15 +6,15 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:36:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/26 21:36:41 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/28 20:31:34 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AST_H
 # define AST_H
 
-#include "libft.h"
-#include "lexer.h"
+# include "libft.h"
+# include "lexer.h"
 
 typedef enum e_node_type
 {
@@ -75,5 +75,6 @@ t_token		*clone_tok(t_token *tok);
 t_ast_redir	*tok_to_redir(t_token *redir_ptr);
 void		free_ast(t_ast_cmd *tree);
 void		free_tok_lst(t_token *tok);
+void		print_nosp_tok(FILE *f, t_token *tok); // ? Debug
 
 #endif // AST_H

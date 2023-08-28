@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/08/26 20:29:30 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/08/28 20:40:44 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,17 +30,20 @@ SRCS_AST = ast.c \
 
 SRCS_ERR = error.c
 
+SRCS_EXE = executor.c
+
 OBJS_FILES = $(SRCS_LEXER:.c=.o) \
 			 $(SRCS_PARSER:.c=.o) \
 			 $(SRCS_AST:.c=.o) \
 			 $(SRCS_ERR:.c=.o) \
+			 $(SRCS_EXE:.c=.o) \
 			 main.o
 
 LIBFT = src/libft/libft.a
 
 OBJS = $(foreach obj, $(OBJS_FILES), $(OBJSFOLDER)$(obj))
 
-GLOBAL_HEADERS = include/structs.h
+GLOBAL_HEADERS = include/globals.h
 
 all: $(OBJSFOLDER) $(LIBFT) $(NAME)
 
@@ -66,6 +69,10 @@ $(OBJSFOLDER)%.o: src/parser/%.c include/parser.h $(GLOBAL_HEADERS)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJSFOLDER)%.o: src/parser/ast/%.c include/ast.h $(GLOBAL_HEADERS)
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJSFOLDER)%.o: src/execution/%.c include/executor.h $(GLOBAL_HEADERS)
 	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) -c $< -o $@
 

@@ -6,14 +6,14 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:01:47 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/26 21:03:23 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/28 19:50:52 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# include "structs.h"
+# include "globals.h"
 # include "error.h"
 
 typedef enum e_token_type {

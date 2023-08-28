@@ -1,6 +1,20 @@
-#include <structs.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
+/*   Updated: 2023/08/28 20:41:11 by ylyoussf         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <globals.h>
 #include <lexer.h>
 #include <parser.h>
+#include <executor.h>
+
 #define RED "\033[91m"
 #define NOCOL "\033[0m"
 
@@ -29,8 +43,9 @@ int main(void)
 			ft_putendl_fd("\nexit", 1);
 			break ;
 		}
-		if (lexer(command_line, &tokens))
-			parser(tokens, command_line, &ast);
+		lexer(command_line, &tokens);
+		parser(tokens, command_line, &ast);
+		executor(ast);
 		if (*command_line)
 			add_history(command_line);
 		free_ast(ast);

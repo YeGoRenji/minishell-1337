@@ -1,34 +1,12 @@
 digraph yep {
-	label="(ls | noice) | lol < inp | amazing > out | wee >> app || heh << here"
-	n0[fontcolor=chocolate1 label="||"];
+	label="(wtf && lo) > noice"
+	n0[fontcolor=crimson label="> noice"];
 	n0 -> n1;
-	n0 -> n2;
-	n1[fontcolor=chocolate1 label="|"];
+	n1[fontcolor=darkturquoise label="(SUBSH) "];
 	n1 -> n3;
-	n1 -> n4;
-	n3[fontcolor=chocolate1 label="|"];
+	n3[fontcolor=chocolate1 label="&&"];
 	n3 -> n7;
 	n3 -> n8;
-	n7[fontcolor=chocolate1 label="|"];
-	n7 -> n15;
-	n7 -> n16;
-	n15[fontcolor=darkturquoise label="(SUBSH) "];
-	n15 -> n31;
-	n31[fontcolor=chocolate1 label="|"];
-	n31 -> n63;
-	n31 -> n64;
-	n63[label="ls "];
-	n64[label="noice "];
-	n16[fontcolor=crimson label="< inp"];
-	n16 -> n33;
-	n33[label="lol "];
-	n8[fontcolor=crimson label="> out"];
-	n8 -> n17;
-	n17[label="amazing "];
-	n4[fontcolor=crimson label=">> app"];
-	n4 -> n9;
-	n9[label="wee "];
-	n2[fontcolor=crimson label="<< here"];
-	n2 -> n5;
-	n5[label="heh "];
+	n7[label="wtf "];
+	n8[label="lo "];
 }
