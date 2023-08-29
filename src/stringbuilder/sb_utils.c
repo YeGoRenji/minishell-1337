@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   globals.h                                          :+:      :+:    :+:   */
+/*   sb_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 11:12:06 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/29 18:51:02 by ylyoussf         ###   ########.fr       */
+/*   Created: 2023/08/29 14:59:24 by ylyoussf          #+#    #+#             */
+/*   Updated: 2023/08/29 15:00:17 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#include <stringbuilder.h>
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdbool.h>
-# include "libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
+static size_t	align(size_t size)
+{
+	return ((size + (16 - 1)) & ~ (16 - 1));
+}
 
-# define DEBUG // ? debug
+void	sb_reallocate(t_strbuilder *sb, size_t len)
+{
+	char	*new;
 
-#endif // STRUCTS_H
+	sb->capacity = align(sb->used_len + len + 1);
+	new = ft_calloc(1, sb->capacity);
+	ft_memcpy(new, sb->str, sb->used_len);
+	free(sb->str);
+	sb->str = new;
+}

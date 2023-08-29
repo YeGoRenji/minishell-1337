@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/28 20:41:11 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:42:20 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 
 void chk(void)
 {
-	system("leaks minishell");
+	// system("leaks minishell");
 }
+
+int	g_exit_status;
 
 int main(void)
 {
@@ -31,8 +33,7 @@ int main(void)
 	char		*cwd;
 	char		*command_line;
 
-	atexit(chk); // ? Debug
-
+	// atexit(chk); // ? Debug
 	cwd = getcwd(NULL, 0);
 	while (true)
 	{
@@ -45,7 +46,9 @@ int main(void)
 		}
 		lexer(command_line, &tokens);
 		parser(tokens, command_line, &ast);
+		printf("----- EXECUTOR ----\n");
 		executor(ast);
+		// printf("\n");
 		if (*command_line)
 			add_history(command_line);
 		free_ast(ast);

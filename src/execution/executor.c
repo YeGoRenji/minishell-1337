@@ -6,28 +6,53 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/28 20:48:53 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:30:11 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <executor.h>
 
+void	free_split(char **args)
+{
+	char	**head;
+
+	head = args;
+	while (*head)
+	{
+		free(*head);
+		head++;
+	}
+	free(*head);
+	free(args);
+}
+
 void	exec_exe(t_ast_exec *exe)
 {
-#ifdef DEBUG
-	t_token	*argv_tok;
-	argv_tok = exe->argv_tok;
-	while (argv_tok)
-	{
-		print_nosp_tok(stdout, argv_tok);
-		fprintf(stdout, " ");
-		argv_tok = argv_tok->next;
-	}
-#endif
-	// TODO: This is where stuff gets complicated
-	// TODO: Expand
+	char	**argv;
+	pid_t	pid;
+
+	///// TODO: This is where stuff gets complicated
+	///// TODO: Expand env
 	// TODO: Prepare the argv
+	// TODO: Expand Wildcard
 	// TODO: execute/call builtins
+	argv = expand_args(exe->argv_tok);
+#ifdef DEBUG
+	pid = fork();
+	if (!pid)
+	{
+		execve(argv[0],
+			argv,
+			(char *[]){NULL});
+		exit(69);
+	}
+	else
+	{
+		printf(" Waiting..\n");
+		waitpid(pid, NULL, 0);
+	}
+	free_split(argv);
+#endif
 }
 
 void	exec_pipe(t_ast_binary *tree)
@@ -35,14 +60,14 @@ void	exec_pipe(t_ast_binary *tree)
 	// TODO: create pipe then fork for both
 	// TODO: dup the output and input
 	executor((t_ast_cmd *)tree->left);
-	ft_putstr_fd(" pipe ", 1);
+	printf(" pipe ");
 	executor((t_ast_cmd *)tree->right);
 }
 
 void	exec_or(t_ast_binary *tree)
 {
 	executor((t_ast_cmd *)tree->left);
-	ft_putstr_fd(" or ", 1);
+	printf(" or ");
 	// TODO: get exit status
 	// if (exit_status isn't 0)
 	executor((t_ast_cmd *)tree->right);
@@ -51,7 +76,7 @@ void	exec_or(t_ast_binary *tree)
 void	exec_and(t_ast_binary *tree)
 {
 	executor((t_ast_cmd *)tree->left);
-	ft_putstr_fd(" and ", 1);
+	printf(" and ");
 	// TODO: get exit status
 	// if (exit_status is 0)
 	executor((t_ast_cmd *)tree->right);

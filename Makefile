@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/08/28 20:40:44 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/08/29 18:08:33 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,11 +32,18 @@ SRCS_ERR = error.c
 
 SRCS_EXE = executor.c
 
+SRCS_EXPAND = expander.c
+
+SRCS_SB = sb.c \
+		  sb_utils.c
+
 OBJS_FILES = $(SRCS_LEXER:.c=.o) \
 			 $(SRCS_PARSER:.c=.o) \
 			 $(SRCS_AST:.c=.o) \
 			 $(SRCS_ERR:.c=.o) \
 			 $(SRCS_EXE:.c=.o) \
+			 $(SRCS_SB:.c=.o) \
+			 $(SRCS_EXPAND:.c=.o) \
 			 main.o
 
 LIBFT = src/libft/libft.a
@@ -73,6 +80,14 @@ $(OBJSFOLDER)%.o: src/parser/ast/%.c include/ast.h $(GLOBAL_HEADERS)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJSFOLDER)%.o: src/execution/%.c include/executor.h $(GLOBAL_HEADERS)
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJSFOLDER)%.o: src/expander/%.c include/expander.h $(GLOBAL_HEADERS)
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJSFOLDER)%.o: src/stringbuilder/%.c include/stringbuilder.h $(GLOBAL_HEADERS)
 	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) -c $< -o $@
 
