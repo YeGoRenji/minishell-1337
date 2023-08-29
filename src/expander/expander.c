@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/29 21:47:52 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/29 22:44:48 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,10 @@ char	*expand_special(char *to_expand, char *specials)
 		// printf("sb = [%s]\n", sb->str);
 		ptr += len;
 	}
+	free(to_expand);
+	to_expand = sb->str;
 	free(sb);
-	return (sb->str);
+	return (to_expand);
 }
 
 char	*expand(t_token *tok)
@@ -102,7 +104,7 @@ char	*expand(t_token *tok)
 	char	*specials;
 
 	specials = "$";
-	// TODO : specials = "$*";
+	// TODO : maybe handle wildcards
 	if (tok->type == DQSTR)
 	{
 		str = ft_strtrim(tok->value, "\"");
@@ -122,16 +124,18 @@ char	*expand_nosp_arg(t_token *argv_tok)
 {
 	char			*to_join;
 	t_strbuilder	*sb;
+	char			*to_return;
 
 	sb = stringbuilder();
 	while (argv_tok)
 	{
 		to_join = expand(argv_tok);
-		sb_append(sb, to_join);
+		sb_append_free(sb, to_join);
 		argv_tok = argv_tok->nospace_next;
 	}
+	to_return = sb->str;
 	free(sb);
-	return (sb->str);
+	return (to_return);
 }
 
 char	**expand_args(t_token *argv_tok)

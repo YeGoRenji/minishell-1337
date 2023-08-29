@@ -1,4 +1,4 @@
 digraph yep {
-	label="/bin/echo $HOME"
-	n0[label="/bin/echo $HOME "];
+	label="/bin/echo  -la                    --color=auto"
+	n0[label="/bin/echo -la --color=auto "];
 }
