@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/30 04:02:27 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:14:52 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 		print_err(argv[0], check_cmd(argv, get_envp(NULL)));
 		exit(69);
 	}
-#ifdef DEBUG
 	pid = fork();
 	if (!pid)
 	{
@@ -57,7 +56,8 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 		waitpid(pid, NULL, 0);
 	}
 	free_split(argv);
-#endif
+// #ifdef DEBUG
+// #endif
 }
 
 void	exec_pipe(t_ast_binary *tree, bool forked)

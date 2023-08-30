@@ -1,4 +1,4 @@
 digraph yep {
-	label="ls --color=tty -l"
-	n0[label="ls --color=tty -l "];
+	label="ls -la"
+	n0[label="ls -la "];
 }

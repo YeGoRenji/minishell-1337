@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/30 03:52:22 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:15:27 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ int main(int _, char **__, char **envp)
 		}
 		lexer(command_line, &tokens);
 		parser(tokens, command_line, &ast);
+#ifdef DEBUG
 		printf("----- EXECUTOR ----\n");
+#endif
 		executor(ast, false);
 		// printf("\n");
 		if (*command_line)
