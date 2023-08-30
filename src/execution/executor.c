@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/30 12:41:58 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/30 16:00:48 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 {
 	char	**argv;
 	pid_t	pid;
+	int		exit_status;
 
 	///// TODO: This is where stuff gets complicated
 	///// TODO: Expand env
@@ -40,7 +41,7 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	if (forked)
 	{
 		print_err(argv[0], check_cmd(argv, get_envp(NULL)));
-		exit(69);
+		exit(-1);
 	}
 	pid = fork();
 	if (!pid)
@@ -48,16 +49,15 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 		// TODO: execute/call builtins
 		// TODO: use jeff's envp linked list
 		print_err(argv[0], check_cmd(argv, get_envp(NULL)));
-		exit(69);
+		exit(-1);
 	}
 	else
 	{
 		// printf(" Waiting..\n");
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &exit_status, 0);
+		g_exit_status = WEXITSTATUS(exit_status);
 	}
 	free_split(argv);
-// #ifdef DEBUG
-// #endif
 }
 
 void	exec_pipe(t_ast_binary *tree, bool forked)
@@ -65,6 +65,7 @@ void	exec_pipe(t_ast_binary *tree, bool forked)
 	int		fd[2];
 	pid_t	pids[2];
 	bool	do_exit;
+	int		exit_status;
 	// TODO: create pipe then fork for both
 	// TODO: dup the output and input
 	pids[0] = pids[1] = 0;
@@ -76,7 +77,8 @@ void	exec_pipe(t_ast_binary *tree, bool forked)
 	if (!pids[0])
 	{
 		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
+		if (dup2(fd[1], STDOUT_FILENO) == -1)
+			(print_err("dup", 0), exit(-1));
 		close(fd[1]);
 		executor((t_ast_cmd *)tree->left, forked);
 		// TODO: protecc ?
@@ -87,35 +89,33 @@ void	exec_pipe(t_ast_binary *tree, bool forked)
 		if (!pids[1])
 		{
 			close(fd[1]);
-			dup2(fd[0], STDIN_FILENO);
+			if (dup2(fd[0], STDIN_FILENO) == -1)
+				(print_err("dup", 0), exit(-1));
 			close(fd[0]);
 			executor((t_ast_cmd *)tree->right, forked);
 		}
 	}
 	close(fd[0]);
 	close(fd[1]);
-	waitpid(pids[0], NULL, 0);
-	waitpid(pids[1], NULL, 0);
+	waitpid(pids[0], &exit_status, 0);
+	waitpid(pids[1], &exit_status, 0);
+	g_exit_status = WEXITSTATUS(exit_status);
 	if (do_exit)
-		exit(69);
+		exit(g_exit_status);
 }
 
 void	exec_or(t_ast_binary *tree, bool forked)
 {
 	executor((t_ast_cmd *)tree->left, forked);
-	printf(" or ");
-	// TODO: get exit status
-	// if (exit_status isn't 0)
-	executor((t_ast_cmd *)tree->right, forked);
+	if (g_exit_status)
+		executor((t_ast_cmd *)tree->right, forked);
 }
 
 void	exec_and(t_ast_binary *tree, bool forked)
 {
 	executor((t_ast_cmd *)tree->left, forked);
-	printf(" and ");
-	// TODO: get exit status
-	// if (exit_status is 0)
-	executor((t_ast_cmd *)tree->right, forked);
+	if (!g_exit_status)
+		executor((t_ast_cmd *)tree->right, forked);
 }
 
 void	exec_redir(t_ast_redir *tree, bool	forked)
@@ -132,10 +132,17 @@ void	exec_redir(t_ast_redir *tree, bool	forked)
 
 void	exec_subsh(t_ast_subsh *tree, bool forked)
 {
+	pid_t	pid;
+	int		exit_status;
 	// TODO: fork
-	printf("(");
-	executor(tree->cmd, forked);
-	printf(")");
+	pid = fork();
+	forked = true;
+	if (!pid)
+		executor(tree->cmd, forked);
+	waitpid(pid, &exit_status, 0);
+	g_exit_status = WEXITSTATUS(exit_status);
+	if (forked)
+		exit(g_exit_status);
 }
 
 void	executor(t_ast_cmd *tree, bool forked)

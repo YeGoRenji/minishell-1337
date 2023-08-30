@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/30 12:15:27 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:51:59 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ void chk(void)
 	// system("leaks minishell");
 }
 
-int	g_exit_status;
-
-char **get_envp(char **envp)
+char	**get_envp(char **envp)
 {
 	static char	**envp_s;
 
