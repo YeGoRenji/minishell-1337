@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/29 21:42:20 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/30 03:52:22 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,16 @@ void chk(void)
 
 int	g_exit_status;
 
-int main(void)
+char **get_envp(char **envp)
+{
+	static char	**envp_s;
+
+	if (envp)
+		envp_s = envp;
+	return (envp_s);
+}
+
+int main(int _, char **__, char **envp)
 {
 	// TODO : Make an actual Prompt with PWD
 	t_token		*tokens;
@@ -34,6 +43,9 @@ int main(void)
 	char		*command_line;
 
 	// atexit(chk); // ? Debug
+	(void)_;
+	(void)__;
+	get_envp(envp);
 	cwd = getcwd(NULL, 0);
 	while (true)
 	{
@@ -47,7 +59,7 @@ int main(void)
 		lexer(command_line, &tokens);
 		parser(tokens, command_line, &ast);
 		printf("----- EXECUTOR ----\n");
-		executor(ast);
+		executor(ast, false);
 		// printf("\n");
 		if (*command_line)
 			add_history(command_line);

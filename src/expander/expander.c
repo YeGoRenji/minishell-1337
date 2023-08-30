@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/29 22:44:48 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/30 01:59:02 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,11 @@ char	*get_env_value(char *var)
 {
 	char	*value;
 	// TODO: actually get value of $var 👍🏿
-	// ? debug
 	value = getenv(var + 1);
+	free(var);
 	if (!value)
 		return (ft_strdup(""));
 	return (ft_strdup(value));
-	// t_strbuilder	*sb = stringbuilder();
-	// sb_append(sb, "{valueof(");
-	// sb_append_free(sb, var);
-	// sb_append(sb, ")}");
-	// free(sb);
-	// return (sb->str);
-	// ? end debug
 }
 
 char	*expand_special(char *to_expand, char *specials)

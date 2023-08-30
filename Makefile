@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/08/29 22:32:40 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/08/30 02:20:01 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS_AST = ast.c \
 
 SRCS_ERR = error.c
 
-SRCS_EXE = executor.c
+SRCS_EXE = executor.c \
+		   exec_utils.c
 
 SRCS_EXPAND = expander.c
 

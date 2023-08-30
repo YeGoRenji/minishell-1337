@@ -1,4 +1,4 @@
 digraph yep {
-	label="/bin/echo  -la                    --color=auto"
-	n0[label="/bin/echo -la --color=auto "];
+	label="ls --color=tty -l"
+	n0[label="ls --color=tty -l "];
 }
