@@ -6,13 +6,13 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/08/30 02:20:01 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/08/30 12:36:56 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS = -Wall -Wextra -Werror -g -Iinclude -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -Iinclude #-fsanitize=address
 
 OBJSFOLDER = objs/
 

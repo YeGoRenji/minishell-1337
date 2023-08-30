@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 04:49:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/27 11:15:17 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/30 12:59:26 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ bool	lexer(char *command_line, t_token **tokens)
 		get_token(command_line + index, &this_tok);
 		if (!check_tok(&this_tok, command_line,
 				(int [2]){index, space}, tokens))
-			return (free_tok_lst(*tokens), false);
+			return (free_tok_lst(*tokens), *tokens = NULL, false);
 		index += this_tok.len;
 	}
 	ft_tokadd_back(tokens, new_token(NEW_LINE, ft_strdup("newline"), 7));
