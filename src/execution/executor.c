@@ -6,14 +6,14 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/31 17:57:55 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/31 21:39:45 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <executor.h>
 #include <sys/wait.h>
 
-void	free_split(char **args)
+void	free_list(char **args)
 {
 	char	**head;
 
@@ -59,7 +59,7 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 		g_exit_status = WEXITSTATUS(exit_status);
 		printf("exe > Got ex_stat : %d\n", g_exit_status);
 	}
-	free_split(argv);
+	free_list(argv);
 }
 
 void	exec_pipe(t_ast_binary *tree, bool forked)

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/30 02:48:23 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/31 22:25:29 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,19 @@ int	check_file(char *file_path, int access_type)
 	return (1);
 }
 
-char	*find_path(char **envp)
+char	*find_path(t_env *envp)
 {
-	while (*envp)
+	while (envp)
 	{
-		if (ft_strncmp("PATH=", *envp, 5) == 0)
-			return (*envp);
-		envp++;
+		if (ft_strncmp("PATH=", envp->value, 5) == 0)
+			return (envp->value);
+		envp = envp->next;
 	}
 	return (NULL);
 }
 
 
-int	check_cmd(char **cmd, char **envp)
+int	check_cmd(char **cmd, t_env *envp)
 {
 	char			*path_var;
 	char			**paths[2];
@@ -63,7 +63,7 @@ int	check_cmd(char **cmd, char **envp)
 	if (ft_strchr(cmd[0], '/'))
 	{
 		if (check_file(cmd[0], X_OK))
-			return (execve(cmd[0], cmd, envp));
+			return (execve(cmd[0], cmd, NULL)); // Send consume(envp), Struct to Char**
 		exit(-1);
 	}
 	path_var = find_path(envp);
@@ -80,7 +80,7 @@ int	check_cmd(char **cmd, char **envp)
 		*paths[0] = sb->str;
 		free(sb);
 		if (access(*paths[0], X_OK) == 0)
-			if (execve(*paths[0], cmd, envp) == -1)
+			if (execve(*paths[0], cmd, NULL) == -1) // Send consume(envp), Struct to Char **
 				return (-1);
 		free(*paths[0]++);
 	}

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/31 16:09:28 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/31 22:20:18 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <lexer.h>
 #include <parser.h>
 #include <executor.h>
+#include "src/minishell_builtins/builtins.h"
 
 #define RED "\033[91m"
 #define NOCOL "\033[0m"
@@ -23,13 +24,13 @@ void chk(void)
 	// system("leaks minishell");
 }
 
-char	**get_envp(char **envp)
+t_env	*get_envp(t_env *envp)
 {
-	static char	**envp_s;
+	static t_env	*env;
 
 	if (envp)
-		envp_s = envp;
-	return (envp_s);
+		env = envp;
+	return (env);
 }
 
 int main(int _, char **__, char **envp)
@@ -43,7 +44,6 @@ int main(int _, char **__, char **envp)
 	// atexit(chk); // ? Debug
 	(void)_;
 	(void)__;
-	get_envp(envp);
 	cwd = getcwd(NULL, 0);
 	while (true)
 	{
@@ -59,6 +59,8 @@ int main(int _, char **__, char **envp)
 #ifdef DEBUG
 		printf("----- EXECUTOR ----\n");
 #endif
+		get_envp(create_env(envp));
+		pwd_trolling(getcwd(NULL, 0));
 		executor(ast, false);
 		// printf("\n");
 		if (*command_line)

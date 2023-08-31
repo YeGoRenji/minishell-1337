@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/08/31 16:30:56 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/08/31 21:22:56 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,8 +62,12 @@ $(LIBFT):
 $(OBJSFOLDER):
 	@mkdir objs
 
+BUILTINS_FOLD = src/minishell_builtins
+
+L_BUILTINS = $(BUILTINS_FOLD)/buitlins.a
+
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(CFLAGS) -o $(NAME) -Lsrc/libft -lft -lreadline
+	$(CC) $(OBJS) $(CFLAGS) -o $(NAME) -L$(BUILTINS_FOLD) -lbuiltins -Lsrc/libft -lft -lreadline
 
 $(OBJSFOLDER)%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
