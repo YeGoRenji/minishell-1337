@@ -1,0 +1,6 @@
+- export +=
+- export a = b
+- sort export keys
+- handle export options, lackof more of
+- make the other builtins
+- make a diff in printing between env and export
