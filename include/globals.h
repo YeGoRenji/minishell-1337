@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:12:06 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/31 22:18:40 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/31 22:51:58 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdbool.h>
 # include <sys/wait.h> // ? For linux only
 # include "libft.h"
+# include "../src/minishell_builtins/builtins.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 

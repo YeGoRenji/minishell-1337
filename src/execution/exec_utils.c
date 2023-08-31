@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/31 22:25:29 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/31 22:55:35 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	check_cmd(char **cmd, t_env *envp)
 	if (ft_strchr(cmd[0], '/'))
 	{
 		if (check_file(cmd[0], X_OK))
-			return (execve(cmd[0], cmd, NULL)); // Send consume(envp), Struct to Char**
+			return (execve(cmd[0], cmd, consume_env(get_envp(NULL))));
 		exit(-1);
 	}
 	path_var = find_path(envp);
@@ -80,7 +80,7 @@ int	check_cmd(char **cmd, t_env *envp)
 		*paths[0] = sb->str;
 		free(sb);
 		if (access(*paths[0], X_OK) == 0)
-			if (execve(*paths[0], cmd, NULL) == -1) // Send consume(envp), Struct to Char **
+			if (execve(*paths[0], cmd, consume_env(get_envp(NULL))) == -1)
 				return (-1);
 		free(*paths[0]++);
 	}

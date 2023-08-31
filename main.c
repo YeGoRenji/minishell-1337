@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/31 22:20:18 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/31 22:56:38 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <lexer.h>
 #include <parser.h>
 #include <executor.h>
-#include "src/minishell_builtins/builtins.h"
 
 #define RED "\033[91m"
 #define NOCOL "\033[0m"
