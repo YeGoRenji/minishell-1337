@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/23 02:54:46 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/08/26 17:26:40 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/09/01 00:05:51 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,26 +53,19 @@ SRC = ft_isalpha.c \
 
 OBJ = $(SRC:.c=.o)
 
-bonus_src = ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstclear_bonus.c ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c ft_lstmap_bonus.c
-
-bonus_obj = $(bonus_src:.c=.o)
-
-all : $(NAME) bonus
+all : $(NAME)
 
 $(NAME) : $(OBJ)
 	ar rcs $@ $^
-
-bonus : $(bonus_obj)
-	ar rcs $(NAME) $^
 
 %.o : %.c libft.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	rm -rf $(OBJ) $(bonus_obj)
+	rm -rf $(OBJ)
 fclean : clean
 	rm -rf $(NAME)
 
 re : fclean all
 
-.PHONY : clean fclean re all bonus
+.PHONY : clean fclean re all
