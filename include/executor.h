@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:49:19 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/30 03:47:23 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/31 22:23:15 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include "expander.h"
 
 void	executor(t_ast_cmd *tree, bool forked);
-int		check_cmd(char **cmd, char **envp);
+void	free_list(char **args);
+int		check_cmd(char **cmd, t_env *envp);
 int		print_err(char *preced, int msg_code);
 
 #endif // EXECUTOR_H

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:12:06 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/31 16:32:28 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/08/31 22:18:40 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-char	**get_envp(char **envp);
+t_env	*get_envp(t_env *envp);
 
 // # define DEBUG // ? debug
 
