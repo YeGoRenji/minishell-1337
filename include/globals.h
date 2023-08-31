@@ -27,6 +27,6 @@ char	**get_envp(char **envp);
 
 // # define DEBUG // ? debug
 
-extern int	g_exit_status;
+int	g_exit_status;
 
 #endif // GLOBALS_H
