@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/31 22:56:38 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/01 02:08:37 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_env	*get_envp(t_env *envp)
 	return (env);
 }
 
+int g_exit_status;
+
 int main(int _, char **__, char **envp)
 {
 	// TODO : Make an actual Prompt with PWD
@@ -43,9 +45,11 @@ int main(int _, char **__, char **envp)
 	// atexit(chk); // ? Debug
 	(void)_;
 	(void)__;
-	cwd = getcwd(NULL, 0);
+	get_envp(create_env(envp));
+	pwd_trolling(getcwd(NULL, 0));
 	while (true)
 	{
+		cwd = pwd_trolling(NULL);
 		printf("["RED"%s"NOCOL"]\n", cwd);
 		command_line = readline("➤ ");
 		if (!command_line)
@@ -58,8 +62,6 @@ int main(int _, char **__, char **envp)
 #ifdef DEBUG
 		printf("----- EXECUTOR ----\n");
 #endif
-		get_envp(create_env(envp));
-		pwd_trolling(getcwd(NULL, 0));
 		executor(ast, false);
 		// printf("\n");
 		if (*command_line)

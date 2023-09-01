@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/31 21:39:45 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/01 01:58:07 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,31 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	char	**argv;
 	pid_t	pid;
 	int		exit_status;
+	t_env	*envp;
 
 	///// TODO: This is where stuff gets complicated
 	///// TODO: Expand env
 	// TODO: Prepare the argv
 	argv = expand_args(exe->argv_tok);
 	// TODO: Expand Wildcard
+	envp = get_envp(NULL);
+	if (check_builtins(tok_lst_len(exe->argv_tok) - 1, argv[0], argv + 1, &envp))
+	{
+		if (forked)
+			exit(g_exit_status);
+		else
+			return ;
+	}
 	if (forked)
 	{
-		print_err(argv[0], check_cmd(argv, get_envp(NULL)));
+		print_err(argv[0], check_cmd(argv, envp));
 		exit(-1);
 	}
 	pid = fork();
 	if (!pid)
 	{
 		// TODO: execute/call builtins
-		// TODO: use jeff's envp linked list
-		print_err(argv[0], check_cmd(argv, get_envp(NULL)));
+		print_err(argv[0], check_cmd(argv, envp));
 		exit(-1);
 	}
 	else

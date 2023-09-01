@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/31 22:55:35 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/01 01:40:59 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,12 @@ int	check_file(char *file_path, int access_type)
 
 char	*find_path(t_env *envp)
 {
-	while (envp)
-	{
-		if (ft_strncmp("PATH=", envp->value, 5) == 0)
-			return (envp->value);
-		envp = envp->next;
-	}
-	return (NULL);
+	t_env	*node;
+
+	node = search_in_env(envp, "PATH");
+	if (!node)
+		return (NULL);
+	return (node->value);
 }
 
 
