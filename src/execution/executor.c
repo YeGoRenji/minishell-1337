@@ -6,12 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/01 02:51:58 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/02 00:52:51 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <executor.h>
-#include <sys/wait.h>
 
 void	free_list(char **list)
 {
@@ -25,7 +24,7 @@ void	free_list(char **list)
 
 void	exec_exe(t_ast_exec *exe, bool forked)
 {
-	printf("exe > \n");
+	// fprintf(stderr, "[%d] exe > \n", getpid());
 	char	**argv;
 	pid_t	pid;
 	int		exit_status;
@@ -37,54 +36,37 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	argv = expand_args(exe->argv_tok);
 	// TODO: Expand Wildcard
 	envp = get_envp(NULL);
-	// if (check_builtins(tok_lst_len(exe->argv_tok) - 1, argv[0], argv + 1, &envp))
-	// {
-	// 	if (forked)
-	// 		exit(g_exit_status);
-	// 	else
-	// 		return ;
-	// }
-	printf("WTF\n");
-	if (forked)
+	if (check_builtins(tok_lst_len(exe->argv_tok) - 1, argv[0], argv + 1, &envp))
 	{
-		print_err(argv[0], check_cmd(argv, envp));
-		exit(-1);
+		if (forked)
+			exit(g_exit_status);
+		return (free_list(argv));
 	}
-	printf("WTF 2\n");
 	pid = fork();
 	if (!pid)
 	{
 		// TODO: execute/call builtins
-		printf("WTF IF\n");
 		print_err(argv[0], check_cmd(argv, envp));
-		exit(-1);
+		exit(g_exit_status);
 	}
-	else
-	{
-	printf("WTF else\n");
-		// printf(" Waiting..\n");
-		waitpid(pid, &exit_status, 0);
-		g_exit_status = WEXITSTATUS(exit_status);
-		printf("exe > Got ex_stat : %d\n", g_exit_status);
-	}
-	printf("WTF 3\n");
+	// printf(" Waiting..\n");
+	waitpid(pid, &exit_status, 0);
+	g_exit_status = WEXITSTATUS(exit_status);
+	// fprintf(stderr, "exe > Got ex_stat : %d\n", g_exit_status);
 	free_list(argv);
 }
 
 void	exec_pipe(t_ast_binary *tree, bool forked)
 {
-	printf("pipe > \n");
+	// fprintf(stderr, "[%d] pipe > \n", getpid());
 	int		fd[2];
 	pid_t	pids[2];
-	bool	do_exit;
 	int		exit_status;
 	// TODO: create pipe then fork for both
 	// TODO: dup the output and input
 	pids[0] = pids[1] = 0;
-	do_exit = forked;
 	if (pipe(fd) == -1)
 		exit(69);
-	forked = true;
 	pids[0] = fork();
 	if (!pids[0])
 	{
@@ -92,55 +74,58 @@ void	exec_pipe(t_ast_binary *tree, bool forked)
 		if (dup2(fd[1], STDOUT_FILENO) == -1)
 			(print_err("dup", 0), exit(-1));
 		close(fd[1]);
-		executor((t_ast_cmd *)tree->left, forked);
+		executor((t_ast_cmd *)tree->left, true);
+		exit(g_exit_status);
 		// TODO: protecc ?
 	}
-	else
+	pids[1] = fork();
+	if (!pids[1])
 	{
-		pids[1] = fork();
-		if (!pids[1])
-		{
-			close(fd[1]);
-			if (dup2(fd[0], STDIN_FILENO) == -1)
-				(print_err("dup", 0), exit(-1));
-			close(fd[0]);
-			executor((t_ast_cmd *)tree->right, forked);
-		}
+		close(fd[1]);
+		if (dup2(fd[0], STDIN_FILENO) == -1)
+			(print_err("dup", 0), exit(-1));
+		close(fd[0]);
+		executor((t_ast_cmd *)tree->right, true);
+		exit(g_exit_status);
 	}
 	close(fd[0]);
 	close(fd[1]);
 	waitpid(pids[0], &exit_status, 0);
 	waitpid(pids[1], &exit_status, 0);
 	g_exit_status = WEXITSTATUS(exit_status);
-	printf("pipe > Got ex_stat : %d\n", g_exit_status);
-	if (do_exit)
+	// fprintf(stderr, "pipe > Got ex_stat : %d\n", g_exit_status);
+	if (forked)
 		exit(g_exit_status);
 }
 
 void	exec_or(t_ast_binary *tree, bool forked)
 {
-	printf("or > \n");
-	executor((t_ast_cmd *)tree->left, forked);
+	// fprintf(stderr, "[%d] or > \n", getpid());
+	executor((t_ast_cmd *)tree->left, false);
 	if (g_exit_status)
-		executor((t_ast_cmd *)tree->right, forked);
+		executor((t_ast_cmd *)tree->right, false);
+	if (forked)
+		exit(g_exit_status);
 }
 
 void	exec_and(t_ast_binary *tree, bool forked)
 {
-	printf("and > \n");
-	executor((t_ast_cmd *)tree->left, forked);
+	// fprintf(stderr, "[%d] and > \n", getpid());
+	executor((t_ast_cmd *)tree->left, false);
 	if (!g_exit_status)
-		executor((t_ast_cmd *)tree->right, forked);
+		executor((t_ast_cmd *)tree->right, false);
+	if (forked)
+		exit(g_exit_status);
 }
 
 void	exec_redir(t_ast_redir *tree, bool	forked)
 {
-	printf("redir > \n");
+	fprintf(stderr, "[%d] redir > \n", getpid());
 	char *redirs[4] = {">", ">>", "<", "<<"}; // ? Debug
 
-	printf(" %s", redirs[tree->direction - 3]); // ? Debug
+	fprintf(stderr, " %s", redirs[tree->direction - 3]); // ? Debug
 	print_nosp_tok(stdout, tree->file_tok);
-	printf(" ");
+	fprintf(stderr, " ");
 	// TODO: open file
 	// TODO: dup the output and input
 	executor(tree->cmd, forked);
@@ -148,16 +133,16 @@ void	exec_redir(t_ast_redir *tree, bool	forked)
 
 void	exec_subsh(t_ast_subsh *tree, bool forked)
 {
-	printf("subsh > \n");
+	// fprintf(stderr, "[%d] subsh > \n", getpid());
 	pid_t	pid;
 	int		exit_status;
 	// TODO: fork
 	pid = fork();
 	if (!pid)
-		executor(tree->cmd, forked);
+		executor(tree->cmd, true);
 	waitpid(pid, &exit_status, 0);
 	g_exit_status = WEXITSTATUS(exit_status);
-	printf("subsh > Got ex_stat : %d\n", g_exit_status);
+	// fprintf(stderr, "subsh > Got ex_stat : %d\n", g_exit_status);
 	if (forked)
 		exit(g_exit_status);
 }

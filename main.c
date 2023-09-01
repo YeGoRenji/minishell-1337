@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/01 19:02:18 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/09/02 00:51:34 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int main(int _, char **__, char **envp)
 		command_line = readline("➤ ");
 		if (!command_line)
 		{
-			ft_putendl_fd("\nexit", 1);
+			ft_putendl_fd("exit", 1);
 			break ;
 		}
 		lexer(command_line, &tokens);
@@ -74,4 +74,5 @@ int main(int _, char **__, char **envp)
 	}
 	free(command_line);
 	free(cwd);
+	exit(g_exit_status);
 }

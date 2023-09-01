@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/01 02:48:34 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/02 00:53:11 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	print_err(char *preced, int msg_code)
 	sb = stringbuilder();
 	sb_append(sb_append(sb, "shell69: "), preced);
 	if (msg_code == -1)
+	{
 		sb_append(sb, ": command not found\n");
+		g_exit_status = 127;
+	}
 	else if (msg_code == -2)
 		sb_append(sb, ": allocation error\n");
 	else if (msg_code == -3)

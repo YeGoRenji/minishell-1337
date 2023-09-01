@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/30 01:59:02 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/02 00:28:37 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ unsigned int	get_chunk_len(char *ptr, char *sp)
 char	*get_env_value(char *var)
 {
 	char	*value;
-	// TODO: actually get value of $var 👍🏿
-	value = getenv(var + 1);
+	t_env	*node;
+
+	node = search_in_env(get_envp(NULL), var + 1);
+	value = node->value;
 	free(var);
 	if (!value)
 		return (ft_strdup(""));
