@@ -6,25 +6,21 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/01 01:58:07 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/01 02:51:58 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <executor.h>
 #include <sys/wait.h>
 
-void	free_list(char **args)
+void	free_list(char **list)
 {
-	char	**head;
+	unsigned int	i;
 
-	head = args;
-	while (*head)
-	{
-		free(*head);
-		head++;
-	}
-	free(*head);
-	free(args);
+	i = 0;
+	while (list[i])
+		free(list[i++]);
+	free(list);
 }
 
 void	exec_exe(t_ast_exec *exe, bool forked)
@@ -41,32 +37,37 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	argv = expand_args(exe->argv_tok);
 	// TODO: Expand Wildcard
 	envp = get_envp(NULL);
-	if (check_builtins(tok_lst_len(exe->argv_tok) - 1, argv[0], argv + 1, &envp))
-	{
-		if (forked)
-			exit(g_exit_status);
-		else
-			return ;
-	}
+	// if (check_builtins(tok_lst_len(exe->argv_tok) - 1, argv[0], argv + 1, &envp))
+	// {
+	// 	if (forked)
+	// 		exit(g_exit_status);
+	// 	else
+	// 		return ;
+	// }
+	printf("WTF\n");
 	if (forked)
 	{
 		print_err(argv[0], check_cmd(argv, envp));
 		exit(-1);
 	}
+	printf("WTF 2\n");
 	pid = fork();
 	if (!pid)
 	{
 		// TODO: execute/call builtins
+		printf("WTF IF\n");
 		print_err(argv[0], check_cmd(argv, envp));
 		exit(-1);
 	}
 	else
 	{
+	printf("WTF else\n");
 		// printf(" Waiting..\n");
 		waitpid(pid, &exit_status, 0);
 		g_exit_status = WEXITSTATUS(exit_status);
 		printf("exe > Got ex_stat : %d\n", g_exit_status);
 	}
+	printf("WTF 3\n");
 	free_list(argv);
 }
 
