@@ -1,0 +1,2 @@
+Expanding $var should happen before from expanding wildcards
+Probably Expanding $vars should not make literal strings

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:12:06 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/01 02:30:04 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/13 17:00:10 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 t_env	*get_envp(t_env *envp);
 
-// # define DEBUG // ? debug
+# define DEBUG // ? debug
 
 extern int	g_exit_status;
 

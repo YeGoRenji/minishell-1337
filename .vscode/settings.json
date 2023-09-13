@@ -1,0 +1,11 @@
+{
+	"files.associations": {
+		"expander.h": "c",
+		"lexer.h": "c",
+		"globals.h": "c",
+		"stringbuilder.h": "c",
+		"readline.h": "c",
+		"wait.h": "c",
+		"stdio.h": "c"
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/02 00:53:11 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/13 17:31:15 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*find_path(t_env *envp)
 
 int	check_cmd(char **cmd, t_env *env)
 {
-	char			*path_var;
+	char			*path_val;
 	char			**paths[2];
 	t_strbuilder	*sb;
 	char			**envp;
@@ -72,10 +72,10 @@ int	check_cmd(char **cmd, t_env *env)
 		}
 		exit(-1);
 	}
-	path_var = find_path(env);
-	if (!path_var)
+	path_val = find_path(env);
+	if (!path_val)
 		return (-3);
-	paths[0] = ft_split(path_var + 5, ':');
+	paths[0] = ft_split(path_val, ':');
 	paths[1] = paths[0];
 	if (!paths[0])
 		return (-2);

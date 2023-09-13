@@ -1,4 +1,4 @@
 digraph yep {
-	label="ls -la"
-	n0[label="ls -la "];
+	label="$a"
+	n0[label="$a "];
 }
