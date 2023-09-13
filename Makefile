@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/09/01 02:44:15 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/09/13 18:37:43 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,10 @@ SRCS_EXPAND = expander.c
 SRCS_SB = sb.c \
 		  sb_utils.c
 
+BUILTINS_FOLD = src/minishell_builtins
+
+SRCS_BUILTINS = $(BUILTINS_FOLD)/*.c
+
 OBJS_FILES = $(SRCS_LEXER:.c=.o) \
 			 $(SRCS_PARSER:.c=.o) \
 			 $(SRCS_AST:.c=.o) \
@@ -53,7 +57,9 @@ OBJS = $(foreach obj, $(OBJS_FILES), $(OBJSFOLDER)$(obj))
 
 GLOBAL_HEADERS = include/globals.h
 
-all: $(OBJSFOLDER) $(LIBFT) $(NAME)
+L_BUILTINS = $(BUILTINS_FOLD)/libbuiltins.a
+
+all: $(OBJSFOLDER) $(LIBFT) $(L_BUILTINS) $(NAME)
 
 $(LIBFT):
 	@echo "Compiling libft..."
@@ -62,9 +68,8 @@ $(LIBFT):
 $(OBJSFOLDER):
 	@mkdir objs
 
-BUILTINS_FOLD = src/minishell_builtins
-
-L_BUILTINS = $(BUILTINS_FOLD)/buitlins.a
+$(L_BUILTINS): $(SRCS_BUILTINS)
+	make -C $(BUILTINS_FOLD)
 
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) -o $(NAME) -L$(BUILTINS_FOLD) -lbuiltins -Lsrc/libft -lft -lreadline
