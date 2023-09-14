@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 20:28:04 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/27 10:50:09 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:59:07 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	check_expanding(char *str, t_token_type type)
 	dollar_pos = ft_strchr(str, '$');
 	if (!wild_pos && !dollar_pos)
 		return (false);
-	if (dollar_pos && ft_isalpha(dollar_pos[1]))
+	if (dollar_pos && (ft_isalpha(dollar_pos[1]) || dollar_pos[1] == '?'))
 		return (true);
 	if (wild_pos)
 		return (true);

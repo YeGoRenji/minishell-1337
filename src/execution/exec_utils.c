@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/13 17:31:15 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/14 01:21:44 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,12 @@ int	check_cmd(char **cmd, t_env *env)
 		*paths[0] = sb->str;
 		free(sb);
 		if (access(*paths[0], X_OK) == 0)
-			if (execve(*paths[0], cmd, consume_env(get_envp(NULL))) == -1)
-				return (-1);
-		free(*paths[0]++);
+		{
+			envp = consume_env(get_envp(NULL));
+			if (execve(*paths[0], cmd, envp) == -1)
+				return (free_list(envp), free_list(paths[1]), -1);
+		}
+		paths[0]++;
 	}
-	return (free(paths[1]), -1);
+	return (free_list(paths[1]), -1);
 }

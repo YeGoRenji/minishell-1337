@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:54:59 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/27 10:50:23 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/14 02:53:39 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,8 @@ int	get_token_len(t_token_type type, char *str)
 		pos = ft_strchr(str + 1, '"');
 	else
 		pos = ft_strchr(str + 1, '\'');
-	// TODO : This is Unclosed Quote Error !
 	if (pos == NULL)
 		return (1);
-	// TODO : return the content without ' or "
 	return (pos - str + 1);
 }
 

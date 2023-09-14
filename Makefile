@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/09/13 18:37:43 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/09/14 01:35:46 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ GLOBAL_HEADERS = include/globals.h
 
 L_BUILTINS = $(BUILTINS_FOLD)/libbuiltins.a
 
-all: $(OBJSFOLDER) $(LIBFT) $(L_BUILTINS) $(NAME)
+all: $(OBJSFOLDER) $(LIBFT) $(NAME)
 
 $(LIBFT):
 	@echo "Compiling libft..."
@@ -71,7 +71,7 @@ $(OBJSFOLDER):
 $(L_BUILTINS): $(SRCS_BUILTINS)
 	make -C $(BUILTINS_FOLD)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(L_BUILTINS)
 	$(CC) $(OBJS) $(CFLAGS) -o $(NAME) -L$(BUILTINS_FOLD) -lbuiltins -Lsrc/libft -lft -lreadline
 
 $(OBJSFOLDER)%.o: %.c

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/13 17:32:42 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/14 03:34:31 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,12 @@ char	*expand_special(char *to_expand, char *specials)
 		len = get_chunk_len(ptr, specials);
 		chunk = ft_substr(ptr, 0, len);
 		if (*ptr == '$' && len > 1)
-			chunk = get_env_value(chunk);
+		{
+			if (len == 2 && ptr[1] == '?')
+				chunk = ft_itoa(g_exit_status);
+			else
+				chunk = get_env_value(chunk);
+		}
 		// printf("Got [%lu]{%s}\n", len, chunk);
 		sb_append_free(sb, chunk);
 		// printf("sb = [%s]\n", sb->str);
