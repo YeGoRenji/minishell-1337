@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/14 03:34:31 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/15 00:56:52 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ unsigned int	get_chunk_len(char *ptr, char *sp)
 	else
 	{
 		len++;
-		while (ft_isalnum(ptr[len]))
+		while (ft_isalnum(ptr[len]) || ptr[len] == '?')
 			len++;
 	}
 	return (len);
@@ -70,13 +70,11 @@ char	*expand_special(char *to_expand, char *specials)
 		if (*ptr == '$' && len > 1)
 		{
 			if (len == 2 && ptr[1] == '?')
-				chunk = ft_itoa(g_exit_status);
+				(free(chunk), chunk = ft_itoa(g_exit_status));
 			else
 				chunk = get_env_value(chunk);
 		}
-		// printf("Got [%lu]{%s}\n", len, chunk);
 		sb_append_free(sb, chunk);
-		// printf("sb = [%s]\n", sb->str);
 		ptr += len;
 	}
 	free(to_expand);
