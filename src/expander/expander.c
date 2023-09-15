@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/15 01:24:56 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/15 01:31:23 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ unsigned int	get_chunk_len(char *ptr, char *sp)
 	return (len);
 }
 
-char	*expand_special(char *to_expand, char *specials)
+char	*expand_env(char *to_expand)
 {
 	char			*ptr;
 	size_t			len;
@@ -67,7 +67,7 @@ char	*expand_special(char *to_expand, char *specials)
 	ptr = (char *)to_expand;
 	while (*ptr)
 	{
-		len = get_chunk_len(ptr, specials);
+		len = get_chunk_len(ptr, "$");
 		chunk = ft_substr(ptr, 0, len);
 		if (*ptr == '$' && len > 1)
 		{
@@ -88,27 +88,22 @@ char	*expand_special(char *to_expand, char *specials)
 char	*expand(t_token *tok)
 {
 	char	*str;
-	char	*specials;
 
-	specials = "$";
-	// TODO : maybe handle wildcards
 	if (tok->type == DQSTR)
-	{
 		str = ft_strtrim(tok->value, "\"");
-		specials = "$";
-	}
 	else if (tok->type == STR)
 		str = ft_strtrim(tok->value, "'");
 	else
 		str = ft_strdup(tok->value);
 	if (!tok->to_expand)
 		return (str);
-	str = expand_special(str, specials);
+	str = expand_env(str);
 	return (str);
 }
 
 char	*expand_nosp_arg(t_token *argv_tok)
 {
+	// TODO : maybe handle wildcards
 	char			*to_join;
 	t_strbuilder	*sb;
 	char			*to_return;
