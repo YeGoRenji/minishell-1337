@@ -1,4 +1,4 @@
 digraph yep {
-	label="echo $!"
-	n0[label="echo $! "];
+	label="echo $a?"
+	n0[label="echo $a? "];
 }

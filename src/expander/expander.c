@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/15 00:56:52 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/15 01:24:56 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ unsigned int	get_chunk_len(char *ptr, char *sp)
 	else
 	{
 		len++;
-		while (ft_isalnum(ptr[len]) || ptr[len] == '?')
+		if (ptr[1] == '?')
+			return (len + 1);
+		while (ft_isalnum(ptr[len]))
 			len++;
 	}
 	return (len);
