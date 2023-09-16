@@ -6,6 +6,7 @@
 		"stringbuilder.h": "c",
 		"readline.h": "c",
 		"wait.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"executor.h": "c"
 	}
 }

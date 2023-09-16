@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 02:56:22 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/27 10:49:32 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/16 04:15:35 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ t_token	*ft_toklast(t_token *lst)
 	return (lst);
 }
 
-void	ft_tokadd_back(t_token **lst, t_token *new)
+void	ft_tokadd_back(t_token **lst, t_token *new_tok)
 {
-	if (!lst || !new)
+	if (!lst || !new_tok)
 		return ;
 	if (!(*lst))
 	{
-		*lst = new;
+		*lst = new_tok;
 		return ;
 	}
-	ft_toklast(*lst)->next = new;
+	ft_toklast(*lst)->next = new_tok;
 }
 
 void	ft_tokiter(t_token *lst, void (*f)(void *))
