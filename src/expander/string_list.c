@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <expander.h>
+#include <assert.h>
 
 t_str	*new_str(char *str, bool to_expand)
 {
@@ -54,7 +55,7 @@ void	p_str_node(void *s)
 {
 	t_str	*sot = s;
 
-	printf("[%s] expandable: %s\n", sot->str, sot->to_expand ? "true" : "false");
+	fprintf(stderr, "[%s] expandable: %s\n", sot->str, sot->to_expand ? "true" : "false");
 }
 
 int	ft_strlstlen(t_str *lst)
@@ -105,4 +106,26 @@ int	split_len(char **lst)
 	while (lst[len])
 		len++;
 	return (len);
+}
+
+char	**consume_argv(t_str *lst)
+{
+	char	**argv;
+	t_str	*tmp;
+	int		i;
+	int		len;
+
+	len = ft_strlstlen(lst);
+	argv = malloc((len + 1) * sizeof(char *));
+
+	i = 0;
+	while (i < len)
+	{
+		argv[i++] = lst->str;
+		tmp = lst;
+		lst = lst->next;
+		free(tmp);
+	}
+	argv[i] = NULL;
+	return (argv);
 }

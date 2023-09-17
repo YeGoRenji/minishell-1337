@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/17 02:49:31 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/17 18:40:37 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,9 @@ void	add_str_lst(char *str, t_str **lst, bool join_to_last, t_token *tok)
 	bool to_expand;
 
 	to_expand = (tok->type == WORD && ft_strchr(str, '*'));
+
+	if (tok->type == WORD && !ft_strncmp(str, "$", 2) && tok->nospace_next)
+		str = "";
 	if (join_to_last)
 		ft_join_last(lst, str, to_expand);
 	else
@@ -148,28 +151,6 @@ void	expand_nosp_arg(t_token *sub_tok, t_str **lst)
 	}
 }
 
-char	**consume_argv(t_str *lst)
-{
-	char	**argv;
-	t_str	*tmp;
-	int		i;
-	int		len;
-
-	len = ft_strlstlen(lst);
-	argv = malloc((len + 1) * sizeof(char *));
-
-	i = 0;
-	while (i < len)
-	{
-		argv[i++] = lst->str;
-		tmp = lst;
-		lst = lst->next;
-		free(tmp);
-	}
-	argv[i] = NULL;
-	return (argv);
-}
-
 char	**expand_args(t_token *tok_lst)
 {
 	// TODO : maybe return t_str and consume outside after wildcard !
@@ -183,7 +164,7 @@ char	**expand_args(t_token *tok_lst)
 		// printf("expand_args > Got <%s> \n", argv[i - 1]);
 		tok_lst = tok_lst->next;
 	}
-	// ft_striter(argv_lst, p_str_node); // ? Debug
+	ft_striter(argv_lst, p_str_node); // ? Debug
 	argv = consume_argv(argv_lst);
 	// int i = 0;
 	// printf("--uwu---\n"); // ? Debug
