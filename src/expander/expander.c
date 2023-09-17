@@ -6,24 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/16 04:26:24 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/17 02:49:31 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <expander.h>
-
-int	tok_lst_len(t_token *tok_lst)
-{
-	int	len;
-
-	len = 0;
-	while (tok_lst)
-	{
-		len++;
-		tok_lst = tok_lst->next;
-	}
-	return (len);
-}
 
 bool	in_set(char *set, char c)
 {
@@ -119,21 +106,29 @@ char	*expand(t_token *tok)
 	return (str);
 }
 
-char	*expand_nosp_arg(t_token *argv_tok, t_str **lst)
+void	add_str_lst(char *str, t_str **lst, bool join_to_last, t_token *tok)
+{
+	bool to_expand;
+
+	to_expand = (tok->type == WORD && ft_strchr(str, '*'));
+	if (join_to_last)
+		ft_join_last(lst, str, to_expand);
+	else
+		ft_stradd_back(lst, new_str(str, to_expand));
+}
+
+void	expand_nosp_arg(t_token *sub_tok, t_str **lst)
 {
 	// TODO : maybe handle wildcards
 	char			*to_join;
-	t_strbuilder	*sb;
-	char			*to_return;
 	char			**splited;
 	int				i;
 	int				iter;
 
-	sb = stringbuilder();
 	iter = 0;
-	while (argv_tok)
+	while (sub_tok)
 	{
-		to_join = expand(argv_tok);
+		to_join = expand(sub_tok);
 		// printf("expand_nosp_arg > Got <%s> \n", to_join);
 		if (ft_strchr(to_join, TROLL))
 		{
@@ -141,25 +136,16 @@ char	*expand_nosp_arg(t_token *argv_tok, t_str **lst)
 			i = 0;
 			while (splited[i])
 			{
-				if (i == 0 && iter != 0)
-					ft_join_last(lst, splited[i]);
-				else
-					ft_stradd_back(lst, new_str(splited[i], ft_strchr(splited[i], '*')));
+				add_str_lst(splited[i], lst, i == 0 && iter != 0, sub_tok);
 				i++;
 			}
 			(free_list(splited), splited = NULL);
 		}
-		else if (!iter)
-			ft_stradd_back(lst, new_str(to_join, ft_strchr(to_join, '*')));
 		else
-			ft_join_last(lst, to_join);
-		sb_append_free(sb, to_join);
-		argv_tok = argv_tok->nospace_next;
-		iter++;
+			add_str_lst(to_join, lst, iter != 0, sub_tok);
+		sub_tok = sub_tok->nospace_next;
+		(free(to_join), iter++);
 	}
-	to_return = sb->str;
-	free(sb);
-	return (to_return);
 }
 
 char	**consume_argv(t_str *lst)
@@ -186,29 +172,23 @@ char	**consume_argv(t_str *lst)
 
 char	**expand_args(t_token *tok_lst)
 {
-	int		i;
+	// TODO : maybe return t_str and consume outside after wildcard !
 	char	**argv;
-	char	**uwu_argv;
 	t_str	*argv_lst;
-	// TODO : use a list instead
-	// TODO : use uwu_argv instead of argv
 
-	argv = ft_calloc(tok_lst_len(tok_lst) + 1, sizeof(char *));
 	argv_lst = NULL;
-	i = 0;
 	while (tok_lst)
 	{
-		argv[i++] = expand_nosp_arg(tok_lst, &argv_lst);
+		expand_nosp_arg(tok_lst, &argv_lst);
 		// printf("expand_args > Got <%s> \n", argv[i - 1]);
 		tok_lst = tok_lst->next;
 	}
 	// ft_striter(argv_lst, p_str_node); // ? Debug
-	uwu_argv = consume_argv(argv_lst);
-	i = 0;
-	free_list(argv);
+	argv = consume_argv(argv_lst);
+	// int i = 0;
 	// printf("--uwu---\n"); // ? Debug
 	// while (argv[i])
 	// 	printf("%s\n", argv[i++]);
 	// printf("--------\n");
-	return (uwu_argv);
+	return (argv);
 }

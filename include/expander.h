@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:54 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/16 04:20:38 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/17 02:48:36 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_str
 }	t_str;
 
 char	**expand_args(t_token *argv_tok);
-int		tok_lst_len(t_token *tok_lst);
 
 /* String list utils */
 void	ft_stradd_back(t_str **lst, t_str *new);
@@ -37,7 +36,7 @@ void	p_str_node(void *s);
 void	ft_striter(t_str *lst, void (*f)(void *));
 int		ft_strlstlen(t_str *lst);
 t_str	*ft_strlast(t_str *lst);
-void	ft_join_last(t_str **lst, char *str);
-int	split_len(char **lst);
+void	ft_join_last(t_str **lst, char *str, bool to_expand);
+int		split_len(char **lst);
 
 #endif

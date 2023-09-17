@@ -81,20 +81,20 @@ void	ft_striter(t_str *lst, void (*f)(void *))
 	}
 }
 
-void	ft_join_last(t_str **lst, char *str)
+void	ft_join_last(t_str **lst, char *str, bool to_expand)
 {
 	char	*joined;
 	t_str	*str_last;
-	bool	to_expand;
+	bool	old_to_expand;
 
 	str_last = ft_strlast(*lst);
-	to_expand = ft_strchr(str, '*');
 	if (!str_last)
 		return (ft_stradd_back(lst, new_str(str, to_expand)));
 	joined = ft_strjoin(str_last->str, str);
+	old_to_expand = str_last->to_expand;
 	free(str_last->str);
 	str_last->str = joined;
-	str_last->to_expand = to_expand;
+	str_last->to_expand = old_to_expand || to_expand;
 }
 
 int	split_len(char **lst)
