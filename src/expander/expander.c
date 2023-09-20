@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/17 18:40:37 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/20 01:57:37 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ unsigned int	get_chunk_len(char *ptr, char *sp)
 		len++;
 		if (ptr[1] == '?')
 			return (len + 1);
-		while (ft_isalnum(ptr[len]))
+		while (ft_isalnum(ptr[len]) || ptr[len] == '_')
 			len++;
 	}
 	return (len);
@@ -164,7 +164,7 @@ char	**expand_args(t_token *tok_lst)
 		// printf("expand_args > Got <%s> \n", argv[i - 1]);
 		tok_lst = tok_lst->next;
 	}
-	ft_striter(argv_lst, p_str_node); // ? Debug
+	// ft_striter(argv_lst, p_str_node); // ? Debug
 	argv = consume_argv(argv_lst);
 	// int i = 0;
 	// printf("--uwu---\n"); // ? Debug

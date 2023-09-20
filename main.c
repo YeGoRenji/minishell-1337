@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/13 17:33:02 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:47:46 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(int _, char **__, char **envp)
 	// atexit(chk); // ? Debug
 	(void)_;
 	(void)__;
-	get_envp(create_env(envp));
+	create_env(envp);
 	tmp = getcwd(NULL, 0);
 	pwd_trolling(tmp);
 	free(tmp);

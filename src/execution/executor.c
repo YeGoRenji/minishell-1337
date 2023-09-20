@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/16 04:20:49 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:02:52 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	// printf("--------\n");
 	// TODO: Expand Wildcard
 	envp = get_envp(NULL);
-	if (check_builtins(split_len(argv) - 1, argv[0], argv + 1, &envp))
+	if (check_builtins(split_len(argv) - 1, argv[0], argv + 1))
 	{
 		if (forked)
 			exit(g_exit_status);

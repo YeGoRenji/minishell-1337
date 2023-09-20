@@ -1,4 +1,4 @@
 digraph yep {
-	label="echo $a"
-	n0[label="echo $a "];
+	label="echo $_"
+	n0[label="echo $_ "];
 }
