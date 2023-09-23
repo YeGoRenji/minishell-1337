@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:56:55 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/15 21: by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:37:31 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_str	*new_str(char *str, bool to_expand)
 	if (!node)
 		return (NULL);
 	node->str = ft_strdup(str);
-	node->to_expand = to_expand;
+	node->wild_card = to_expand;
 	node->next = NULL;
 	return (node);
 }
@@ -55,7 +55,7 @@ void	p_str_node(void *s)
 {
 	t_str	*sot = s;
 
-	fprintf(stderr, "[%s] expandable: %s\n", sot->str, sot->to_expand ? "true" : "false");
+	fprintf(stderr, "[%s] wild_card: %s\n", sot->str, sot->wild_card ? "true" : "false");
 }
 
 int	ft_strlstlen(t_str *lst)
@@ -92,10 +92,10 @@ void	ft_join_last(t_str **lst, char *str, bool to_expand)
 	if (!str_last)
 		return (ft_stradd_back(lst, new_str(str, to_expand)));
 	joined = ft_strjoin(str_last->str, str);
-	old_to_expand = str_last->to_expand;
+	old_to_expand = str_last->wild_card;
 	free(str_last->str);
 	str_last->str = joined;
-	str_last->to_expand = old_to_expand || to_expand;
+	str_last->wild_card = old_to_expand || to_expand;
 }
 
 int	split_len(char **lst)

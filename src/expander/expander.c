@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/20 01:57:37 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:33:31 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ghost_char_trolling(char *str)
 	while (str[i])
 	{
 		if (str[i] == ' ')
-			str[i] = TROLL;
+			str[i] = (char )TROLL;
 		i++;
 	}
 }
@@ -122,7 +122,6 @@ void	add_str_lst(char *str, t_str **lst, bool join_to_last, t_token *tok)
 
 void	expand_nosp_arg(t_token *sub_tok, t_str **lst)
 {
-	// TODO : maybe handle wildcards
 	char			*to_join;
 	char			**splited;
 	int				i;
@@ -135,7 +134,7 @@ void	expand_nosp_arg(t_token *sub_tok, t_str **lst)
 		// printf("expand_nosp_arg > Got <%s> \n", to_join);
 		if (ft_strchr(to_join, TROLL))
 		{
-			splited = ft_split(to_join, TROLL);
+			splited = ft_split(to_join, (char )TROLL);
 			i = 0;
 			while (splited[i])
 			{
@@ -151,9 +150,58 @@ void	expand_nosp_arg(t_token *sub_tok, t_str **lst)
 	}
 }
 
+void	wild_card(t_str **lst, t_str *expr)
+{
+	DIR 			*dir;
+	struct dirent	*file_entry;
+	bool			is_hidden;
+	bool			matched;
+
+	is_hidden = expr->str[0] == '.';
+	dir = opendir(".");
+	matched = false;
+	if (!dir)
+	{
+		fprintf(stderr, "TODO: opendir failed\n");
+		return;
+	}
+	file_entry = readdir(dir);
+	while (file_entry)
+	{
+		// Move through files and if matched get that
+		// fprintf(stderr, "got file <%s>\n", file_entry->d_name);
+		if ((is_hidden || file_entry->d_name[0] != '.')
+			&& wild_match(file_entry->d_name, expr->str))
+			(ft_stradd_back(lst, new_str(file_entry->d_name, false)), matched = true);
+		file_entry = readdir(dir);
+	}
+	if (!matched)
+		ft_stradd_back(lst, new_str(expr->str, false));
+	closedir(dir);
+	// if nothing matched add str without expanding...
+}
+
+t_str	*expand_wild_cards(t_str *argv_lst)
+{
+	t_str	*new_argv;
+	t_str	*tmp;
+
+	new_argv = NULL;
+	while (argv_lst)
+	{
+		if (argv_lst->wild_card)
+			wild_card(&new_argv, argv_lst);
+		else
+			ft_stradd_back(&new_argv, new_str(argv_lst->str, false));
+		tmp = argv_lst;
+		argv_lst = argv_lst->next;
+		free_strnode(tmp);
+	}
+	return (new_argv);
+}
+
 char	**expand_args(t_token *tok_lst)
 {
-	// TODO : maybe return t_str and consume outside after wildcard !
 	char	**argv;
 	t_str	*argv_lst;
 
@@ -165,11 +213,7 @@ char	**expand_args(t_token *tok_lst)
 		tok_lst = tok_lst->next;
 	}
 	// ft_striter(argv_lst, p_str_node); // ? Debug
+	argv_lst = expand_wild_cards(argv_lst);
 	argv = consume_argv(argv_lst);
-	// int i = 0;
-	// printf("--uwu---\n"); // ? Debug
-	// while (argv[i])
-	// 	printf("%s\n", argv[i++]);
-	// printf("--------\n");
 	return (argv);
 }

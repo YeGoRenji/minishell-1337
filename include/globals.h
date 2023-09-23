@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:12:06 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/16 04:21:22 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:32:11 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <dirent.h>
 # include <sys/wait.h> // ? For linux only
 # include "libft.h"
 # include "../src/minishell_builtins/builtins.h"

@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/09/15 17:33:43 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/09/23 15:02:18 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRCS_EXE = executor.c \
 		   exec_utils.c
 
 SRCS_EXPAND = expander.c \
-			  string_list.c
+			  string_list.c \
+			  matcher.c
 
 SRCS_SB = sb.c \
 		  sb_utils.c

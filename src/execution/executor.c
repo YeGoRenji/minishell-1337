@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/19 19:02:52 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/09/23 18:20:57 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,12 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	int		exit_status;
 	t_env	*envp;
 
-	///// TODO: This is where stuff gets complicated
-	///// TODO: Expand env
-	// TODO: Prepare the argv
 	argv = expand_args(exe->argv_tok);
 	// printf("--uwu---\n");
 	// int i = 0;
 	// while (argv[i])
 	// 	printf("%s\n", argv[i++]);
 	// printf("--------\n");
-	// TODO: Expand Wildcard
 	envp = get_envp(NULL);
 	if (check_builtins(split_len(argv) - 1, argv[0], argv + 1))
 	{
