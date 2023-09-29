@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/23 17:33:31 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/26 00:22:37 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,9 @@ char	*expand(t_token *tok)
 
 void	add_str_lst(char *str, t_str **lst, bool join_to_last, t_token *tok)
 {
-	bool to_expand;
+	bool	to_expand;
 
 	to_expand = (tok->type == WORD && ft_strchr(str, '*'));
-
 	if (tok->type == WORD && !ft_strncmp(str, "$", 2) && tok->nospace_next)
 		str = "";
 	if (join_to_last)

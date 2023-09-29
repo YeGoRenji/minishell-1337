@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/23 18:20:57 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:34:47 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	// while (argv[i])
 	// 	printf("%s\n", argv[i++]);
 	// printf("--------\n");
+	log_last_command(argv[split_len(argv) - 1]);
 	envp = get_envp(NULL);
 	if (check_builtins(split_len(argv) - 1, argv[0], argv + 1))
 	{
