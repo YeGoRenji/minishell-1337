@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/29 11:34:47 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/03 19:22:12 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	free_list(char **list)
 
 void	exec_exe(t_ast_exec *exe, bool forked)
 {
-	// fprintf(stderr, "[%d] exe > \n", getpid());
 	char	**argv;
 	pid_t	pid;
 	int		exit_status;
 	t_env	*envp;
 
+	// fprintf(stderr, "[%d] exe > \n", getpid());
 	argv = expand_args(exe->argv_tok);
 	// printf("--uwu---\n");
 	// int i = 0;
@@ -60,10 +60,11 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 
 void	exec_pipe(t_ast_binary *tree, bool forked)
 {
-	// fprintf(stderr, "[%d] pipe > \n", getpid());
 	int		fd[2];
 	pid_t	pids[2];
 	int		exit_status;
+
+	// fprintf(stderr, "[%d] pipe > \n", getpid());
 	// TODO: create pipe then fork for both
 	// TODO: dup the output and input
 	pids[0] = pids[1] = 0;
@@ -120,24 +121,39 @@ void	exec_and(t_ast_binary *tree, bool forked)
 		exit(g_exit_status);
 }
 
-void	exec_redir(t_ast_redir *tree, bool	forked)
+void	exec_redir(t_ast_redir *tree, bool forked)
 {
-	fprintf(stderr, "[%d] redir > \n", getpid());
-	char *redirs[4] = {">", ">>", "<", "<<"}; // ? Debug
+	int	fd_to_dup;
+	int	fd_backup;
 
-	fprintf(stderr, " %s", redirs[tree->direction - 3]); // ? Debug
-	print_nosp_tok(stdout, tree->file_tok);
-	fprintf(stderr, " ");
-	// TODO: open file
-	// TODO: dup the output and input
+	fd_to_dup = open(tree->file_tok->value, tree->mode, 0644);
+	if (fd_to_dup < 0)
+		return (perror(tree->file_tok->value), g_exit_status = 1, free(NULL));
+	if (tree->direction == HEREDOC)
+		return (fprintf(stderr, "TODO : handle heredoc\n"), exit(69));
+	else
+	{
+		fd_backup = dup(tree->fd);
+		if (fd_to_dup != tree->fd)
+		{
+			dup2(fd_to_dup, tree->fd);
+			close(fd_to_dup);
+		}
+	}
 	executor(tree->cmd, forked);
+	if (tree->direction != HEREDOC && fd_backup != tree->fd)
+	{
+		dup2(fd_backup, tree->fd);
+		close(fd_backup);
+	}
 }
 
 void	exec_subsh(t_ast_subsh *tree, bool forked)
 {
-	// fprintf(stderr, "[%d] subsh > \n", getpid());
 	pid_t	pid;
 	int		exit_status;
+
+	// fprintf(stderr, "[%d] subsh > \n", getpid());
 	// TODO: fork
 	pid = fork();
 	if (!pid)
