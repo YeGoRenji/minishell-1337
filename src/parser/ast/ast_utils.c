@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 03:58:53 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/03 18:59:30 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/04 01:14:13 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_ast_redir	*tok_to_redir(t_token *redir_ptr)
 	mode |= (redir_ptr->type == INPUT) * (O_RDONLY);
 	mode |= (redir_ptr->type == OUTPUT) * (O_CREAT | O_WRONLY | O_TRUNC);
 	mode |= (redir_ptr->type == APPEND) * (O_CREAT | O_APPEND | O_WRONLY);
-	fd += (redir_ptr->type == OUTPUT | redir_ptr->type == APPEND);
+	fd += ((redir_ptr->type == OUTPUT) | (redir_ptr->type == APPEND));
 	redir = (t_ast_redir *)redir_node(
 			redir_ptr->type,
 			clone_tok(redir_ptr->next),

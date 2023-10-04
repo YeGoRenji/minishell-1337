@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/14 01:21:44 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/04 01:28:24 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*find_path(t_env *envp)
 {
 	t_env	*node;
 
-	node = search_in_env(envp, "PATH");
+	node = search_in_env(envp, ft_strdup("PATH"));
 	if (!node)
 		return (NULL);
 	return (node->value);
