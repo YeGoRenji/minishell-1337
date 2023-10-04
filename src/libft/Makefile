@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/23 02:54:46 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/09/01 00:05:51 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/10/04 19:08:23 by afatimi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC = ft_isalpha.c \
 	  ft_strdup.c \
 	  ft_memcmp.c \
 	  ft_strncmp.c \
+	  ft_strcmp.c \
 	  ft_calloc.c \
 	  ft_strnstr.c \
 	  ft_strlcpy.c \

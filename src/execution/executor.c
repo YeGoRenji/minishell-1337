@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/03 19:22:12 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/04 19:20:48 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,17 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 	int	fd_to_dup;
 	int	fd_backup;
 
-	fd_to_dup = open(tree->file_tok->value, tree->mode, 0644);
+	char *file_name = *expand_args(tree -> file_tok);
+	if (!ft_strlen(file_name))
+	{
+		if ((*tree -> file_tok -> value) == '$')
+			fprintf(stderr, "shell69: %s: ambiguous redirect\n", tree -> file_tok -> value);
+		else
+			fprintf(stderr, "shell69: %s: No such file or directory\n", file_name);
+		return;
+	}
+
+	fd_to_dup = open(file_name, tree->mode, 0644);
 	if (fd_to_dup < 0)
 		return (perror(tree->file_tok->value), g_exit_status = 1, free(NULL));
 	if (tree->direction == HEREDOC)
