@@ -6,11 +6,12 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/05 16:38:54 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/05 16:51:41 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <executor.h>
+#include <errno.h>
 
 int	print_err(char *preced, int msg_code)
 {
@@ -78,7 +79,11 @@ int	check_cmd(char **cmd, t_env *env)
 			envp = consume_env(get_envp(NULL));
 			return (execve(cmd[0], cmd, envp), free_list(envp), -1);
 		}
-		exit(-1);
+		if (errno == ENOTDIR)
+			exit(126);
+		else
+			exit(127);
+		// TODO : ben 10 and the pursuite of other cases
 	}
 	path_val = find_path(env);
 	if (!path_val)
