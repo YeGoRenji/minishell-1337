@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/04 19:20:48 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:51:28 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,56 @@ void	exec_and(t_ast_binary *tree, bool forked)
 		exit(g_exit_status);
 }
 
+char *ft_mktmp()
+{
+	t_strbuilder *sb;
+	char *name;
+	int i;
+
+	i = 0;
+	while (++i)
+	{
+		sb = stringbuilder();
+		sb_append(sb, "/tmp/SHELL69_HEREDOC_");
+		sb_append_int(sb, i);
+		name = ft_strdup(sb -> str);
+		sb_free(sb);
+		if (access(name, F_OK))
+			break;
+		free(name);
+	}
+	return (name);
+}
+
+void handle_heredoc(char *delim)
+{
+	char *line;
+	if (!delim)
+		return ;
+	puts("9lawo");
+	char *tmp_file = ft_mktmp();
+	puts(tmp_file);
+	int fd = open(tmp_file, O_RDWR | O_CREAT, 0640);
+	if (fd < 0)
+	{
+		perror("open");
+		return ;
+	}
+	while(1)
+	{
+		printf("> ");
+		fflush(stdout);
+		line = get_next_line(0);
+		if (ft_strncmp(line, "\n", 1) && !ft_strncmp(delim, line, ft_strlen(line) - 1))
+			break;
+		// TODO : how the fuck is this not a leak??
+		line = expand_env(line, false);
+		write(fd, line, ft_strlen(line));
+	}
+	close(fd);
+	unlink(tmp_file);
+}
+
 void	exec_redir(t_ast_redir *tree, bool forked)
 {
 	int	fd_to_dup;
@@ -135,12 +185,14 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 			fprintf(stderr, "shell69: %s: No such file or directory\n", file_name);
 		return;
 	}
-
 	fd_to_dup = open(file_name, tree->mode, 0644);
 	if (fd_to_dup < 0)
 		return (perror(tree->file_tok->value), g_exit_status = 1, free(NULL));
 	if (tree->direction == HEREDOC)
+	{
+		handle_heredoc(file_name);
 		return (fprintf(stderr, "TODO : handle heredoc\n"), exit(69));
+	}
 	else
 	{
 		fd_backup = dup(tree->fd);

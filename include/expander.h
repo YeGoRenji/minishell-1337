@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:54 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/23 14:59:47 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/05 14:47:13 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_str
 }	t_str;
 
 char	**expand_args(t_token *argv_tok);
+char	*expand_env(char *to_expand, bool in_quote);
 
 /* wild_cards */
 bool	wild_match(char *str, char *expr);
