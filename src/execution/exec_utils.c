@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/06 19:22:34 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/06 19:33:25 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,18 @@ char	*find_path(t_env *envp)
 	return (node->value);
 }
 
+int is_dir(char *str)
+{
+	DIR *ptr;
+	int res;
+	if (!str)
+		return (0);
+	ptr = opendir(str);
+	res = !!ptr;
+	if (ptr)
+		closedir(ptr);
+	return (res);
+}
 
 int	check_cmd(char **cmd, t_env *env)
 {
@@ -69,8 +81,8 @@ int	check_cmd(char **cmd, t_env *env)
 	t_strbuilder	*sb;
 	char			**envp;
 
-	if(opendir(cmd[0]))
-			return (-69);
+	if (is_dir(cmd[0]))
+		return (-69);
 	if (ft_strchr(cmd[0], '/'))
 	{
 		if (check_file(cmd[0], X_OK))
