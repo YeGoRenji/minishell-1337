@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:54 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/06 15:32:50 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/06 18:37:25 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef struct s_str
 }					t_str;
 
 char				**expand_args(t_token *argv_tok);
-char				*expand_env(char *to_expand, bool in_quote);
+char				*expand_env(char *to_expand, bool in_quote,
+						bool ignore_env);
 void				expand_nosp_arg(t_token *sub_tok, t_str **lst,
 						bool ignore_env);
 

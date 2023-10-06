@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/06 16:00:33 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/06 18:36:45 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ghost_char_trolling(char *str)
 	}
 }
 
-char	*expand_env(char *to_expand, bool in_quote)
+char	*expand_env(char *to_expand, bool in_quote, bool ignore_env)
 {
 	char			*ptr;
 	size_t			len;
@@ -70,7 +70,7 @@ char	*expand_env(char *to_expand, bool in_quote)
 		len = get_chunk_len(ptr, "$");
 		chunk = ft_substr(ptr, 0, len);
 		// printf("big_chunk = <%s>\n", chunk);
-		if (*ptr == '$' && len > 1)
+		if (!ignore_env && *ptr == '$' && len > 1)
 		{
 			if (len == 2 && ptr[1] == '?')
 				(free(chunk), chunk = ft_itoa(g_exit_status));
@@ -103,7 +103,7 @@ char	*expand(t_token *tok, bool ignore_env)
 	if (!tok->to_expand)
 		return (str);
 	if (!ignore_env)
-		str = expand_env(str, tok->type == DQSTR);
+		str = expand_env(str, tok->type == DQSTR, ignore_env);
 	return (str);
 }
 
