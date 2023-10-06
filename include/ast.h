@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 16:36:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/28 20:31:34 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:20:17 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_ast_exec
 typedef struct s_ast_redir
 {
 	t_node_type		type;
-	// Just for debug Maybe
 	t_token_type	direction;
 	t_token			*file_tok;
 	int				mode;

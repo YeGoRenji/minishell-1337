@@ -6,13 +6,13 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 00:32:00 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/30 12:59:38 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:39:40 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parser.h>
+# include <parser.h>
 
-void	print_escape(FILE *f, char *str)
+void	print_escape(FILE *f, char *str) // ? Debug
 {
 	while (*str)
 	{
@@ -119,5 +119,6 @@ bool	parser(t_token *tokens, char *cmd, t_ast_cmd **tree)
 	fprintf(f, "}\n");
 	fclose(f);
 #endif // DEBUG
+	patch_heredoc(*tree);
 	return (true);
 }

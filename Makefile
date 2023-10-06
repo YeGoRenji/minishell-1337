@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/09/23 15:02:18 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/10/06 14:09:26 by afatimi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ SRCS_EXPAND = expander.c \
 SRCS_SB = sb.c \
 		  sb_utils.c
 
+SRCS_HEREDOC = heredoc.c
+
 BUILTINS_FOLD = src/minishell_builtins
 
 SRCS_BUILTINS = $(BUILTINS_FOLD)/*.c
@@ -51,6 +53,7 @@ OBJS_FILES = $(SRCS_LEXER:.c=.o) \
 			 $(SRCS_EXE:.c=.o) \
 			 $(SRCS_SB:.c=.o) \
 			 $(SRCS_EXPAND:.c=.o) \
+			 $(SRCS_HEREDOC:.c=.o) \
 			 main.o
 
 LIBFT = src/libft/libft.a
@@ -104,6 +107,10 @@ $(OBJSFOLDER)%.o: src/stringbuilder/%.c include/stringbuilder.h $(GLOBAL_HEADERS
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJSFOLDER)%.o: src/error/%.c include/error.h $(GLOBAL_HEADERS)
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJSFOLDER)%.o: src/heredoc/%.c include/heredoc.h $(GLOBAL_HEADERS)
 	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) -c $< -o $@
 

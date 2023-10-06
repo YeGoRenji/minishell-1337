@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/06 13:58:41 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/06 15:09:33 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,58 +121,6 @@ void	exec_and(t_ast_binary *tree, bool forked)
 		exit(g_exit_status);
 }
 
-char *ft_mktmp()
-{
-	t_strbuilder *sb;
-	char *name;
-	int i;
-
-	i = 0;
-	while (++i)
-	{
-		sb = stringbuilder();
-		sb_append(sb, "/tmp/SHELL69_HEREDOC_");
-		sb_append_int(sb, i);
-		name = ft_strdup(sb -> str);
-		sb_free(sb);
-		if (access(name, F_OK))
-			break;
-		free(name);
-	}
-	return (name);
-}
-
-void handle_heredoc(char *delim)
-{
-	char *line;
-	if (!delim)
-		return ;
-	char *tmp_file = ft_mktmp();
-	puts(tmp_file);
-	int fd = open(tmp_file, O_RDWR | O_CREAT, 0640);
-	if (fd < 0)
-	{
-		perror("open");
-		return ;
-	}
-	while(1)
-	{
-		write(1, "> ", 2);
-		line = get_next_line(0);
-		if (!line)
-			return ;
-		line[ft_strlen(line) - 1] = '\0';
-		if (!ft_strncmp(delim, line, ft_strlen(delim) + 1))
-			break ;
-		line = expand_env(line, false);
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
-	}
-
-	close(fd);
-	unlink(tmp_file);
-}
-
 void	exec_redir(t_ast_redir *tree, bool forked)
 {
 	int	fd_to_dup;
@@ -180,10 +128,11 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 
 	char *file_name = *expand_args(tree -> file_tok);
 	if (tree->direction == HEREDOC)
-	{
-		handle_heredoc(file_name);
 		return;
-	}
+//	{
+//		handle_heredoc(file_name);
+//		return;
+//	}
 	if (!ft_strlen(file_name))
 	{
 		if ((*tree -> file_tok -> value) == '$')
