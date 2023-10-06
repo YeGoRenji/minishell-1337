@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/05 16:51:41 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/06 19:22:34 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	print_err(char *preced, int msg_code)
 	}
 	else if (msg_code == -69)
 	{
-		sb_append(sb, ": is a directory\n");
+		sb_append(sb, ": Is a directory\n");
 		g_exit_status = 126;
 	}
 	else if (msg_code == -2)
@@ -71,7 +71,6 @@ int	check_cmd(char **cmd, t_env *env)
 
 	if(opendir(cmd[0]))
 			return (-69);
-
 	if (ft_strchr(cmd[0], '/'))
 	{
 		if (check_file(cmd[0], X_OK))

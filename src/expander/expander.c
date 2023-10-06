@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/06 18:36:45 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/06 19:07:53by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	expand_nosp_arg(t_token *sub_tok, t_str **lst, bool ignore_env)
 	while (sub_tok)
 	{
 		to_join = expand(sub_tok, ignore_env);
-//		printf("expand_nosp_arg > Got <%s> \n", to_join);
+		// printf("expand_nosp_arg > Got <%s> \n", to_join);
 		if (ft_strchr(to_join, TROLL))
 		{
 			splited = ft_split(to_join, (char )TROLL);
@@ -208,8 +208,8 @@ char	**expand_args(t_token *tok_lst)
 	argv_lst = NULL;
 	while (tok_lst)
 	{
+		// printf("expand_args > expanding <%s> \n", tok_lst->value);
 		expand_nosp_arg(tok_lst, &argv_lst, 0);
-		// printf("expand_args > Got <%s> \n", argv[i - 1]);
 		tok_lst = tok_lst->next;
 	}
 	// ft_striter(argv_lst, p_str_node); // ? Debug

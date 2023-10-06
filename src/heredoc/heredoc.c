@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:02:14 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/06 18:39:04 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/06 19:03:20 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ void	patch_heredoc(t_ast_cmd *tree)
 	}
 	else if (tree->type == P_SUBSH)
 		patch_heredoc(((t_ast_subsh *)tree)->cmd);
-	else if (tree->type == P_REDIR
-			&& ((t_ast_redir *)tree)->direction == HEREDOC)
+	else if (tree->type == P_REDIR)
 	{
-		patch_token((t_ast_redir *)tree);
+		if (((t_ast_redir *)tree)->direction == HEREDOC)
+			patch_token((t_ast_redir *)tree);
 		patch_heredoc(((t_ast_redir *)tree)->cmd);
 	}
 }
