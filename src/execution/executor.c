@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/05 16:13:51 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/06 13:58:41 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ void handle_heredoc(char *delim)
 	char *line;
 	if (!delim)
 		return ;
-	puts("9lawo");
 	char *tmp_file = ft_mktmp();
 	puts(tmp_file);
 	int fd = open(tmp_file, O_RDWR | O_CREAT, 0640);
@@ -158,15 +157,18 @@ void handle_heredoc(char *delim)
 	}
 	while(1)
 	{
-		printf("> ");
-		fflush(stdout);
+		write(1, "> ", 2);
 		line = get_next_line(0);
-		if (ft_strncmp(line, "\n", 1) && !ft_strncmp(delim, line, ft_strlen(line) - 1))
-			break;
-		// TODO : how the fuck is this not a leak??
+		if (!line)
+			return ;
+		line[ft_strlen(line) - 1] = '\0';
+		if (!ft_strncmp(delim, line, ft_strlen(delim) + 1))
+			break ;
 		line = expand_env(line, false);
 		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
 	}
+
 	close(fd);
 	unlink(tmp_file);
 }
@@ -180,7 +182,7 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 	if (tree->direction == HEREDOC)
 	{
 		handle_heredoc(file_name);
-		return (fprintf(stderr, "TODO : handle heredoc\n"), exit(69));
+		return;
 	}
 	if (!ft_strlen(file_name))
 	{
