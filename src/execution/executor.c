@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/06 15:09:33 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/06 16:12:03 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,6 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 	int	fd_backup;
 
 	char *file_name = *expand_args(tree -> file_tok);
-	if (tree->direction == HEREDOC)
-		return;
-//	{
-//		handle_heredoc(file_name);
-//		return;
-//	}
 	if (!ft_strlen(file_name))
 	{
 		if ((*tree -> file_tok -> value) == '$')
@@ -154,7 +148,7 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 		}
 	}
 	executor(tree->cmd, forked);
-	if (tree->direction != HEREDOC && fd_backup != tree->fd)
+	if (fd_backup != tree->fd)
 	{
 		dup2(fd_backup, tree->fd);
 		close(fd_backup);

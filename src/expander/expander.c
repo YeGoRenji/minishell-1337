@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/26 00:22:37 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:00:33 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*expand_env(char *to_expand, bool in_quote)
 	return (to_expand);
 }
 
-char	*expand(t_token *tok)
+char	*expand(t_token *tok, bool ignore_env)
 {
 	char	*str;
 
@@ -102,7 +102,8 @@ char	*expand(t_token *tok)
 		str = ft_strdup(tok->value);
 	if (!tok->to_expand)
 		return (str);
-	str = expand_env(str, tok->type == DQSTR);
+	if (!ignore_env)
+		str = expand_env(str, tok->type == DQSTR);
 	return (str);
 }
 
@@ -119,7 +120,7 @@ void	add_str_lst(char *str, t_str **lst, bool join_to_last, t_token *tok)
 		ft_stradd_back(lst, new_str(str, to_expand));
 }
 
-void	expand_nosp_arg(t_token *sub_tok, t_str **lst)
+void	expand_nosp_arg(t_token *sub_tok, t_str **lst, bool ignore_env)
 {
 	char			*to_join;
 	char			**splited;
@@ -129,8 +130,8 @@ void	expand_nosp_arg(t_token *sub_tok, t_str **lst)
 	iter = 0;
 	while (sub_tok)
 	{
-		to_join = expand(sub_tok);
-		// printf("expand_nosp_arg > Got <%s> \n", to_join);
+		to_join = expand(sub_tok, ignore_env);
+//		printf("expand_nosp_arg > Got <%s> \n", to_join);
 		if (ft_strchr(to_join, TROLL))
 		{
 			splited = ft_split(to_join, (char )TROLL);
@@ -207,7 +208,7 @@ char	**expand_args(t_token *tok_lst)
 	argv_lst = NULL;
 	while (tok_lst)
 	{
-		expand_nosp_arg(tok_lst, &argv_lst);
+		expand_nosp_arg(tok_lst, &argv_lst, 0);
 		// printf("expand_args > Got <%s> \n", argv[i - 1]);
 		tok_lst = tok_lst->next;
 	}

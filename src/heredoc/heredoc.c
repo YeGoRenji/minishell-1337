@@ -6,7 +6,7 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:02:14 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/06 15:08:11 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/06 17:36:01 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,25 @@ void patch_heredoc(t_ast_cmd *tree)
 		patch_token((t_ast_redir *)tree);
 		patch_heredoc(((t_ast_redir *)tree) -> cmd);
 	}
-
 }
 
 void patch_token(t_ast_redir *tree)
 {
 	t_token *tok;
+	t_str *s_ptr;
 	if (!tree)
 		return;
+
+	s_ptr = NULL;
+	tok = NULL;
+	expand_nosp_arg(tree -> file_tok, &s_ptr, 1);
 	tok = tree -> file_tok;
+	tok -> value = handle_heredoc(s_ptr -> str);
+	tok -> len = ft_strlen(tok->value);
 	tree -> direction = INPUT;
-	tok -> type = INPUT;
-	tok -> value = handle_heredoc(tree -> file_tok -> value);
+	free_tok_lst(tok -> nospace_next);
+	tok -> nospace_next = NULL;
+	free(s_ptr -> str);
+	free(s_ptr);
 	tok -> to_expand = false;
 }
