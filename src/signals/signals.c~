@@ -6,7 +6,7 @@
 /*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 20:57:10 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/07 21:13:09 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/07 21:12:12 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void sigint_handler(int sig)
 {
 	(void)sig;
+	printf("\n");
 	if (waitpid(-1, &sig, WNOHANG) == 0)
 		return;
-	printf("\n");
 	prompt_pwd();
 	rl_on_new_line(); // Regenerate the prompt on a newline
 	rl_replace_line("", 0); // Clear the previous text
