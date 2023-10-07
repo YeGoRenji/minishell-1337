@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/06 19:22:16 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:16:22 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	pid = fork();
 	if (!pid)
 	{
-		// TODO: execute/call builtins
+		reset_default_sig_handlers();
+		// TODO: execute/call binary
 		print_err(argv[0], check_cmd(argv, envp));
 		exit(g_exit_status);
 	}

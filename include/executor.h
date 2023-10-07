@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:49:19 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/31 22:23:15 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:16:40 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define EXECUTOR_H
 
 # include "ast.h"
-# include "globals.h"
 # include "expander.h"
+# include "globals.h"
+# include "signals.h"
 
 void	executor(t_ast_cmd *tree, bool forked);
 void	free_list(char **args);
