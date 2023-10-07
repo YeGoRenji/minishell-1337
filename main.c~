@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/07 16:19:06 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/07 16:18:45 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	chk(void)
 int		g_exit_status;
 
 
-void	prompt_pwd()
+inline void	prompt_pwd()
 {
 	printf("[" RED "%s" NOCOL "]\n", pwd_trolling(NULL));
 }
