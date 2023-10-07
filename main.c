@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/07 20:20:24 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/07 20:23:41 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ int	main(int _, char **__, char **envp)
 	install_default_sig_handlers();
 	while (true)
 	{
-//		printf("g_last_signal = %d\n", g_last_signal);
+		printf("g_last_signal = %d\n", g_last_signal);
 		if (g_last_signal != 69)
 		{
-//			puts("printing prompts from main");
+			puts("printing prompts from main");
 			prompt_pwd();
 		}
 //		puts("printing > from main");
