@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/08 16:37:41 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/08 17:50:29 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,45 +61,36 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	free_list(argv);
 }
 
+void handle_dups(t_ast_cmd *sub_tree, int *fd, int fd_num)
+{
+		close(fd[!fd_num]);
+		if (dup2(fd[fd_num], fd_num) == -1)
+			(print_err("dup", 0), exit(-1));
+		close(fd[fd_num]);
+		executor(sub_tree, true);
+		exit(g_exit_status);
+}
+
 void	exec_pipe(t_ast_binary *tree, bool forked)
 {
 	int		fd[2];
 	pid_t	pids[2];
 	int		exit_status;
 
-	// fprintf(stderr, "[%d] pipe > \n", getpid());
-	// TODO: create pipe then fork for both
-	// TODO: dup the output and input
 	pids[0] = pids[1] = 0;
 	if (pipe(fd) == -1)
 		exit(69);
 	pids[0] = fork();
 	if (!pids[0])
-	{
-		close(fd[0]);
-		if (dup2(fd[1], STDOUT_FILENO) == -1)
-			(print_err("dup", 0), exit(-1));
-		close(fd[1]);
-		executor((t_ast_cmd *)tree->left, true);
-		exit(g_exit_status);
-		// TODO: protecc ?
-	}
+		handle_dups(tree -> left, fd, STDOUT_FILENO);
 	pids[1] = fork();
 	if (!pids[1])
-	{
-		close(fd[1]);
-		if (dup2(fd[0], STDIN_FILENO) == -1)
-			(print_err("dup", 0), exit(-1));
-		close(fd[0]);
-		executor((t_ast_cmd *)tree->right, true);
-		exit(g_exit_status);
-	}
+		handle_dups(tree -> right, fd, STDIN_FILENO);
 	close(fd[0]);
 	close(fd[1]);
 	waitpid(pids[0], &exit_status, 0);
 	waitpid(pids[1], &exit_status, 0);
 	g_exit_status = WEXITSTATUS(exit_status);
-	// fprintf(stderr, "pipe > Got ex_stat : %d\n", g_exit_status);
 	if (forked)
 		exit(g_exit_status);
 }
