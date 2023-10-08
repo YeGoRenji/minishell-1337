@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/07 20:42:59 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/08 16:37:41 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	// printf(" Waiting..\n");
 	waitpid(pid, &exit_status, 0);
 	g_exit_status = WEXITSTATUS(exit_status);
-	// fprintf(stderr, "exe > Got ex_stat : %d\n", g_exit_status);
+	if (WIFSIGNALED(exit_status) == 1 && WTERMSIG(exit_status) == 3)
+		puts("Quit : 3");
+	//fprintf(stderr, "exe > Got ex_stat : %d && signal = %d\n", WIFSIGNALED(exit_status), WTERMSIG(exit_status));
 	free_list(argv);
 }
 
