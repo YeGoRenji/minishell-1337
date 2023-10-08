@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/08 17:50:29 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/08 18:01:05 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,18 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 		puts("Quit : 3");
 	//fprintf(stderr, "exe > Got ex_stat : %d && signal = %d\n", WIFSIGNALED(exit_status), WTERMSIG(exit_status));
 	free_list(argv);
+	if (forked)
+		exit(g_exit_status);
 }
 
-void handle_dups(t_ast_cmd *sub_tree, int *fd, int fd_num)
+void	handle_dups(t_ast_cmd *sub_tree, int *fd, int fd_num)
 {
-		close(fd[!fd_num]);
-		if (dup2(fd[fd_num], fd_num) == -1)
-			(print_err("dup", 0), exit(-1));
-		close(fd[fd_num]);
-		executor(sub_tree, true);
-		exit(g_exit_status);
+	close(fd[!fd_num]);
+	if (dup2(fd[fd_num], fd_num) == -1)
+		(print_err("dup", 0), exit(-1));
+	close(fd[fd_num]);
+	executor(sub_tree, true);
+	exit(g_exit_status);
 }
 
 void	exec_pipe(t_ast_binary *tree, bool forked)
