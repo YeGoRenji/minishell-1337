@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 00:32:00 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/06 14:39:40 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:25:07 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,5 @@ bool	parser(t_token *tokens, char *cmd, t_ast_cmd **tree)
 	fprintf(f, "}\n");
 	fclose(f);
 #endif // DEBUG
-	patch_heredoc(*tree);
-	return (true);
+	return (patch_heredoc(*tree));
 }

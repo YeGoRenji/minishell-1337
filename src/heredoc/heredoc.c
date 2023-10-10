@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:02:14 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/10 16:11:33 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:44:57 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ char	*ft_mktmp(void)
 	return (name);
 }
 
-void	patch_heredoc(t_ast_cmd *tree)
+int		patch_heredoc(t_ast_cmd *tree)
 {
 	int	type;
 
 	if (!tree)
-		return ;
+		return (0);
 	type = tree->type;
 	if (type == P_AND || type == P_OR || type == P_PIPE)
 	{
@@ -87,6 +87,7 @@ void	patch_heredoc(t_ast_cmd *tree)
 			patch_token((t_ast_redir *)tree);
 		patch_heredoc(((t_ast_redir *)tree)->cmd);
 	}
+	return (g_exit_status != 420);
 }
 
 void	patch_token(t_ast_redir *tree)
@@ -101,7 +102,9 @@ void	patch_token(t_ast_redir *tree)
 	expand_nosp_arg(tree->file_tok, &s_ptr, 1);
 	tok = tree->file_tok;
 	tok->value = handle_heredoc(s_ptr->str, is_expandable(tree -> file_tok));
-	tok->len = ft_strlen(tok->value);
+	tok->len = 0;
+	if (tok->value)
+		tok->len = ft_strlen(tok->value);
 	tree->direction = INPUT;
 	free_tok_lst(tok->nospace_next);
 	tok->nospace_next = NULL;

@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/23 02:54:46 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/10/05 13:55:22 by afatimi          ###   ########.fr        #
+#    Updated: 2023/10/10 16:40:00 by afatimi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = cc
 
 NAME = libft.a
 
-CFLAGS = -Wall -Wextra -Werror -I ../../include
+CFLAGS = -Wall -Wextra -Werror -I ../../include -g -fsanitize=address
 
 SRC = ft_isalpha.c \
 	  ft_isdigit.c \

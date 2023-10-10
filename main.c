@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/10 15:36:16 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:04:04 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 #define RED "\033[91m"
 #define NOCOL "\033[0m"
 
-enum { 
-	INPUT_AT,
-	OUTPUT_AT,
-	ERROR_AT
+enum {
+	ATTR_SET,
+	ATTR_GET,
+	ATTR_CHG
 };
 
 void	chk(void)
@@ -41,17 +41,24 @@ void	prompt_pwd()
 
 void	tty_attr(struct termios *attrs, int action)
 {
-	if (action == SET)
+	if (action == ATTR_GET)
 	{
 		tcgetattr(STDIN_FILENO, &attrs[0]);
 		tcgetattr(STDOUT_FILENO, &attrs[1]);
 		tcgetattr(STDERR_FILENO, &attrs[2]);
 	}
-	else if (action == RESET)
+	else if (action == ATTR_SET)
 	{
 		tcsetattr(STDIN_FILENO, TCSANOW, &attrs[0]);
 		tcsetattr(STDOUT_FILENO, TCSANOW, &attrs[1]);
 		tcsetattr(STDERR_FILENO, TCSANOW, &attrs[2]);
+	}
+	else if (action == ATTR_CHG)
+	{
+		attrs[0].c_lflag &= ~ECHOCTL;
+		attrs[1].c_lflag &= ~ECHOCTL;
+		attrs[2].c_lflag &= ~ECHOCTL;
+		tty_attr(attrs, RESET);
 	}
 }
 
@@ -73,7 +80,8 @@ int	main(int _, char **__, char **envp)
 	pwd_trolling(tmp);
 	free(tmp);
 	install_default_sig_handlers();
-	tty_attr(attrs, SET);
+	tty_attr(attrs, ATTR_GET);
+	tty_attr(attrs, ATTR_CHG);
 	while (true)
 	{
 		if (g_last_signal != 69)
@@ -86,11 +94,17 @@ int	main(int _, char **__, char **envp)
 			break ;
 		}
 		lexer(command_line, &tokens);
-		parser(tokens, command_line, &ast);
 #ifdef DEBUG
 		printf("----- EXECUTOR ----\n");
 #endif
-		executor(ast, false);
+		if (parser(tokens, command_line, &ast))
+			executor(ast, false);
+		else
+		{
+			dup2(2, 0);
+			g_exit_status = 0;
+		}
+
 		if (*command_line)
 			add_history(command_line);
 		free_ast(ast);

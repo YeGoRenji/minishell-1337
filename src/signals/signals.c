@@ -6,7 +6,7 @@
 /*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 20:57:10 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/10 16:09:01 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:45:53 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	nop(int sig)
 void	heredoc_sigint_handler(int sig)
 {
 	(void)sig;
-	puts("here handler called!");
+	g_exit_status = 420;
+	printf("");
+	close(0);
+	signal(SIGINT, sigint_handler);
 }
 
 void	handle_default_sig_handlers(int action)

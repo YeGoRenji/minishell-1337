@@ -6,7 +6,7 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:53:28 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/05 13:56:44 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:40:32 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <libft.h>
@@ -46,6 +46,8 @@ static char	*get_line(char **buff)
 	char	*end_of_line;
 	size_t	line_len;
 
+	if (!*buff)
+		return (NULL);
 	end_of_line = ft_strchr(*buff, '\n');
 	if (!end_of_line)
 	{
