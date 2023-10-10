@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/10 17:04:04 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:38:09 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	chk(void)
 int		g_exit_status;
 int		g_last_signal;
 
-void	prompt_pwd()
+void	prompt_pwd(void)
 {
 	printf("[" RED "%s" NOCOL "]\n", pwd_trolling(NULL));
 }
@@ -64,14 +64,12 @@ void	tty_attr(struct termios *attrs, int action)
 
 int	main(int _, char **__, char **envp)
 {
-	t_token		*tokens;
-	t_ast_cmd	*ast;
-	char		*command_line;
-	char		*tmp;
+	t_token			*tokens;
+	t_ast_cmd		*ast;
+	char			*command_line;
+	char			*tmp;
 	struct termios	attrs[3];
 
-	// TODO : Make an actual Prompt with PWD
-	// atexit(chk); // ? Debug
 	(void)_;
 	(void)__;
 	create_env(envp);
@@ -94,10 +92,7 @@ int	main(int _, char **__, char **envp)
 			break ;
 		}
 		lexer(command_line, &tokens);
-#ifdef DEBUG
-		printf("----- EXECUTOR ----\n");
-#endif
-		if (parser(tokens, command_line, &ast))
+		if (parser(tokens, &ast))
 			executor(ast, false);
 		else
 		{

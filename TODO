@@ -1,36 +1,7 @@
-// Expanding $var should happen before from expanding wildcards
-// Probably Expanding $vars should not make literal strings
-
-cmd = echo "Hello"$var"world"
-
-cmd = echo "Salam"'alo'"noice"
-
-[echo, Salamalonoice, NULL]
-
-["echo"] -> ["Hello"] -> NULL
-				V
-			  [$var]
-			  	V
-			["world"]
-				V
-			  NULL
-
-var = "Salam    Al3alam osakodad"
-
-splitted(var) = ["Salam", "Al3alam", NULL]
-
-sb = "Al3alam"
-
-linkedList = {echo} -> {Salam} -> {alo} -> {noice}
-
-linkedList = {echo} -> {Hello} -> {Salam} -> {Al3alam} -> {osakodad} -> {world}
-
-lst = {echo} -> {HelloSalam} -> NULL
-
-argv = ["echo", "HelloSalam", "Al3alam", "osakodadworld", NULL]
-
-$var // in_quote=false
-
-aodskda $var sadkaos // in_quote=true
-
-okwkd* // DONT CARE
+libft relink
+builtins relink
+stress test return statuses
+move all errors to error/
+ft_malloc
+check 'Quit: 3' (SUIQUIT result) wach gets printed in stdout or stderr
+get rid of g_exit_status (and only have one global var) // make get_seter to g_exit_status

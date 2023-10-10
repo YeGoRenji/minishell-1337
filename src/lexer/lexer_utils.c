@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:54:59 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/14 02:53:39 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:10:07 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ void	free_tok_lst(t_token *tok)
 		return ;
 	while (tok)
 	{
-		// printf("Freeing %s\n", tok->value);
 		free(tok->value);
 		free_tok_lst(tok->nospace_next);
 		tmp = tok;

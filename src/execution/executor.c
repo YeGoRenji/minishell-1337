@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/10 14:10:21 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:35:54 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,7 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	int		exit_status;
 	t_env	*envp;
 
-	// fprintf(stderr, "[%d] exe > \n", getpid());
 	argv = expand_args(exe->argv_tok);
-	// printf("--uwu---\n");
-	// int i = 0;
-	// while (argv[i])
-	// 	printf("%s\n", argv[i++]);
-	// printf("--------\n");
 	log_last_command(argv[split_len(argv) - 1]);
 	envp = get_envp(NULL);
 	if (check_builtins(split_len(argv) - 1, argv[0], argv + 1))
@@ -48,16 +42,13 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	if (!pid)
 	{
 		reset_default_sig_handlers();
-		// TODO: execute/call binary
 		print_err(argv[0], check_cmd(argv, envp));
 		exit(g_exit_status);
 	}
-	// printf(" Waiting..\n");
 	waitpid(pid, &exit_status, 0);
 	g_exit_status = WEXITSTATUS(exit_status);
 	if (WIFSIGNALED(exit_status) == 1 && WTERMSIG(exit_status) == 3)
-		puts("Quit : 3");
-	//fprintf(stderr, "exe > Got ex_stat : %d && signal = %d\n", WIFSIGNALED(exit_status), WTERMSIG(exit_status));
+		ft_putendl_fd("Quit : 3", 2);
 	free_list(argv);
 	if (forked)
 		exit(g_exit_status);
@@ -79,7 +70,8 @@ void	exec_pipe(t_ast_binary *tree, bool forked)
 	pid_t	pids[2];
 	int		exit_status;
 
-	pids[0] = pids[1] = 0;
+	pids[0] = 0;
+	pids[1] = 0;
 	if (pipe(fd) == -1)
 		exit(69);
 	pids[0] = fork();
@@ -99,7 +91,6 @@ void	exec_pipe(t_ast_binary *tree, bool forked)
 
 void	exec_or(t_ast_binary *tree, bool forked)
 {
-	// fprintf(stderr, "[%d] or > \n", getpid());
 	executor((t_ast_cmd *)tree->left, false);
 	if (g_exit_status)
 		executor((t_ast_cmd *)tree->right, false);
@@ -109,7 +100,6 @@ void	exec_or(t_ast_binary *tree, bool forked)
 
 void	exec_and(t_ast_binary *tree, bool forked)
 {
-	// fprintf(stderr, "[%d] and > \n", getpid());
 	executor((t_ast_cmd *)tree->left, false);
 	if (!g_exit_status)
 		executor((t_ast_cmd *)tree->right, false);
@@ -129,7 +119,7 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 			fprintf(stderr, "shell69: %s: ambiguous redirect\n", tree -> file_tok -> value);
 		else
 			fprintf(stderr, "shell69: %s: No such file or directory\n", file_name);
-		return;
+		return ;
 	}
 	fd_to_dup = open(file_name, tree->mode, 0644);
 	if (fd_to_dup < 0)
@@ -156,14 +146,11 @@ void	exec_subsh(t_ast_subsh *tree, bool forked)
 	pid_t	pid;
 	int		exit_status;
 
-	// fprintf(stderr, "[%d] subsh > \n", getpid());
-	// TODO: fork
 	pid = fork();
 	if (!pid)
 		executor(tree->cmd, true);
 	waitpid(pid, &exit_status, 0);
 	g_exit_status = WEXITSTATUS(exit_status);
-	// fprintf(stderr, "subsh > Got ex_stat : %d\n", g_exit_status);
 	if (forked)
 		exit(g_exit_status);
 }

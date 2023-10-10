@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/06 19:33:25 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:32:22 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ char	*find_path(t_env *envp)
 	return (node->value);
 }
 
-int is_dir(char *str)
+int	is_dir(char *str)
 {
-	DIR *ptr;
-	int res;
+	DIR	*ptr;
+	int	res;
+
 	if (!str)
 		return (0);
 	ptr = opendir(str);

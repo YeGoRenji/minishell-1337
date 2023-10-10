@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 14:42:37 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/06 19:07:53by ylyoussf         ###   ########.fr       */
+/*   Created: 2023/10/10 17:25:42 by afatimi           #+#    #+#             */
+/*   Updated: 2023/10/10 17:29:45 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void	expand_nosp_arg(t_token *sub_tok, t_str **lst, bool ignore_env)
 
 void	wild_card(t_str **lst, t_str *expr)
 {
-	DIR 			*dir;
+	DIR				*dir;
 	struct dirent	*file_entry;
 	bool			is_hidden;
 	bool			matched;
@@ -161,15 +161,10 @@ void	wild_card(t_str **lst, t_str *expr)
 	dir = opendir(".");
 	matched = false;
 	if (!dir)
-	{
-		fprintf(stderr, "TODO: opendir failed\n");
-		return;
-	}
+		return ((void)fprintf(stderr, "TODO: opendir failed\n"));
 	file_entry = readdir(dir);
 	while (file_entry)
 	{
-		// Move through files and if matched get that
-		// fprintf(stderr, "got file <%s>\n", file_entry->d_name);
 		if ((is_hidden || file_entry->d_name[0] != '.')
 			&& wild_match(file_entry->d_name, expr->str))
 			(ft_stradd_back(lst, new_str(file_entry->d_name, false)), matched = true);
@@ -178,7 +173,6 @@ void	wild_card(t_str **lst, t_str *expr)
 	if (!matched)
 		ft_stradd_back(lst, new_str(expr->str, false));
 	closedir(dir);
-	// if nothing matched add str without expanding...
 }
 
 t_str	*expand_wild_cards(t_str *argv_lst)

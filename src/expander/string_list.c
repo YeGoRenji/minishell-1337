@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:56:55 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/09/23 13:37:31 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:30:39 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,6 @@ void	free_strnode(t_str *node)
 {
 	free(node->str);
 	free(node);
-}
-
-void	p_str_node(void *s)
-{
-	t_str	*sot = s;
-
-	fprintf(stderr, "[%s] wild_card: %s\n", sot->str, sot->wild_card ? "true" : "false");
 }
 
 int	ft_strlstlen(t_str *lst)
@@ -117,7 +110,6 @@ char	**consume_argv(t_str *lst)
 
 	len = ft_strlstlen(lst);
 	argv = malloc((len + 1) * sizeof(char *));
-
 	i = 0;
 	while (i < len)
 	{
