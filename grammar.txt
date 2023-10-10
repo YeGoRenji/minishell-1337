@@ -9,6 +9,9 @@
 			 | ">>" 
 			 | "<<"
 
+<EXEC> ::=	<WORD> <EXEC>
+			| "(" <EXEC> ")"
+
 <REDIRECTION> ::= <DIRECTION> <FILE>
 
 <ARGS> ::= <WORD> <ARGS>
@@ -23,6 +26,5 @@
 
 <COMMANDLINE> ::= <COMMANDLINE> "&&" <COMMANDLINE>
 			   |  <COMMANDLINE> "||" <COMMANDLINE>
-			   |  "(" <COMMANDLINE> ")"
 			   |  <PIPELINE>
 
