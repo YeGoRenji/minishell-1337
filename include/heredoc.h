@@ -6,7 +6,7 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:03:53 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/06 18:19:00 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:06:37 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <ast.h>
 # include <expander.h>
 # include <globals.h>
+# include <signals.h>
 # include <stringbuilder.h>
 char	*handle_heredoc(char *delim, bool expand_env);
 char	*ft_mktmp(void);
