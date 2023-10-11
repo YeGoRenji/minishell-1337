@@ -10,7 +10,7 @@ fi
 make fclean
 find . \( -name '*~' \) -delete
 find . \( -name ".*swp" \) -delete
-find . \( -name ".?*" \) -delete
+find . \( -name ".DS_STORE" \) -delete
 find . \( -name "*.o" \) -delete
 git add .
 git commit -m "$1"

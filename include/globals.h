@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:12:06 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/10 17:17:09 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:17:47 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include "../src/minishell_builtins/builtins.h"
+# include "../src/minishell_builtins/global_utils.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 
