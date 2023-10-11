@@ -1,35 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matcher.c                                          :+:      :+:    :+:   */
+/*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/23 14:44:53 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/10 17:21:54 by afatimi          ###   ########.fr       */
+/*   Created: 2023/10/11 17:13:07 by ylyoussf          #+#    #+#             */
+/*   Updated: 2023/10/11 17:16:17 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <expander.h>
 
-bool	wild_match(char *str, char *expr)
+unsigned int	get_chunk_len(char *ptr, char *sp)
 {
-	while (*str && *expr)
+	unsigned int	len;
+
+	len = 0;
+	if (!ft_strchr(sp, *ptr))
 	{
-		if (*expr == '*' && expr[1] == '\0')
-			return (true);
-		if (*expr == '*')
-		{
-			while (expr[1] == '*')
-				expr++;
-			if (wild_match(str + (expr[1] != *str), \
-				expr + (expr[1] == str[1] || expr[1] == *str)))
-				return (true);
-		}
-		if (*str != *expr)
-			return (false);
-		str++;
-		expr++;
+		while (ptr[len] && !ft_strchr(sp, ptr[len]))
+			len++;
 	}
-	return (*str == '\0' && *expr == '\0');
+	else
+	{
+		len++;
+		if (ptr[1] == '?')
+			return (len + 1);
+		while (ft_isalnum(ptr[len]) || ptr[len] == '_')
+			len++;
+	}
+	return (len);
+}
+
+void	ghost_char_trolling(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ')
+			str[i] = (char )TROLL;
+		i++;
+	}
 }
