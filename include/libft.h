@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 22:32:03 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/05 14:04:24 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:28:37 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct s_list
 
 typedef struct s_env
 {
+	bool			equal_sign;
 	char			*key;
-	char			*equal_sign;
 	char			*value;
 	struct s_env	*prev;
 	struct s_env	*next;
