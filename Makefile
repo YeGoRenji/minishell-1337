@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/10/07 16:05:15 by afatimi          ###   ########.fr        #
+#    Updated: 2023/10/11 15:46:24 by afatimi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,9 +48,29 @@ SRCS_HEREDOC = heredoc.c
 
 SRCS_SIGNALS = signals.c
 
-BUILTINS_FOLD = src/minishell_builtins
+BUILTINS_FOLD = src/minishell_builtins/
 
-SRCS_BUILTINS = $(BUILTINS_FOLD)/*.c
+BUILTINS_FILES = builtin_dispatcher.c \
+				builtin_utils.c \
+				cd/cd.c \
+				cd/utils.c \
+				echo/echo.c \
+				echo/utils.c \
+				env/env.c \
+				env/utils.c \
+				exit/exit.c \
+				exit/utils.c \
+				export/export.c \
+				export/utils.c \
+				export/validation_utils.c \
+				global_utils.c \
+				lst_operations.c \
+				pwd/pwd.c \
+				pwd/utils.c \
+				unset/unset.c \
+				unset/utils.c
+
+SRCS_BUILTINS = $(foreach file, $(BUILTINS_FILES), $(BUILTINS_FOLD)$(file))
 
 OBJS_FILES = $(SRCS_LEXER:.c=.o) \
 			 $(SRCS_PARSER:.c=.o) \
@@ -77,7 +97,7 @@ $(LIBFT):
 	@echo "Compiling libft..."
 	@make -C src/libft
 
-$(OBJSFOLDER):
+$(OBJSFOLDER): 
 	@mkdir objs
 
 $(L_BUILTINS): $(SRCS_BUILTINS)
