@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/10/12 18:01:29 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/10/12 20:27:28 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRCS_ERR = error.c
 SRCS_EXE = executor.c \
 		   exec_binary.c \
 		   exec_unary.c \
-		   exec_utils.c
+		   exec_utils.c \
+		   exec_utils2.c
 
 SRCS_EXPAND = expander.c \
 			  expander_utils.c \

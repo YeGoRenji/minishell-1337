@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/12 14:16:52 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/12 20:45:49 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	tty_attr(struct termios *attrs, int action)
 		attrs[0].c_lflag &= ~ECHOCTL;
 		attrs[1].c_lflag &= ~ECHOCTL;
 		attrs[2].c_lflag &= ~ECHOCTL;
-		tty_attr(attrs, RESET);
+		tty_attr(attrs, ATTR_SET);
 	}
 }
 
@@ -104,7 +104,7 @@ int	main(int _, char **__, char **envp)
 			add_history(command_line);
 		free_ast(ast);
 		free(command_line);
-		tty_attr(attrs, RESET);
+		tty_attr(attrs, ATTR_SET);
 	}
 	free(command_line);
 	exit(get_exit_status());
