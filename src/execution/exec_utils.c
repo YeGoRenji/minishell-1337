@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/12 14:22:13 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:00:42 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,17 @@ int	print_err(char *preced, int msg_code)
 	sb = stringbuilder();
 	sb_append(sb_append(sb, "shell69: "), preced);
 	if (msg_code == -1)
-	{
-		sb_append(sb, ": command not found\n");
-		set_exit_status(127);
-	}
+		(sb_append(sb, ": command not found\n"), set_exit_status(127));
 	else if (msg_code == -69)
-	{
-		sb_append(sb, ": Is a directory\n");
-		set_exit_status(126);
-	}
+		(sb_append(sb, ": Is a directory\n"), set_exit_status(126));
 	else if (msg_code == -2)
 		sb_append(sb, ": allocation error\n");
 	else if (msg_code == -3)
 		sb_append(sb, ": $PATH var unset\n");
+	else if (msg_code == -4)
+		(sb_append(sb, ": ambiguous redirect\n"), set_exit_status(1));
+	else if (msg_code == -5)
+		(sb_append(sb, ": No such file or directory\n"), set_exit_status(1));
 	if (msg_code == 0)
 		perror(sb->str);
 	else
