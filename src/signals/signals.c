@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 20:57:10 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/12 14:22:13 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:22:24 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ void	sigint_handler(int sig)
 	g_last_signal = 69;
 }
 
-void	nop(int sig)
-{
-	(void)sig;
-}
-
 void	heredoc_sigint_handler(int sig)
 {
 	(void)sig;
@@ -48,7 +43,7 @@ void	handle_default_sig_handlers(int action)
 	if (action == SET)
 	{
 		signal(SIGINT, sigint_handler);
-		signal(SIGQUIT, nop);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	else
 	{
