@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:49:19 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/12 17:47:36 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/12 18:52:30 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 void	executor(t_ast_cmd *tree, bool forked);
 void	free_list(char **args);
-int		check_cmd(char **cmd, t_env *envp);
+int		execute_cmd(char **cmd, t_env *envp);
 int		print_err(char *preced, int msg_code);
 /* binary */
 void	exec_pipe(t_ast_binary *tree, bool forked);
