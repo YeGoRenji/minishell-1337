@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:02:14 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/10 16:44:57 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:26:52 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		patch_heredoc(t_ast_cmd *tree)
 			patch_token((t_ast_redir *)tree);
 		patch_heredoc(((t_ast_redir *)tree)->cmd);
 	}
-	return (g_exit_status != 420);
+	return (get_exit_status() != 420);
 }
 
 void	patch_token(t_ast_redir *tree)

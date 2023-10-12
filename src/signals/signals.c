@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 20:57:10 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/11 19:15:23 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:22:13 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	sigint_handler(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-	g_exit_status = 1;
+	set_exit_status(1);
 	g_last_signal = 69;
 }
 
@@ -37,7 +37,7 @@ void	nop(int sig)
 void	heredoc_sigint_handler(int sig)
 {
 	(void)sig;
-	g_exit_status = 420;
+	set_exit_status(420);
 	printf("");
 	close(0);
 	signal(SIGINT, sigint_handler);

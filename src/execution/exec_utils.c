@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/10 17:32:22 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:22:13 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	print_err(char *preced, int msg_code)
 	if (msg_code == -1)
 	{
 		sb_append(sb, ": command not found\n");
-		g_exit_status = 127;
+		set_exit_status(127);
 	}
 	else if (msg_code == -69)
 	{
 		sb_append(sb, ": Is a directory\n");
-		g_exit_status = 126;
+		set_exit_status(126);
 	}
 	else if (msg_code == -2)
 		sb_append(sb, ": allocation error\n");

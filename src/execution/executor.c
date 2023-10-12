@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/12 14:17:28 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:26:52 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	if (check_builtins(split_len(argv) - 1, argv[0], argv + 1))
 	{
 		if (forked)
-			exit(g_exit_status);
+			exit(get_exit_status());
 		return (free_list(argv));
 	}
 	pid = fork();
@@ -43,20 +43,20 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	{
 		reset_default_sig_handlers();
 		print_err(argv[0], check_cmd(argv, envp));
-		exit(g_exit_status);
+		exit(get_exit_status());
 	}
 	waitpid(pid, &exit_status, 0);
-	g_exit_status = WEXITSTATUS(exit_status);
+	set_exit_status(WEXITSTATUS(exit_status));
 	if (WIFSIGNALED(exit_status) == 1 && WTERMSIG(exit_status) == 3)
 	{
 		ft_putendl_fd("Quit : 3", 2);
-		g_exit_status = 131;
+		set_exit_status(131);
 	}
 	else if (g_last_signal == 6969)
-		g_exit_status = 130;
+		set_exit_status(130);
 	free_list(argv);
 	if (forked)
-		exit(g_exit_status);
+		exit(get_exit_status());
 }
 
 void	handle_dups(t_ast_cmd *sub_tree, int *fd, int fd_num)
@@ -66,7 +66,7 @@ void	handle_dups(t_ast_cmd *sub_tree, int *fd, int fd_num)
 		(print_err("dup", 0), exit(-1));
 	close(fd[fd_num]);
 	executor(sub_tree, true);
-	exit(g_exit_status);
+	exit(get_exit_status());
 }
 
 void	exec_pipe(t_ast_binary *tree, bool forked)
@@ -89,27 +89,27 @@ void	exec_pipe(t_ast_binary *tree, bool forked)
 	close(fd[1]);
 	waitpid(pids[0], &exit_status, 0);
 	waitpid(pids[1], &exit_status, 0);
-	g_exit_status = WEXITSTATUS(exit_status);
+	set_exit_status(WEXITSTATUS(exit_status));
 	if (forked)
-		exit(g_exit_status);
+		exit(get_exit_status());
 }
 
 void	exec_or(t_ast_binary *tree, bool forked)
 {
 	executor((t_ast_cmd *)tree->left, false);
-	if (g_exit_status)
+	if (get_exit_status())
 		executor((t_ast_cmd *)tree->right, false);
 	if (forked)
-		exit(g_exit_status);
+		exit(get_exit_status());
 }
 
 void	exec_and(t_ast_binary *tree, bool forked)
 {
 	executor((t_ast_cmd *)tree->left, false);
-	if (!g_exit_status)
+	if (!get_exit_status())
 		executor((t_ast_cmd *)tree->right, false);
 	if (forked)
-		exit(g_exit_status);
+		exit(get_exit_status());
 }
 
 void	exec_redir(t_ast_redir *tree, bool forked)
@@ -128,7 +128,7 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 	}
 	fd_to_dup = open(file_name, tree->mode, 0644);
 	if (fd_to_dup < 0)
-		return (print_err(file_name, 0), g_exit_status = 1, free(NULL));
+		return (print_err(file_name, 0), set_exit_status(1), free(NULL));
 	else
 	{
 		fd_backup = dup(tree->fd);
@@ -155,9 +155,9 @@ void	exec_subsh(t_ast_subsh *tree, bool forked)
 	if (!pid)
 		executor(tree->cmd, true);
 	waitpid(pid, &exit_status, 0);
-	g_exit_status = WEXITSTATUS(exit_status);
+	set_exit_status(WEXITSTATUS(exit_status));
 	if (forked)
-		exit(g_exit_status);
+		exit(get_exit_status());
 }
 
 void	executor(t_ast_cmd *tree, bool forked)

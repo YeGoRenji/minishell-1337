@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:25:42 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/11 17:25:34 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:26:52 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*expand_env(char *to_expand, bool in_quote, bool ignore_env)
 		if (!ignore_env && *ptr == '$' && len > 1)
 		{
 			if (len == 2 && ptr[1] == '?')
-				(free(chunk), chunk = ft_itoa(g_exit_status));
+				(free(chunk), chunk = ft_itoa(get_exit_status()));
 			else
 			{
 				chunk = get_env_value(chunk);

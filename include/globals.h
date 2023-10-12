@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:12:06 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/11 14:17:47 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:27:25 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "../src/minishell_builtins/global_utils.h"
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <hacks.h>
 
 t_env		*get_envp(t_env *envp);
 void		prompt_pwd(void);
