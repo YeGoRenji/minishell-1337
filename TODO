@@ -1,7 +1,4 @@
 libft relink
-builtins relink
-stress test return statuses
 move all errors to error/
 ft_malloc
-check 'Quit: 3' (SUIQUIT result) wach gets printed in stdout or stderr
 get rid of g_exit_status (and only have one global var) // make get_seter to g_exit_status

@@ -6,7 +6,7 @@
 /*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 20:57:10 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/10 16:45:53 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/11 19:15:23 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void	sigint_handler(int sig)
 {
 	(void)sig;
 	if (waitpid(-1, &sig, WNOHANG) == 0)
+	{
+		g_last_signal = 6969;
 		return ;
+	}
 	printf("\n");
 	prompt_pwd();
 	rl_on_new_line();

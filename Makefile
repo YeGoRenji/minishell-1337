@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/10/11 18:32:25 by afatimi          ###   ########.fr        #
+#    Updated: 2023/10/12 14:13:25 by afatimi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,8 @@ BUILTINS_FILES = builtin_dispatcher.c \
 				unset/unset.c \
 				unset/utils.c
 
+SRCS_HACKS		= hacks.c
+
 SRCS_BUILTINS = $(foreach file, $(BUILTINS_FILES), $(BUILTINS_FOLD)$(file))
 
 OBJS_FILES = $(SRCS_LEXER:.c=.o) \
@@ -83,6 +85,7 @@ OBJS_FILES = $(SRCS_LEXER:.c=.o) \
 			 $(SRCS_EXPAND:.c=.o) \
 			 $(SRCS_HEREDOC:.c=.o) \
 			 $(SRCS_SIGNALS:.c=.o) \
+			 $(SRCS_HACKS:.c=.o) \
 			 main.o
 
 LIBFT = src/libft/libft.a
@@ -144,6 +147,10 @@ $(OBJSFOLDER)%.o: src/heredoc/%.c include/heredoc.h $(GLOBAL_HEADERS)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJSFOLDER)%.o: src/signals/%.c include/signals.h $(GLOBAL_HEADERS)
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJSFOLDER)%.o: src/hacks/%.c include/hacks.h $(GLOBAL_HEADERS)
 	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) -c $< -o $@
 

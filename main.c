@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/10 17:38:09 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:16:52 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <parser.h>
 #include <signals.h>
 #include <termios.h>
+#include <hacks.h>
 
 #define RED "\033[91m"
 #define NOCOL "\033[0m"
@@ -31,7 +32,6 @@ void	chk(void)
 	// system("leaks minishell");
 }
 
-int		g_exit_status;
 int		g_last_signal;
 
 void	prompt_pwd(void)
@@ -97,7 +97,7 @@ int	main(int _, char **__, char **envp)
 		else
 		{
 			dup2(2, 0);
-			g_exit_status = 0;
+			set_exit_status(0);
 		}
 
 		if (*command_line)
@@ -107,5 +107,5 @@ int	main(int _, char **__, char **envp)
 		tty_attr(attrs, RESET);
 	}
 	free(command_line);
-	exit(g_exit_status);
+	exit(get_exit_status());
 }

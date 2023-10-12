@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/11 16:56:15 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:17:28 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,12 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	waitpid(pid, &exit_status, 0);
 	g_exit_status = WEXITSTATUS(exit_status);
 	if (WIFSIGNALED(exit_status) == 1 && WTERMSIG(exit_status) == 3)
+	{
 		ft_putendl_fd("Quit : 3", 2);
+		g_exit_status = 131;
+	}
+	else if (g_last_signal == 6969)
+		g_exit_status = 130;
 	free_list(argv);
 	if (forked)
 		exit(g_exit_status);
