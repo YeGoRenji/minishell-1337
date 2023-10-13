@@ -64,7 +64,6 @@ BUILTINS_FILES = builtin_dispatcher.c \
 				env/env.c \
 				env/utils.c \
 				exit/exit.c \
-				exit/utils.c \
 				export/export.c \
 				export/utils.c \
 				export/validation_utils.c \
