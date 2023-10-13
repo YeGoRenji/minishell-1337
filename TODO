@@ -2,3 +2,12 @@ libft relink
 move all errors to error/
 ft_malloc
 get rid of g_exit_status (and only have one global var) // make get_seter to g_exit_status
+
+-- Minishell Testing :
+
+- exit number beyond LONG Threshhold !
+Expected -> shell69: exit: [number]: numeric argument required
+
+- Weird behaviour when too many cats 'fork problem probably' or Iterm being stupid.
+
+- export $var // if var is empty not set  -> heap-buffer-overflow
