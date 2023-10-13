@@ -35,6 +35,7 @@ bool	check_if_executable(char **cmd, char *exec, char **paths, t_env *env)
 	return (false);
 }
 
+/* TODO : ben 10 and the pursuite of other cases */
 bool	check_absolute_path(char **cmd, t_env *env)
 {
 	char	**envp;
@@ -50,7 +51,6 @@ bool	check_absolute_path(char **cmd, t_env *env)
 			exit(126);
 		else
 			exit(127);
-		// TODO : ben 10 and the pursuite of other cases
 	}
 	return (false);
 }
