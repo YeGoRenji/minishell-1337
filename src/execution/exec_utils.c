@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/12 21:05:31 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:06:22 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,16 @@ int	execute_cmd(char **cmd, t_env *env)
 		return (-3);
 	paths = ft_split(find_path(env), ':');
 	tmp = paths;
-	if (!paths[0])
+	if (!paths)
 		return (-2);
 	while (*tmp)
 	{
 		sb = stringbuilder();
 		sb_append(sb_append(sb_append_free(sb, *tmp), "/"), cmd[0]);
-		if (check_if_executable(cmd, sb->str, paths, env))
-			return (-1);
+		*tmp = sb->str;
 		free(sb);
+		if (check_if_executable(cmd, *tmp, paths, env))
+			return (-1);
 		tmp++;
 	}
 	return (free_list(paths), -1);
