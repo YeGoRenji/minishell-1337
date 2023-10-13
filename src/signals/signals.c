@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 20:57:10 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/12 18:22:24 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/13 23:29:28 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	heredoc_sigint_handler(int sig)
 {
 	(void)sig;
 	set_exit_status(420);
-	printf("");
 	close(0);
 	signal(SIGINT, sigint_handler);
 }
