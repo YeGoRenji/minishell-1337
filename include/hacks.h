@@ -6,12 +6,13 @@
 /*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:06:42 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/12 14:09:19 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/13 13:42:32 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HACKS_H
 # define HACKS_H
+
 void	set_exit_status(int exit_status);
 int		get_exit_status(void);
 #endif
