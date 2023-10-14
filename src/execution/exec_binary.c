@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:43:05 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/12 17:43:10 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:53:12 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	exec_pipe(t_ast_binary *tree, bool forked)
 	pids[1] = 0;
 	if (pipe(fd) == -1)
 		exit(69);
-	pids[0] = fork();
+	pids[0] = ft_fork();
 	if (!pids[0])
 		handle_dups(tree -> left, fd, STDOUT_FILENO);
-	pids[1] = fork();
+	pids[1] = ft_fork();
 	if (!pids[1])
 		handle_dups(tree -> right, fd, STDIN_FILENO);
 	close(fd[0]);

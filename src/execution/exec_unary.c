@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:40:54 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/12 18:52:35 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:53:27 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,9 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 			exit(get_exit_status());
 		return (free_list(argv));
 	}
-	pid = fork();
-	if (!pid)
+	if (!forked)
+		pid = ft_fork();
+	if (forked || !pid)
 	{
 		reset_default_sig_handlers();
 		print_err(argv[0], execute_cmd(argv, envp));
@@ -104,7 +105,7 @@ void	exec_subsh(t_ast_subsh *tree, bool forked)
 	pid_t	pid;
 	int		exit_status;
 
-	pid = fork();
+	pid = ft_fork();
 	if (!pid)
 		executor(tree->cmd, true);
 	waitpid(pid, &exit_status, 0);

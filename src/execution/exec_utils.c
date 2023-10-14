@@ -6,11 +6,24 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:09:45 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/13 23:34:27 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:47:46 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <executor.h>
+
+pid_t	ft_fork(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid < 0)
+	{
+		print_err("fork", 0);
+		exit(1);
+	}
+	return (pid);
+}
 
 int	print_err(char *preced, int msg_code)
 {

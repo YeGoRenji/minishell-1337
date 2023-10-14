@@ -58,7 +58,6 @@ BUILTINS_FOLD = src/minishell_builtins/
 BUILTINS_FILES = builtin_dispatcher.c \
 				builtin_utils.c \
 				cd/cd.c \
-				cd/utils.c \
 				echo/echo.c \
 				echo/utils.c \
 				env/env.c \

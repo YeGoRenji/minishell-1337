@@ -10,7 +10,8 @@
 			 | "<<"
 
 <EXEC> ::=	<WORD> <EXEC>
-			| "(" <EXEC> ")"
+			| "(" <COMMANDLINE> ")"
+			| <WORD>
 
 <REDIRECTION> ::= <DIRECTION> <FILE>
 
