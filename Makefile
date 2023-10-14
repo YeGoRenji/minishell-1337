@@ -12,7 +12,11 @@
 
 NAME = minishell
 
+ifeq ($(OS), Darwin)
+
 RL_PATH =$(shell brew --prefix readline)
+
+endif
 
 LIB = -L $(RL_PATH)/lib -lreadline
 
@@ -103,7 +107,7 @@ $(LIBFT):
 	@echo "Compiling libft..."
 	@make -C src/libft
 
-$(OBJSFOLDER): 
+$(OBJSFOLDER):
 	@mkdir objs
 
 $(L_BUILTINS): $(SRCS_BUILTINS)
