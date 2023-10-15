@@ -6,15 +6,14 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:36:07 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 13:26:10 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:37:33 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "cd_utils.h"
 #include <libft.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h> // TODO : GET RID OF THIS AND USE LIBFT's INSTEAD!!
 #include <unistd.h>
 
 int	change_directory(char *dir)

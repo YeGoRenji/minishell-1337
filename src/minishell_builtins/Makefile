@@ -5,13 +5,13 @@ NAME = libbuiltins.a
 EXEC = minishell
 
 CFLAGS = -Wall -Wextra -Werror -I../../include -g -fsanitize=address
-ECHO   = echo/echo.c echo/utils.c
+ECHO   = echo/echo.c echo/echo_utils.c
 CD     = cd/cd.c cd/cds_nuts.c cd/path_utils.c
 EXIT   = exit/exit.c
-PWD    = pwd/pwd.c pwd/utils.c
-UNSET  = unset/unset.c unset/utils.c
-EXPORT = export/export.c export/utils.c export/validation_utils.c
-ENV    = env/env.c env/utils.c
+PWD    = pwd/pwd.c pwd/pwd_utils.c
+UNSET  = unset/unset.c unset/unset_utils.c
+EXPORT = export/export.c export/export_utils.c export/validation_utils.c
+ENV    = env/env.c env/env_utils.c
 
 M_SRC = $(ECHO) $(CD) $(EXIT) $(PWD) $(UNSET) $(EXPORT) $(ENV) global_utils.c builtin_dispatcher.c lst_operations.c
 

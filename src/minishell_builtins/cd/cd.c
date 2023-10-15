@@ -6,11 +6,11 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:20:46 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 13:20:49 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:37:20 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "cd_utils.h"
 #include <stdio.h>
 
 int	cd(char *arg, t_env *env)

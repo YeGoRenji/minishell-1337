@@ -6,10 +6,10 @@
 /*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 13:24:38 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 13:11:47 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:36:55 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "utils.h"
+#include "echo_utils.h"
 
 int	echo(int argc, char **args)
 {

@@ -6,11 +6,11 @@
 /*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 13:00:21 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 13:04:33 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:36:38 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "cd_utils.h"
 #include "../global_utils.h"
 
 char	*join_paths(char *dirname, char *basename)

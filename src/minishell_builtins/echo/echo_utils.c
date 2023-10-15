@@ -5,30 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 14:33:04 by afatimi           #+#    #+#             */
-/*   Updated: 2023/09/30 14:33:56 by afatimi          ###   ########.fr       */
+/*   Created: 2023/09/30 14:35:39 by afatimi           #+#    #+#             */
+/*   Updated: 2023/10/15 13:37:11 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "echo_utils.h"
 
-void	del_from_env(t_env **env, char *key)
+int	consist_of(char *line, char c)
 {
-	t_env	*node;
+	return (count(line, c) == ft_strlen(line));
+}
 
-	if (!env || !*env)
-		return ;
-	node = search_in_env(*env, key);
-	if (!node)
-		return ;
-	if (node == *env)
-		*env = (*env)->next;
-	else if (!node->next)
-		node->prev->next = NULL;
-	else
-	{
-		node->prev->next = node->next;
-		node->next->prev = node->prev;
-	}
-	ft_lstdelone(node, free);
+size_t	count(const char *s, int c)
+{
+	size_t	res;
+
+	res = 0;
+	while (*s)
+		res += *s++ == c;
+	return (res);
 }

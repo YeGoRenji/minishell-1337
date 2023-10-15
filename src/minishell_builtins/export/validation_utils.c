@@ -6,11 +6,11 @@
 /*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 13:24:22 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/11 13:24:23 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:39:03 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "export_utils.h"
 
 int	validate_args(int args_num, char **args)
 {
