@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:40:54 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/15 15:30:08 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:42:48 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 		return ;
 	fd_to_dup = open(file_name, tree->mode, 0644);
 	if (fd_to_dup < 0)
-		return (print_err(file_name, 0), set_exit_status(1));
+		return (print_err(file_name, 0), set_exit_status(1), free(file_name));
 	else
 	{
 		fd_backup = dup(tree->fd);
@@ -69,6 +69,7 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 		dup2(fd_backup, tree->fd);
 		close(fd_backup);
 	}
+	free(file_name);
 }
 
 void	exec_exe(t_ast_exec *exe, bool forked)
