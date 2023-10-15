@@ -1,0 +1,19 @@
+diff --git a/Makefile b/Makefile
+index ed31714..4df3e00 100644
+--- a/Makefile
++++ b/Makefile
+@@ -9,12 +9,12 @@ CFLAGS = -Wall -Wextra -Werror -I../../include # -g -ggdb3 -fsanitize=address
+ ECHO   = echo/echo.c echo/utils.c
+ CD     = cd/cd.c cd/utils.c
+ EXIT   = exit/exit.c
+-PWD    = pwd/pwd.c
++PWD    = pwd/pwd.c pwd/utils.c
+ UNSET  = unset/unset.c unset/utils.c
+ EXPORT = export/export.c export/utils.c export/validation_utils.c
+ ENV    = env/env.c env/utils.c
+
+-M_SRC = $(ECHO) $(CD) $(EXIT) $(PWD) $(UNSET) $(EXPORT) $(ENV) global_utils.c builtin_dispatcher.c lst_operations.c
++M_SRC = $(ECHO) $(CD) $(EXIT) $(PWD) $(UNSET) $(EXPORT) $(ENV) global_utils.c builtin_dispatcher.c lst_operations.c parse_utils.c
+
+ EXEC_SRC = main.c $(M_SRC)
+
