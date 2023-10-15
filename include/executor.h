@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:49:19 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/14 16:50:15 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:58:17 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 # include "ast.h"
 # include "expander.h"
 # include "globals.h"
+# include "error.h"
 # include "signals.h"
-# include <errno.h>
 
 void	executor(t_ast_cmd *tree, bool forked);
 void	free_list(char **args);
 int		execute_cmd(char **cmd, t_env *envp);
-int		print_err(char *preced, int msg_code);
 bool	check_absolute_path(char **cmd, t_env *env);
 bool	check_if_executable(char **cmd, char *exec, char **paths, t_env *env);
 pid_t	ft_fork(void);

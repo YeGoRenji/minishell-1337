@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 14:44:53 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/11 16:29:36 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 15:11:08 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void	wild_card(t_str **lst, t_str *expr)
 	dir = opendir(".");
 	matched = false;
 	if (!dir)
-		return ((void)fprintf(stderr, "TODO: opendir failed\n"));
+	{
+		closedir(dir);
+		return ;
+	}
 	file_entry = readdir(dir);
 	while (file_entry)
 	{

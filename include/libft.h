@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 22:32:03 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/11 14:28:37 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 16:11:10 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdlib.h>
+# include <error.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 69
 # endif
 
 typedef struct s_list

@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/23 02:54:46 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/10/10 16:40:00 by afatimi          ###   ########.fr        #
+#    Updated: 2023/10/15 16:08:02 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC = ft_isalpha.c \
 	  ft_putstr_fd.c \
 	  ft_putendl_fd.c \
 	  ft_putnbr_fd.c \
+	  ft_malloc.c \
 	  get_next_line.c
 
 OBJ = $(SRC:.c=.o)

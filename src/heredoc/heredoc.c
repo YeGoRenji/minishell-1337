@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:02:14 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/12 14:26:52 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 15:52:30 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,23 @@ char	*handle_heredoc(char *delim, bool expandable)
 	tmp_file = ft_mktmp();
 	fd = open(tmp_file, O_RDWR | O_CREAT, 0640);
 	if (fd < 0)
-	{
-		perror("open");
-		return (NULL);
-	}
+		return (print_err(tmp_file, 0), set_exit_status(1), NULL);
 	signal(SIGINT, heredoc_sigint_handler);
 	while (1)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(0);
 		if (!line)
-			return (close(fd), tmp_file);
+			return (close(fd), unlink(tmp_file), tmp_file);
 		line[ft_strlen(line) - 1] = '\0';
 		if (!ft_strncmp(delim, line, ft_strlen(delim) + 1))
 			break ;
 		line = expand_env(line, false, !expandable);
-		// printf("Got <%s>\n", line);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 	}
 	signal(SIGINT, sigint_handler);
-	return (close(fd), tmp_file);
+	return (close(fd), unlink(tmp_file), tmp_file);
 }
 
 char	*ft_mktmp(void)

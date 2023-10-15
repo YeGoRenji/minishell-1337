@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:12:06 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/12 14:27:25 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 15:02:53 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GLOBALS_H
 
 # include <stdio.h>
+# include <errno.h>
 # include "libft.h"
 # include <dirent.h>
 # include <fcntl.h>
@@ -33,4 +34,4 @@ void		prompt_pwd(void);
 extern int	g_exit_status;
 extern int	g_last_signal;
 
-#endif // GLOBALS_H
+#endif /* GLOBALS_H */

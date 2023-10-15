@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/10/15 13:02:15 by afatimi          ###   ########.fr        #
+#    Updated: 2023/10/15 15:00:44 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,19 +65,19 @@ BUILTINS_FILES = builtin_dispatcher.c \
 				cd/cds_nuts.c \
 				cd/path_utils.c \
 				echo/echo.c \
-				echo/utils.c \
+				echo/echo_utils.c \
 				env/env.c \
-				env/utils.c \
+				env/env_utils.c \
 				exit/exit.c \
 				export/export.c \
-				export/utils.c \
+				export/export_utils.c \
 				export/validation_utils.c \
 				global_utils.c \
 				lst_operations.c \
 				pwd/pwd.c \
-				pwd/utils.c \
+				pwd/pwd_utils.c \
 				unset/unset.c \
-				unset/utils.c
+				unset/unset_utils.c
 
 SRCS_HACKS		= hacks.c
 
