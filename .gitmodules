@@ -1,3 +1,0 @@
-[submodule "src/minishell_builtins"]
-	path = src/minishell_builtins
-	url = git@github.com:0x00Jeff/minishell_builtins.git
