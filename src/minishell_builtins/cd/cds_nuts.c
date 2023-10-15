@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   cds_nuts.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:36:07 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 14:31:30 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 17:58:17 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	change_directory(char *dir)
 	path = structure_path(pwd_trolling(NULL), dir);
 	if (!opendir(path))
 	{
-		fprintf(stderr, "SHELL69: cd: ..: No such file or directory\n");
+		ft_putendl_fd("shell69: cd: ..: No such file or directory", 2);
 		pwd_trolling(trim_path(join_paths(pwd_trolling(NULL), dir)));
 		status = 1;
 	}

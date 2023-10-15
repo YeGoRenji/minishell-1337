@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/10/15 16:42:56 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/10/15 18:01:15 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ RL_PATH =$(shell brew --prefix readline)
 
 LIB = -L $(RL_PATH)/lib -lreadline
 
-CFLAGS = -Wall -Wextra -Werror -Iinclude -I$(RL_PATH)/include -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -Iinclude -I$(RL_PATH)/include #-fsanitize=address -g
 
 OBJSFOLDER = objs/
 
