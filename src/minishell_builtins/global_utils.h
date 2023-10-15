@@ -6,19 +6,19 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:02:00 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/14 22:17:23 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:19:05 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBAL_UTILS_H
 # define GLOBAL_UTILS_H
-# include "lst_operations.h"
 # include "builtin_dispatcher.h"
 # include "builtins.h"
-# include <libft.h>
-# include <stdlib.h>
+# include "lst_operations.h"
 # include <globals.h>
+# include <libft.h>
 # include <stdbool.h>
+# include <stdlib.h>
 # include <stringbuilder.h>
 
 extern int	g_exit_status;
@@ -39,4 +39,5 @@ int			is_concate(char *str);
 t_env		*get_envp(t_env *envp);
 t_env		**get_envp_internal(t_env *envp);
 void		log_last_command(char *value);
+int			validate_args(int args_num, char **args);
 #endif

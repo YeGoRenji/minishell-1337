@@ -6,7 +6,7 @@ EXEC = minishell
 
 CFLAGS = -Wall -Wextra -Werror -I../../include -g -fsanitize=address
 ECHO   = echo/echo.c echo/utils.c
-CD     = cd/cd.c cd/cds_nuts.c
+CD     = cd/cd.c cd/cds_nuts.c cd/path_utils.c
 EXIT   = exit/exit.c
 PWD    = pwd/pwd.c pwd/utils.c
 UNSET  = unset/unset.c unset/utils.c
@@ -32,7 +32,7 @@ $(NAME): rf_lib $(M_OBJ)
 exec:	$(EXEC_OBJ) $(LIBFT)/libft.a
 	$(CC) $(CFLAGS) $(EXEC_OBJ) $(LIBFT)/libft.a -o $(EXEC)
 
-cp: $(NAME) fclean
+cp: fclean
 	find . -name "*~" -delete
 	cp -rfv * ../1337/minishell-1337/src/minishell_builtins/
 

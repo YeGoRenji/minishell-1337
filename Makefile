@@ -6,17 +6,17 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/10/12 20:27:28 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/10/15 13:02:15 by afatimi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-ifeq ($(OS), Darwin)
+#ifeq ($(OS), Darwin)
 
 RL_PATH =$(shell brew --prefix readline)
 
-endif
+#endif
 
 LIB = -L $(RL_PATH)/lib -lreadline
 
@@ -62,6 +62,8 @@ BUILTINS_FOLD = src/minishell_builtins/
 BUILTINS_FILES = builtin_dispatcher.c \
 				builtin_utils.c \
 				cd/cd.c \
+				cd/cds_nuts.c \
+				cd/path_utils.c \
 				echo/echo.c \
 				echo/utils.c \
 				env/env.c \

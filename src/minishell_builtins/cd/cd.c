@@ -6,7 +6,7 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:20:46 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/13 14:41:05 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:20:49 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ int	cd(char *arg, t_env *env)
 			return (1);
 		}
 		else
-			change_directory(node->value);
+			return (change_directory(node->value));
 	}
 	else
-		change_directory(arg);
-	return (0);
+		return (change_directory(arg));
 }
