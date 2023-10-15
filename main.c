@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/15 16:20:52 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 17:47:08 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,6 @@ enum {
 	ATTR_GET,
 	ATTR_CHG
 };
-
-void	chk(void)
-{
-	// system("leaks minishell");
-}
 
 int		g_last_signal;
 
@@ -62,16 +57,10 @@ void	tty_attr(struct termios *attrs, int action)
 	}
 }
 
-int	main(int _, char **__, char **envp)
+void	setup_stuff(char **envp, struct termios *attrs, ...)
 {
-	t_token			*tokens;
-	t_ast_cmd		*ast;
-	char			*command_line;
-	char			*tmp;
-	struct termios	attrs[3];
+	char	*tmp;
 
-	(void)_;
-	(void)__;
 	create_env(envp);
 	tmp = getcwd(NULL, 0);
 	rl_catch_signals = false;
@@ -80,32 +69,46 @@ int	main(int _, char **__, char **envp)
 	install_default_sig_handlers();
 	tty_attr(attrs, ATTR_GET);
 	tty_attr(attrs, ATTR_CHG);
+}
+
+bool	sabon_func(char *command_line)
+{
+	t_token			*tokens;
+	t_ast_cmd		*ast;
+
+	if (!command_line)
+	{
+		ft_putendl_fd("exit", 1);
+		free(command_line);
+		return (true);
+	}
+	lexer(command_line, &tokens);
+	if (parser(tokens, &ast))
+		executor(ast, false);
+	else
+		(dup2(2, 0), set_exit_status(0));
+	if (*command_line)
+		add_history(command_line);
+	free_ast(ast);
+	free(command_line);
+	return (false);
+}
+
+int	main(int _, char **__, char **envp)
+{
+	char			*command_line;
+	struct termios	attrs[3];
+
+	setup_stuff(envp, attrs, _, __);
 	while (true)
 	{
 		if (g_last_signal != 69)
 			prompt_pwd();
 		command_line = readline("➤ ");
-		g_last_signal = 0;
-		if (!command_line)
-		{
-			ft_putendl_fd("exit", 1);
+		if (sabon_func(command_line))
 			break ;
-		}
-		lexer(command_line, &tokens);
-		if (parser(tokens, &ast))
-			executor(ast, false);
-		else
-		{
-			dup2(2, 0);
-			set_exit_status(0);
-		}
-
-		if (*command_line)
-			add_history(command_line);
-		free_ast(ast);
-		free(command_line);
+		g_last_signal = 0;
 		tty_attr(attrs, ATTR_SET);
 	}
-	free(command_line);
 	exit(get_exit_status());
 }

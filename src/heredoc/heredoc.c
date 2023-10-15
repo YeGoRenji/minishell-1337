@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:02:14 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 16:33:54 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 17:36:18 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ char	*handle_heredoc(char *delim, bool expandable)
 		if (!ft_strncmp(delim, line, ft_strlen(delim) + 1))
 			break ;
 		line = expand_env(line, false, !expandable);
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
+		ft_putendl_fd(line, fd);
 	}
 	signal(SIGINT, sigint_handler);
 	return (close(fd), unlink(tmp_file), tmp_file);
