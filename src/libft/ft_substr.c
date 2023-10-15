@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 11:13:38 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/25 18:45:54 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:18:04 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_calloc(1, 1));
 	if (s_len == 0)
 		return (NULL);
-	substr = malloc(min(s_len - start + 1, len + 1));
+	substr = ft_malloc(min(s_len - start + 1, len + 1));
 	if (!substr)
 		return (NULL);
 	while (s[start] && i < len)

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:58:09 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/11 17:11:02 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:18:05 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	**consume_argv(t_str *lst)
 	int		len;
 
 	len = ft_strlstlen(lst);
-	argv = malloc((len + 1) * sizeof(char *));
+	argv = ft_malloc((len + 1) * sizeof(char *));
 	i = 0;
 	while (i < len)
 	{

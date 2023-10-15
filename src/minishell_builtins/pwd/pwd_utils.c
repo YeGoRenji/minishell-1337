@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   pwd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:38:45 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 14:28:52 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 16:38:42 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char	*pwd_trolling(char *str)
 {
 	static char	*pwd;
-	t_env *env;
-	t_env	*pwd_node;
+	t_env		*env;
+	t_env		*pwd_node;
 
 	if (!str)
 		return (pwd);
@@ -42,7 +42,7 @@ char	*trim_path(char *pwd)
 	pwd_len = ft_strlen(pwd);
 	if (ft_strlen(pwd) == 1)
 		return (ft_strdup(pwd));
-	buff = malloc((pwd_len + 1) * sizeof(char));
+	buff = ft_malloc((pwd_len + 1) * sizeof(char));
 	i = 0;
 	fake_i = 0;
 	while (fake_i < pwd_len)

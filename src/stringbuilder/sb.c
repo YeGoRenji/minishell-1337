@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:21:59 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/29 15:01:06 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:18:05 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_strbuilder	*stringbuilder(void)
 {
 	t_strbuilder	*sb;
 
-	sb = malloc(sizeof(t_strbuilder));
+	sb = ft_malloc(sizeof(t_strbuilder));
 	if (!sb)
 		return (NULL);
 	sb->capacity = 16;

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 04:12:02 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/27 10:43:13 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:18:05 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_ast_cmd	*binary_node(t_node_type type, t_ast_cmd *left, t_ast_cmd *right)
 {
 	t_ast_binary	*node;
 
-	node = malloc(sizeof(t_ast_binary));
+	node = ft_malloc(sizeof(t_ast_binary));
 	if (!node)
 		return (NULL);
 	node->type = type;
@@ -29,7 +29,7 @@ t_ast_cmd	*exec_node(t_token *argv_tok)
 {
 	t_ast_exec	*node;
 
-	node = malloc(sizeof(t_ast_exec));
+	node = ft_malloc(sizeof(t_ast_exec));
 	if (!node)
 		return (NULL);
 	node->type = P_EXEC;
@@ -42,7 +42,7 @@ t_ast_cmd	*redir_node(t_token_type direction, t_token *file_tok,
 {
 	t_ast_redir	*node;
 
-	node = malloc(sizeof(t_ast_redir));
+	node = ft_malloc(sizeof(t_ast_redir));
 	if (!node)
 		return (NULL);
 	node->type = P_REDIR;
@@ -58,7 +58,7 @@ t_ast_cmd	*subsh_node(t_ast_cmd *cmd)
 {
 	t_ast_subsh	*node;
 
-	node = malloc(sizeof(t_ast_subsh));
+	node = ft_malloc(sizeof(t_ast_subsh));
 	if (!node)
 		return (NULL);
 	node->type = P_SUBSH;

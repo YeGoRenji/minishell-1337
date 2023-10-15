@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:02:14 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 15:52:30 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:33:54 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_mktmp(void)
 	return (name);
 }
 
-int		patch_heredoc(t_ast_cmd *tree)
+int	patch_heredoc(t_ast_cmd *tree)
 {
 	int	type;
 

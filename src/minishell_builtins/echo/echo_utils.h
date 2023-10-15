@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   echo_utils.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:24:38 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/11 14:22:03 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 16:38:02 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef ECHO_UTILS_H
+# define ECHO_UTILS_H
 # include "../global_utils.h"
 # include <unistd.h>
 

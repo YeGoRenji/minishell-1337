@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 23:51:40 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/25 18:45:54 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:18:05 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t count, size_t size)
 
 	if (count == SIZE_MAX && size == SIZE_MAX)
 		return (NULL);
-	target = malloc(count * size);
+	target = ft_malloc(count * size);
 	if (target)
 		ft_bzero(target, count * size);
 	return (target);

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:56:55 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/11 17:01:55 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:18:05 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_str	*new_str(char *str, bool to_expand)
 {
 	t_str	*node;
 
-	node = malloc(sizeof(t_str));
+	node = ft_malloc(sizeof(t_str));
 	if (!node)
 		return (NULL);
 	node->str = ft_strdup(str);

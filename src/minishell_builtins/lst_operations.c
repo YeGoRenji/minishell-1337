@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   lst_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 21:40:43 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/13 17:00:41 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 16:18:05 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "global_utils.h"
+
 #include "lst_operations.h"
 #include <libft.h>
 #include <stdio.h> // TODO : delete this
@@ -19,7 +19,7 @@ t_env	*ft_lstnew(char *key, char *value, int equal_sign, t_env *prev)
 {
 	t_env	*node;
 
-	node = (t_env *)malloc(sizeof(t_env));
+	node = (t_env *)ft_malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
 	node->key = key;

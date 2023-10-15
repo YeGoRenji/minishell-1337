@@ -6,12 +6,12 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:26:15 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 15:04:39 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:37:36 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef EXIT_UTILS_H
+# define EXIT_UTILS_H
 # include "../global_utils.h"
 # include <error.h>
 #endif

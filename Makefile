@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/10/15 15:00:44 by ylyoussf         ###   ########.fr        #
+#    Updated: 2023/10/15 16:42:56 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,6 @@ SRCS_SIGNALS = signals.c
 BUILTINS_FOLD = src/minishell_builtins/
 
 BUILTINS_FILES = builtin_dispatcher.c \
-				builtin_utils.c \
 				cd/cd.c \
 				cd/cds_nuts.c \
 				cd/path_utils.c \

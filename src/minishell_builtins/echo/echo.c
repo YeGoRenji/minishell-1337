@@ -6,10 +6,21 @@
 /*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 13:24:38 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 13:36:55 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 16:41:34 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "echo_utils.h"
+
+static void	print_args(int argc, char **args, int i)
+{
+	while (i < argc - 1)
+	{
+		ft_putstr_fd(args[i++], 1);
+		ft_putstr_fd(" ", 1);
+	}
+	ft_putstr_fd(args[i++], 1);
+}
 
 int	echo(int argc, char **args)
 {
@@ -30,9 +41,7 @@ int	echo(int argc, char **args)
 		else
 			break ;
 	}
-	while (i < argc - 1)
-		(ft_putstr_fd(args[i++], 1), ft_putstr_fd(" ", 1));
-	ft_putstr_fd(args[i++], 1);
+	print_args(argc, args, i);
 	if (new_line)
 		ft_putstr_fd("\n", 1);
 	return (0);

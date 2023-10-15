@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:03:32 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/15 16:07:16 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:32:20 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	*ft_malloc(unsigned long size)
 	ptr = malloc(size);
 	if (!ptr)
 	{
-		print_err("malloc", -2);
-		exit(get_exit_status());
+		write(2, "shell69: MALLOC FAILED BRO !\n", 29);
+		exit(69);
 	}
 	return (ptr);
 }

@@ -75,5 +75,6 @@ void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 void				free_list(char **args);
 char				*get_next_line(int fd);
+void				*ft_malloc(unsigned long size);
 
 #endif

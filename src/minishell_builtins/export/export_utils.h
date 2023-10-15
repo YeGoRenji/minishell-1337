@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   export_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:25:08 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 13:16:54 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 16:37:13 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef EXPORT_UTILS_H
+# define EXPORT_UTILS_H
 # include "../global_utils.h"
 # include "../lst_operations.h"
 # include <stdbool.h>

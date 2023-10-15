@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 19:51:35 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/25 18:45:54 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:18:05 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*create_str(char const *word_start, char c)
 {
 	char	*str;
 
-	str = malloc(word_len(word_start, c) + 1);
+	str = ft_malloc(word_len(word_start, c) + 1);
 	if (str)
 		ft_strlcpy(str, word_start, word_len(word_start, c) + 1);
 	return (str);
@@ -92,7 +92,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	word_count = count_words(s, c);
-	target = malloc((word_count + 1) * sizeof(char *));
+	target = ft_malloc((word_count + 1) * sizeof(char *));
 	if (!target)
 		return (NULL);
 	if (!fill_target(s, c, target, word_count))

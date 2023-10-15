@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:06:46 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 14:13:18 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 16:18:05 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**consume_env(t_env *env)
 	if (!env)
 		return (NULL);
 	size = ft_lstsize(env);
-	ptr = (char **)malloc((size + 1) * sizeof(char *));
+	ptr = (char **)ft_malloc((size + 1) * sizeof(char *));
 	node = env;
 	i = 0;
 	while (i < size)

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin_utils.h"
 #include "global_utils.h"
 #include <libft.h>
 #include <stdio.h>
