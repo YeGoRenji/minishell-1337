@@ -6,7 +6,7 @@
 /*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 13:24:38 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 16:41:34 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:49:45 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ static void	print_args(int argc, char **args, int i)
 {
 	while (i < argc - 1)
 	{
-		ft_putstr_fd(args[i++], 1);
-		ft_putstr_fd(" ", 1);
+		ft_putstr_fd(args[i], 1);
+		if (ft_strlen(args[i]))
+			ft_putstr_fd(" ", 1);
+		i++;
 	}
 	ft_putstr_fd(args[i++], 1);
 }
