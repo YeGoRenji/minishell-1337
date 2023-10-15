@@ -6,12 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:09:31 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 13:22:14 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 14:02:59 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_utils.h"
-#include "builtins.h"
 #include "global_utils.h"
 #include <libft.h>
 #include <stdio.h>

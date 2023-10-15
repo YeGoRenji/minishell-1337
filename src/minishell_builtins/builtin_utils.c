@@ -6,13 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:49:12 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/10 23:12:38 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 14:03:08 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin_utils.h"
-#include "builtins.h"	// delete this after
-						// figuring out an actual solution for log_last_command
 #include "lst_operations.h"
 #include <libft.h>
 #include <stdbool.h>

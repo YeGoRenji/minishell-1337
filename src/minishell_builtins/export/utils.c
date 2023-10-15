@@ -6,11 +6,11 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:35:10 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/12 16:21:48 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:48:54 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "export_utils.h"
 
 int	print_exports(t_env *env)
 {

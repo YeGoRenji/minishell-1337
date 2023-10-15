@@ -1,3 +1,1 @@
-- echo $garbage heap bofs
-- set OLDPWD from env instaed of dupping pwd
-- unset PWD; cd anything; $OLDPWD should be non-null
+there are no KNOWN bugs :)

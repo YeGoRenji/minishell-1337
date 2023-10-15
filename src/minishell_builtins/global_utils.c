@@ -6,58 +6,11 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:06:46 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/13 17:00:18 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 14:13:18 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "global_utils.h"
-#include <string.h> // TODO : GET RID OF THIS AND USE libft's instead!!
-#include "builtins.h" // GET RID OF THIS AFTER WORKING OUT A SOLUTION FOR LOG_LAST_COMMAND
-#include <stdio.h> // TODO : remove this!!
-
-extern int	g_exit_status;
-
-char	*pwd_trolling(char *str)
-{
-	static char	*pwd;
-
-	if (!str)
-		return (pwd);
-	if (pwd)
-		set_env_value(ft_strdup("OLDPWD"), ft_strdup(pwd), 1); // TODO : maybe shouldn't always be one!!;
-	free(pwd);
-	pwd = trim_path(str);
-	set_env_value(ft_strdup("PWD"), ft_strdup(pwd), 1);
-	return (pwd);
-}
-
-char	*trim_path(char *pwd)
-{
-	size_t	pwd_len;
-	size_t	i;
-	size_t	fake_i;
-	char	*buff;
-
-	pwd_len = ft_strlen(pwd);
-	if (ft_strlen(pwd) == 1)
-		return (ft_strdup(pwd));
-	buff = malloc((pwd_len + 1) * sizeof(char));
-	i = 0;
-	fake_i = 0;
-	while (fake_i < pwd_len)
-	{
-		if (pwd[fake_i] == '/' && pwd[fake_i + 1] == '/')
-		{
-			fake_i++;
-			continue ;
-		}
-		buff[i++] = pwd[fake_i++];
-	}
-	buff[i--] = 0;
-	if (ft_strlen(buff) > 1 && buff[i] == '/')
-		buff[i] = '\0';
-	return (buff);
-}
 
 t_env	*search_in_env(t_env *env, char *key)
 {

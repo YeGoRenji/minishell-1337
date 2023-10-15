@@ -6,11 +6,11 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:34:07 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/10 22:52:27 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/15 13:41:42 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "pwd_utils.h"
 
 int	pwd(void)
 {
