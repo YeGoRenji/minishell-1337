@@ -72,6 +72,7 @@ BUILTINS_FILES = builtin_dispatcher.c \
 				export/export_utils.c \
 				export/validation_utils.c \
 				global_utils.c \
+				global_utils2.c \
 				lst_operations.c \
 				pwd/pwd.c \
 				pwd/pwd_utils.c \

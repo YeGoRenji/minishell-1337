@@ -13,11 +13,11 @@ UNSET  = unset/unset.c unset/unset_utils.c
 EXPORT = export/export.c export/export_utils.c export/validation_utils.c export/utils.c
 ENV    = env/env.c env/env_utils.c
 
-M_SRC = $(ECHO) $(CD) $(EXIT) $(PWD) $(UNSET) $(EXPORT) $(ENV) global_utils.c builtin_dispatcher.c lst_operations.c
+M_SRC = $(ECHO) $(CD) $(EXIT) $(PWD) $(UNSET) $(EXPORT) $(ENV) global_utils.c global_utils2.c builtin_dispatcher.c lst_operations.c
 
 EXEC_SRC = main.c $(M_SRC)
 
-M_HEAD = global_utils.h builtins_dispatcher.h lst_operations.h exit/utils.h pwd/utils.h unset/utils.h export/utils.h env/utils.h lst_operations.h global_utils.h
+M_HEAD = ./builtin_dispatcher.h ./cd/cd.h ./cd/cd_utils.h ./echo/echo.h ./echo/echo_utils.h ./env/env_utils.h ./exit/exit_utils.h ./export/export_utils.h ./global_utils.h ./lst_operations.h ./pwd/pwd_utils.h ./unset/unset_utils.h ./utils.h
 
 M_OBJ = $(M_SRC:.c=.o)
 EXEC_OBJ = main.o $(M_SRC:.c=.o)
