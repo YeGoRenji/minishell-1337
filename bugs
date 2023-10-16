@@ -1,8 +1,8 @@
 cd leaks when using . and ..
 2 heredocs exit when doing 2 signals
-#ls > a when a is a directorys leaks "a"
-#ls > leaks
-ls > a > b > c leaks
-export a="jomla mofida" then 'ls > $a' leaks
-ambiguious redirection happens when the dir is empty or has spaces (e.g cd 'z b i')
-ls > *
+[Fixed] #ls > a when a is a directorys leaks "a"
+[Fixed] #ls > leaks
+[Fixed] ls > a > b > c leaks
+[Fixed] export a="jomla mofida" then 'ls > $a' leaks
+[Fixed] ambiguious redirection happens when the dir is empty or has spaces (e.g cd 'z b i')
+[Fixed] ls > *
