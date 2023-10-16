@@ -86,7 +86,11 @@ bool	sabon_func(char *command_line)
 	if (parser(tokens, &ast))
 		executor(ast, false);
 	else
-		(dup2(2, 0), set_exit_status(0));
+	{
+		dup2(2, 0);
+		if (get_exit_status() == 420)
+			set_exit_status(0);
+	}
 	if (*command_line)
 		add_history(command_line);
 	free_ast(ast);

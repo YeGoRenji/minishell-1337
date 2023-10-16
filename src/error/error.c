@@ -14,20 +14,23 @@
 
 void	tok_error(char which)
 {
+	set_exit_status(258);
 	write(2, "shell69: unexpected token `", 27);
-	write(1, &which, 1);
+	write(2, &which, 1);
 	write(2, "'\n", 2);
 }
 
 void	unclosed_error(char which)
 {
+	set_exit_status(258);
 	write(2, "shell69: unclosed quote `", 25);
-	write(1, &which, 1);
+	write(2, &which, 1);
 	write(2, "'\n", 2);
 }
 
 void	syntax_error(char *where)
 {
+	set_exit_status(258);
 	write(2, "shell69: syntax error near unexpected token `", 45);
 	ft_putstr_fd(where, 2);
 	write(2, "'\n", 2);
