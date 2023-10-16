@@ -88,8 +88,7 @@ bool	sabon_func(char *command_line)
 	else
 	{
 		dup2(2, 0);
-		if (get_exit_status() == 420)
-			set_exit_status(0);
+		g_last_signal = 0;
 	}
 	if (*command_line)
 		add_history(command_line);

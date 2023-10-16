@@ -85,7 +85,7 @@ int	patch_heredoc(t_ast_cmd *tree)
 			patch_token((t_ast_redir *)tree);
 		patch_heredoc(((t_ast_redir *)tree)->cmd);
 	}
-	return (get_exit_status() != 420);
+	return (g_last_signal != 420);
 }
 
 void	patch_token(t_ast_redir *tree)

@@ -32,7 +32,8 @@ void	sigint_handler(int sig)
 void	heredoc_sigint_handler(int sig)
 {
 	(void)sig;
-	set_exit_status(420);
+	set_exit_status(1);
+	g_last_signal = 420;
 	close(0);
 	signal(SIGINT, sigint_handler);
 }
