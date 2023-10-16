@@ -12,21 +12,6 @@
 
 #include <executor.h>
 
-static bool	check_empty_expand(char *file_name, char *first_tok_val)
-{
-	if (!file_name)
-		return (false);
-	if (!ft_strlen(file_name))
-	{
-		if ((*first_tok_val) == '$')
-			print_err(first_tok_val, -4);
-		else
-			print_err(file_name, -5);
-		return (false);
-	}
-	return (true);
-}
-
 static	void	wait_and_exit_status(int pid)
 {
 	int	exit_status;
@@ -48,8 +33,8 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 	int		fd_backup;
 	char	*file_name;
 
-	file_name = *expand_args(tree -> file_tok);
-	if (!check_empty_expand(file_name, tree->file_tok->value))
+	file_name = check_file_tok(tree->file_tok);
+	if (!file_name)
 		return ;
 	fd_to_dup = open(file_name, tree->mode, 0644);
 	if (fd_to_dup < 0)
@@ -63,13 +48,13 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 			close(fd_to_dup);
 		}
 	}
+	free(file_name);
 	executor(tree->cmd, forked);
 	if (fd_backup != tree->fd)
 	{
 		dup2(fd_backup, tree->fd);
 		close(fd_backup);
 	}
-	free(file_name);
 }
 
 void	exec_exe(t_ast_exec *exe, bool forked)

@@ -30,10 +30,10 @@ int	change_directory(char *dir)
 		return (1);
 	}
 	path = structure_path(pwd_trolling(NULL), dir);
-	if (!opendir(path))
+	if (closedir(opendir(path)))
 	{
 		joined_paths = join_paths(pwd_trolling(NULL), dir);
-		ft_putendl_fd("shell69: cd: ..: No such file or directory", 2);
+		print_err(dir, -5);
 		pwd_trolling(trim_path(joined_paths));
 		free(joined_paths);
 		status = 1;

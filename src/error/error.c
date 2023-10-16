@@ -33,6 +33,16 @@ void	syntax_error(char *where)
 	write(2, "'\n", 2);
 }
 
+/*
+	- msg_code == 0 => use perror instead
+	- msg_code == -1 => command not found
+	- msg_code == -69 => Is a directory
+	- msg_code == -2 => allocation error
+	- msg_code == -3 => $PATH var unset
+	- msg_code == -4 => ambiguous redirect
+	- msg_code == -5 => No such file or directory
+	- msg_code == -6 => numeric argument required
+*/
 int	print_err(char *preced, int msg_code)
 {
 	t_strbuilder	*sb;

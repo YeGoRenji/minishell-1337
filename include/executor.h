@@ -24,6 +24,7 @@ void	free_list(char **args);
 int		execute_cmd(char **cmd, t_env *envp);
 bool	check_absolute_path(char **cmd, t_env *env);
 bool	check_if_executable(char **cmd, char *exec, char **paths, t_env *env);
+char	*check_file_tok(t_token *file_tok);
 pid_t	ft_fork(void);
 /* binary */
 void	exec_pipe(t_ast_binary *tree, bool forked);
