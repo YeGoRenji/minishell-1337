@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:38:45 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 16:38:42 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/16 03:01:56 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,39 @@ char	*pwd_trolling(char *str)
 	return (pwd);
 }
 
+void	shift_slice(char **slices)
+{
+	if (!slices && !*slices)
+		return ;
+	free(slices[0]);
+	slices[0] = NULL;
+	while (slices[1])
+	{
+		slices[0] = slices[1];
+		slices++;
+	}
+	slices[0] = slices[1];
+}
+
 char	*trim_path(char *pwd)
 {
-	size_t	pwd_len;
+	char **slices;
+	char **slice_ptr;
 	size_t	i;
-	size_t	fake_i;
-	char	*buff;
-
-	pwd_len = ft_strlen(pwd);
-	if (ft_strlen(pwd) == 1)
-		return (ft_strdup(pwd));
-	buff = ft_malloc((pwd_len + 1) * sizeof(char));
+	if (!pwd)
+		return (NULL);
+	slices = ft_split(pwd, '/');
+	slice_ptr = slices;
 	i = 0;
-	fake_i = 0;
-	while (fake_i < pwd_len)
+	while (slice_ptr[i])
 	{
-		if (pwd[fake_i] == '/' && pwd[fake_i + 1] == '/')
+		if (!ft_strcmp(slice_ptr[i], "."))
 		{
-			fake_i++;
-			continue ;
+			shift_slice(&slice_ptr[i]);
+			slice_ptr = slices;
+			continue;
 		}
-		buff[i++] = pwd[fake_i++];
+		i++;
 	}
-	buff[i--] = 0;
-	if (ft_strlen(buff) > 1 && buff[i] == '/')
-		buff[i] = '\0';
-	return (buff);
+	return (contruct_path(slices));
 }

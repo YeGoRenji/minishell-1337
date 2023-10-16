@@ -1,5 +1,4 @@
 cd leaks when using . and ..
-trim_path should delete ./
 2 heredocs exit when doing 2 signals
 #ls > a when a is a directorys leaks "a"
 #ls > leaks
