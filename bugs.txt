@@ -1,8 +1,10 @@
 ctrl-c in heredoc should make exit status = 1
 ctrl-c in heredoc leaks
-wc -l < Makefile Makefile
+
+wc -l < Makefile Makefile (BRUH? either this is a fixed leaks in the
+redirections and or smtg we forgot about)
+
 cat|cat kat7wi ctrl-c and the other signal
-bash: exit: too many arguments <--- we don't have this
 echo nnnnn ggg
 
 2 heredocs exit when doing 2 signals

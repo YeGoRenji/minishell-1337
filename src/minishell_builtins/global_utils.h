@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:02:00 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/16 02:55:58 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/16 16:13:01 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 int		export(int argc, char **argv, t_env **env);
 int		env_(t_env **env);
 int		unset(int argc, char **args, t_env **env);
-void	my_exit(char *arg);
+int	my_exit(int argc, char *arg);
 int		check_builtins(int argc, char *command, char **args);
 char	*pwd_trolling(char *str);
 char	*trim_path(char *pwd);

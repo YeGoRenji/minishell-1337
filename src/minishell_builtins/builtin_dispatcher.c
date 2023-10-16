@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:09:31 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 14:02:59 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/16 16:12:14 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_builtins(int argc, char *command, char **args)
 	else if (!ft_strcmp(command, "unset"))
 		res = unset(argc, args, get_envp_internal(NULL));
 	else if (!ft_strcmp(command, "exit"))
-		my_exit(*args);
+		res = my_exit(argc, *args);
 	else if (!ft_strcmp(command, "env"))
 		res = env_(get_envp_internal(NULL));
 	return (handle_exit_status(used, res));
