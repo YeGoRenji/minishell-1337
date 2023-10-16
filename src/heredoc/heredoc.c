@@ -25,10 +25,12 @@ char	*handle_heredoc(char *delim, bool expandable)
 	if (fd < 0)
 		return (print_err(tmp_file, 0), set_exit_status(1), NULL);
 	signal(SIGINT, heredoc_sigint_handler);
+	fprintf(stderr, "delim = %p\n", delim);
 	while (1)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(0);
+		fprintf(stderr, "line = %p\n", line);
 		if (!line)
 			return (close(fd), tmp_file);
 		line[ft_strlen(line) - 1] = '\0';
