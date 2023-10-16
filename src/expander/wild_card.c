@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 14:44:53 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/15 16:27:50 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/16 01:34:56 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ bool	wild_match(char *str, char *expr)
 		{
 			while (expr[1] == '*')
 				expr++;
-			if (wild_match(str + (expr[1] != *str), \
-				expr + (expr[1] == str[1] || expr[1] == *str)))
+			if (wild_match(str, expr + 1))
 				return (true);
+			str++;
 		}
-		if (*str != *expr)
-			return (false);
-		str++;
-		expr++;
+		else
+		{
+			if (*str != *expr)
+				return (false);
+			str++;
+			expr++;
+		}
 	}
 	return (*str == '\0' && *expr == '\0');
 }

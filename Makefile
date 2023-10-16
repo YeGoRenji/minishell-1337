@@ -12,11 +12,11 @@
 
 NAME = minishell
 
-#ifeq ($(OS), Darwin)
+ifeq ($(shell uname -s), Darwin)
 
 RL_PATH =$(shell brew --prefix readline)
 
-#endif
+endif
 
 LIB = -L $(RL_PATH)/lib -lreadline
 
