@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:02:00 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 14:06:25 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/16 02:10:01 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ int		is_concate(char *str);
 t_env	*get_envp(t_env *envp);
 t_env	**get_envp_internal(t_env *envp);
 void	log_last_command(char *value);
-int		validate_args(int args_num, char **args);
+int	validate_arg(char *arg);
 #endif

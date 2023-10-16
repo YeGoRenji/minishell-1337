@@ -6,4 +6,4 @@ trim_path should delete ./
 ls > a > b > c leaks
 export a="jomla mofida" then 'ls > $a' leaks
 ambiguious redirection happens when the dir is empty or has spaces (e.g cd 'z b i')
-ls > * 
+ls > *

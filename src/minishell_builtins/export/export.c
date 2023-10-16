@@ -6,7 +6,7 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:52:58 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 14:04:48 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/16 02:11:39 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	export(int argc, char **argv, t_env **env)
 		return (1);
 	if (!argc)
 		return (print_exports(*env));
-	if (validate_args(argc, argv))
-		return (1);
 	i = 0;
 	while (i < argc)
 	{
 		ptr = argv[i++];
+		if (validate_arg(ptr))
+			continue;
 		if (handle_concate_case(ptr))
 			continue ;
 		key = get_key(ptr);

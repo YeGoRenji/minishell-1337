@@ -6,7 +6,7 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:25:08 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 16:37:13 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/16 02:03:42 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 
 int		print_exports(t_env *env);
-int		validate_args(int args_num, char **args);
+int	validate_arg(char *arg);
 void	concate_env(char *key, char *value);
 void	append_to_env(t_env **env, char *key, char *value, int equal_sign);
 int		validate_var_name(char *str);

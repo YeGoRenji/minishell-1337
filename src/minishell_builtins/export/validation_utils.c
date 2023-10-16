@@ -6,27 +6,20 @@
 /*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 13:24:22 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 13:39:03 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/16 02:10:38 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "export_utils.h"
 
-int	validate_args(int args_num, char **args)
+int	validate_arg(char *arg)
 {
-	int	i;
-
-	if (!args)
+	if (!arg)
 		return (false);
-	i = 0;
-	while (i < args_num)
+	if (validate_var_name(arg))
 	{
-		if (validate_var_name(args[i]))
-		{
-			printf("export: `%s': not a valid identifier\n", args[i]);
-			return (1);
-		}
-		i++;
+		printf("export: `%s': not a valid identifier\n", arg);
+		return (1);
 	}
 	return (0);
 }
