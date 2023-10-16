@@ -65,5 +65,5 @@ int	my_exit(int argc, char *arg)
 		print_err(arg, -6);
 	else if (arg)
 		set_exit_status(ft_atoi(arg));
-	exit(get_exit_status());
+	exit(get_exit_status() % 256);
 }

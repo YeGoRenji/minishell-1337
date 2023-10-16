@@ -1,5 +1,3 @@
-cat|cat kat7wi ctrl-c and the other signal (2 prompts printed)
+ctrl-c on a child process sometimes prints 2 prompts
 
 exit statuses in case of signal need to use formula (128 + <SIGNAL NUMBER>)
-
-exit doesn't return with last exit status
