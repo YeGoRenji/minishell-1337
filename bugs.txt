@@ -1,7 +1,5 @@
 cat|cat kat7wi ctrl-c and the other signal (2 prompts printed)
 
-2 heredocs exit when doing 2 signals
-
 exit statuses in case of signal need to use formula (128 + <SIGNAL NUMBER>)
 
 exit doesn't return with last exit status

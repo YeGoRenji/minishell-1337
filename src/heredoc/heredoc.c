@@ -25,12 +25,10 @@ char	*handle_heredoc(char *delim, bool expandable)
 	if (fd < 0)
 		return (print_err(tmp_file, 0), set_exit_status(1), NULL);
 	signal(SIGINT, heredoc_sigint_handler);
-	fprintf(stderr, "delim = %p\n", delim);
 	while (1)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(0);
-		fprintf(stderr, "line = %p\n", line);
 		if (!line)
 			return (close(fd), tmp_file);
 		line[ft_strlen(line) - 1] = '\0';
@@ -40,7 +38,6 @@ char	*handle_heredoc(char *delim, bool expandable)
 		(ft_putendl_fd(line, fd), free(line));
 	}
 	free(line);
-	signal(SIGINT, sigint_handler);
 	return (close(fd), tmp_file);
 }
 
@@ -101,6 +98,7 @@ void	patch_token(t_ast_redir *tree)
 	tok = tree->file_tok;
 	free(tok->value);
 	tok->value = handle_heredoc(s_ptr->str, is_expandable(tree -> file_tok));
+	signal(SIGINT, sigint_handler);
 	tok->len = 0;
 	if (tok->value)
 		tok->len = ft_strlen(tok->value);
