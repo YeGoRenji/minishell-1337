@@ -1,10 +1,8 @@
 ctrl-c in heredoc should make exit status = 1
 ctrl-c in heredoc leaks
 
-
 cat|cat kat7wi ctrl-c and the other signal (2 prompts printed)
 
 2 heredocs exit when doing 2 signals
 
-leaks fl heredoc delimiter
 exit statuses in case of signal need to use formula (128 + <SIGNAL NUMBER>)
