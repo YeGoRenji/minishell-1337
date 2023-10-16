@@ -99,6 +99,7 @@ void	patch_token(t_ast_redir *tree)
 	tok = NULL;
 	expand_nosp_arg(tree->file_tok, &s_ptr, 1);
 	tok = tree->file_tok;
+	free(tok->value);
 	tok->value = handle_heredoc(s_ptr->str, is_expandable(tree -> file_tok));
 	tok->len = 0;
 	if (tok->value)
