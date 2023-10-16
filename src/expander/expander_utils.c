@@ -40,7 +40,7 @@ void	ghost_char_trolling(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == ' ')
+		if (str[i] == ' ' || str[i] == '\t')
 			str[i] = (char )TROLL;
 		i++;
 	}
