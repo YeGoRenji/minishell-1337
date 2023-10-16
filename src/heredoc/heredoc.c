@@ -30,13 +30,14 @@ char	*handle_heredoc(char *delim, bool expandable)
 		write(1, "> ", 2);
 		line = get_next_line(0);
 		if (!line)
-			return (close(fd) , tmp_file);
+			return (close(fd), tmp_file);
 		line[ft_strlen(line) - 1] = '\0';
 		if (!ft_strncmp(delim, line, ft_strlen(delim) + 1))
 			break ;
 		line = expand_env(line, false, !expandable);
 		(ft_putendl_fd(line, fd), free(line));
 	}
+	free(line);
 	signal(SIGINT, sigint_handler);
 	return (close(fd), tmp_file);
 }
