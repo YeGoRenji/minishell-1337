@@ -67,8 +67,7 @@ char	*check_file_tok(t_token *file_tok)
 	len = split_len(expanded);
 	if (len == 0)
 		return (free_list(expanded), set_exit_status(1), NULL);
-	if (*file_tok->value == '$' || *file_tok->value == '*')
-		if (len > 1 || (len == 1 && **expanded == '\0'))
+	if (len > 1 || (*file_tok->value == '$' && len == 1 && **expanded == '\0'))
 			return (print_err(file_tok->value, -4), free_list(expanded), NULL);
 	file_name = ft_strdup(*expanded);
 	free_list(expanded);
