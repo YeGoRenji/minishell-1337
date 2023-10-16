@@ -1,0 +1,25 @@
+total 468
+drwxrwxrwx+  7 codespace root        4096 Oct 16 16:18 .
+drwxr-xrwx+  5 codespace root        4096 Oct 14 12:53 ..
+drwxrwxrwx+ 10 codespace root        4096 Oct 16 15:43 .git
+-rw-rw-rw-   1 codespace root          33 Oct 14 12:53 .gitignore
+drwxrwxrwx+  2 codespace root        4096 Oct 14 12:53 .vscode
+-rw-rw-rw-   1 codespace codespace   4421 Oct 16 08:26 Makefile
+-rw-rw-rw-   1 codespace codespace     28 Oct 16 08:26 TODO
+-rw-r--r--   1 codespace codespace      0 Oct 16 16:18 a
+-rw-rw-rw-   1 codespace codespace    324 Oct 16 12:44 bugs
+-rw-rw-rw-   1 codespace codespace    329 Oct 16 15:19 bugs.txt
+-rwxrwxrwx   1 codespace root         312 Oct 14 12:53 clean_push.sh
+-rw-rw-rw-   1 codespace root          55 Oct 14 12:53 compile_flags.txt
+-rw-rw-rw-   1 codespace root         831 Oct 14 12:53 grammar-bash.txt
+-rw-rw-rw-   1 codespace codespace    542 Oct 14 17:25 grammar.txt
+drwxrwxrwx+  2 codespace root        4096 Oct 16 08:26 include
+-rw-rw-rw-   1 codespace root       11556 Oct 14 12:53 lol.png
+-rw-rw-rw-   1 codespace codespace   2823 Oct 16 11:00 main.c
+-rwxrwxrwx   1 codespace codespace 376616 Oct 16 15:44 minishell
+-rwxrwxrwx   1 codespace root          21 Oct 14 12:53 nbr_args.sh
+drwxrwxrwx+  2 codespace codespace   4096 Oct 16 15:44 objs
+drwxrwxrwx+ 13 codespace root        4096 Oct 16 08:26 src
+-rw-rw-rw-   1 codespace root          56 Oct 14 12:53 tree.dot
+-rwxrwxrwx   1 codespace root         120 Oct 14 12:53 watcher-mac.sh
+-rwxrwxrwx   1 codespace root         117 Oct 14 12:53 watcher.sh

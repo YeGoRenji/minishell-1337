@@ -1,11 +1,10 @@
 ctrl-c in heredoc should make exit status = 1
 ctrl-c in heredoc leaks
 
-wc -l < Makefile Makefile (BRUH? either this is a fixed leaks in the
-redirections and or smtg we forgot about)
 
-cat|cat kat7wi ctrl-c and the other signal
-echo nnnnn ggg
+cat|cat kat7wi ctrl-c and the other signal (2 prompts printed)
 
 2 heredocs exit when doing 2 signals
-echo hh > aa* when aa* matches more than one file
+
+leaks fl heredoc delimiter
+exit statuses in case of signal need to use formula (128 + <SIGNAL NUMBER>)

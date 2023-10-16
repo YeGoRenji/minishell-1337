@@ -27,10 +27,10 @@ char	*handle_heredoc(char *delim, bool expandable)
 	signal(SIGINT, heredoc_sigint_handler);
 	while (1)
 	{
-		line = readline("> ");
+		line = get_next_line(0);
 		if (!line)
 			return (close(fd) , tmp_file);
-		// line[ft_strlen(line) - 1] = '\0';
+		line[ft_strlen(line) - 1] = '\0';
 		if (!ft_strncmp(delim, line, ft_strlen(delim) + 1))
 			break ;
 		line = expand_env(line, false, !expandable);
