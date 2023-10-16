@@ -68,6 +68,9 @@ char	*contruct_path(char **path)
 
 char	*structure_path(char *curr_dir, char *dir)
 {
+	char	*constructed;
+	char	**dot_dot;
+
 	if (!curr_dir || !dir)
 		return (NULL);
 	if (!ft_strcmp(dir, "."))
@@ -76,7 +79,10 @@ char	*structure_path(char *curr_dir, char *dir)
 		return (ft_strdup(dir));
 	if (!ft_strnstr(dir, "..", ft_strlen(dir)))
 		return (join_paths(curr_dir, dir));
-	return (contruct_path(handle_dot_dot_path(join_paths(curr_dir, dir))));
+	dot_dot = handle_dot_dot_path(join_paths(curr_dir, dir));
+	constructed = contruct_path(dot_dot);
+	free_list(dot_dot);
+	return (constructed);
 }
 
 int	is_dot_dot(char *slice)
