@@ -1,5 +1,4 @@
 ctrl-c in heredoc should make exit status = 1
-ctrl-c in heredoc leaks
 
 cat|cat kat7wi ctrl-c and the other signal (2 prompts printed)
 
