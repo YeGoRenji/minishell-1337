@@ -32,7 +32,7 @@ char	*expand_env(char *to_expand, bool in_quote, bool ignore_env)
 			else
 			{
 				chunk = get_env_value(chunk);
-				if (!in_quote && ft_strchr(chunk, ' '))
+				if (!in_quote && (ft_strchr(chunk, ' ') || ft_strchr(chunk, '\t')))
 					ghost_char_trolling(chunk);
 			}
 		}
