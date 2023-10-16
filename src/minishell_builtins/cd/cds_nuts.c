@@ -6,7 +6,7 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:36:07 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/16 03:25:33 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/16 15:46:06 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 int	change_directory(char *dir)
 {
 	char	*joined_paths;
+	char 	*trimmed_path;
 	char	*path;
 	int		status;
 
@@ -34,8 +35,10 @@ int	change_directory(char *dir)
 	{
 		joined_paths = join_paths(pwd_trolling(NULL), dir);
 		print_err(dir, -5);
-		pwd_trolling(trim_path(joined_paths));
+		trimmed_path = trim_path(joined_paths);
+		pwd_trolling(trimmed_path);
 		free(joined_paths);
+		free(trimmed_path);
 		status = 1;
 	}
 	else
