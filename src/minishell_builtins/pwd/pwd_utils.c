@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 18:38:45 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/16 03:01:56 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/16 03:14:30 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	shift_slice(char **slices)
 
 char	*trim_path(char *pwd)
 {
+	char *result;
 	char **slices;
 	char **slice_ptr;
 	size_t	i;
@@ -66,5 +67,6 @@ char	*trim_path(char *pwd)
 		}
 		i++;
 	}
-	return (contruct_path(slices));
+	result = contruct_path(slices);
+	return (free_list(slices), result);
 }

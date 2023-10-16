@@ -6,7 +6,7 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:36:07 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/15 17:58:17 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/16 03:25:33 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 int	change_directory(char *dir)
 {
+	char	*joined_paths;
 	char	*path;
 	int		status;
 
@@ -31,13 +32,15 @@ int	change_directory(char *dir)
 	path = structure_path(pwd_trolling(NULL), dir);
 	if (!opendir(path))
 	{
+		joined_paths = join_paths(pwd_trolling(NULL), dir);
 		ft_putendl_fd("shell69: cd: ..: No such file or directory", 2);
-		pwd_trolling(trim_path(join_paths(pwd_trolling(NULL), dir)));
+		pwd_trolling(trim_path(joined_paths));
+		free(joined_paths);
 		status = 1;
 	}
 	else
 	{
-		pwd_trolling(structure_path(pwd_trolling(NULL), dir));
+		pwd_trolling(path);
 		status = 0;
 	}
 	free(path);
