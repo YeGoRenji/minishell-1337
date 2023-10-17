@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:40:54 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/15 18:42:48 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/17 13:22:40 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 			dup2(fd_to_dup, tree->fd);
 			close(fd_to_dup);
 		}
+		set_exit_status(0);
 	}
 	free(file_name);
 	executor(tree->cmd, forked);
