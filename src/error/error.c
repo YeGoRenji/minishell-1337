@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 03:15:15 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/15 15:37:20 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:04:15 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	syntax_error(char *where)
 
 /*
 	- msg_code == 0 => use perror instead
-	- msg_code == -1 => command not found
+	- msg_code == 255 => command not found
 	- msg_code == -69 => Is a directory
 	- msg_code == -2 => allocation error
 	- msg_code == -3 => $PATH var unset
@@ -57,7 +57,7 @@ int	print_err(char *preced, int msg_code)
 	else if (msg_code == -69)
 		(sb_append(sb, ": Is a directory\n"), set_exit_status(126));
 	else if (msg_code == -2)
-		(sb_append(sb, ": allocation error\n"), set_exit_status(-1));
+		(sb_append(sb, ": allocation error\n"), set_exit_status(255));
 	else if (msg_code == -3)
 		(sb_append(sb, ": $PATH var unset\n"), set_exit_status(127));
 	else if (msg_code == -4)
@@ -65,7 +65,7 @@ int	print_err(char *preced, int msg_code)
 	else if (msg_code == -5)
 		(sb_append(sb, ": No such file or directory\n"), set_exit_status(1));
 	else if (msg_code == -6)
-		(sb_append(sb, ": numeric argument required\n"), set_exit_status(-1));
+		(sb_append(sb, ": numeric argument required\n"), set_exit_status(255));
 	if (msg_code == 0)
 		perror(sb->str);
 	else
