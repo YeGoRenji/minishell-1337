@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:30:26 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/15 17:31:44 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:53:28 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ char	*get_value(char *line)
 	return (ft_substr(equal_sign, 1, ft_strlen(equal_sign + 1)));
 }
 
-// TODO : might move this function to a more specific file!!
 void	set_env_value(char *key, char *value, int equal_sign)
 {
 	t_env	**env;
@@ -83,7 +82,7 @@ void	set_env_value(char *key, char *value, int equal_sign)
 		append_to_env(env, key, value, equal_sign);
 	else
 	{
-		edit_env(node, value, equal_sign);
+		edit_env(node, value, 1);
 		free(key);
 	}
 }
