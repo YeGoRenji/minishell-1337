@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:30:26 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/17 16:53:28 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:07:03 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ void	set_env_value(char *key, char *value, int equal_sign)
 		append_to_env(env, key, value, equal_sign);
 	else
 	{
-		edit_env(node, value, 1);
+		if (ft_strlen(value))
+			edit_env(node, value, 1);
+		else
+			free(value);
 		free(key);
 	}
 }
