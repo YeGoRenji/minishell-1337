@@ -6,7 +6,7 @@
 /*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 15:18:58 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/17 15:20:52 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/17 15:21:57 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	export(int argc, char **argv, t_env **env)
 	int		i;
 	char	*ptr;
 	char	*key;
-	int res;
+	int		res;
 
 	if (!env)
 		return (1);
