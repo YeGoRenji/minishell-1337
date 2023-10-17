@@ -6,7 +6,7 @@
 /*   By: afatimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 13:24:38 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/16 16:39:49 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/17 14:50:38 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	print_args(int argc, char **args, int i)
 	ft_putstr_fd(args[i++], 1);
 }
 
-int is_option(char *str)
+int	is_option(char *str)
 {
 	if (!str)
 		return (0);

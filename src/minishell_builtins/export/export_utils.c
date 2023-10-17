@@ -6,7 +6,7 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:52:58 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/16 02:09:35 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/17 14:51:12 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	export(int argc, char **argv, t_env **env)
 		ptr = argv[i++];
 		if (handle_concate_case(ptr))
 			continue ;
-		if (validate_arg(ptr)) // TODO : what about then concate_case's arg in invalid??
+		if (validate_arg(ptr))
 			continue ;
 		key = get_key(ptr);
 		set_env_value(key, get_value(ptr), !!ft_strchr(ptr, '='));

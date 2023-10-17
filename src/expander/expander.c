@@ -6,11 +6,16 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:25:42 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/12 14:26:52 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:48:29 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <expander.h>
+
+char	*ft_chr(char *str, char c)
+{
+	return (ft_strchr(str, c));
+}
 
 char	*expand_env(char *to_expand, bool in_quote, bool ignore_env)
 {
@@ -32,7 +37,7 @@ char	*expand_env(char *to_expand, bool in_quote, bool ignore_env)
 			else
 			{
 				chunk = get_env_value(chunk);
-				if (!in_quote && (ft_strchr(chunk, ' ') || ft_strchr(chunk, '\t')))
+				if (!in_quote && (ft_chr(chunk, ' ') || ft_chr(chunk, '\t')))
 					ghost_char_trolling(chunk);
 			}
 		}

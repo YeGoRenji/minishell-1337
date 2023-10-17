@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:01:03 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/13 15:06:32 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:46:34 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*check_file_tok(t_token *file_tok)
 	if (len == 0)
 		return (free_list(expanded), set_exit_status(1), NULL);
 	if (len > 1 || (*file_tok->value == '$' && len == 1 && **expanded == '\0'))
-			return (print_err(file_tok->value, -4), free_list(expanded), NULL);
+		return (print_err(file_tok->value, -4), free_list(expanded), NULL);
 	file_name = ft_strdup(*expanded);
 	free_list(expanded);
 	return (file_name);

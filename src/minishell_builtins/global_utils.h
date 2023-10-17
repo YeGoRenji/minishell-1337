@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:02:00 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/16 16:13:01 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/17 14:48:44 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 int		export(int argc, char **argv, t_env **env);
 int		env_(t_env **env);
 int		unset(int argc, char **args, t_env **env);
-int	my_exit(int argc, char *arg);
+int		my_exit(int argc, char *arg);
 int		check_builtins(int argc, char *command, char **args);
 char	*pwd_trolling(char *str);
 char	*trim_path(char *pwd);
@@ -42,6 +42,6 @@ int		is_concate(char *str);
 t_env	*get_envp(t_env *envp);
 t_env	**get_envp_internal(t_env *envp);
 void	log_last_command(char *value);
-int	validate_arg(char *arg);
+int		validate_arg(char *arg);
 char	*contruct_path(char **path);
 #endif

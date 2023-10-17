@@ -6,7 +6,7 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:36:07 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/16 15:46:06 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/17 14:50:20 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int	change_directory(char *dir)
 {
 	char	*joined_paths;
-	char 	*trimmed_path;
+	char	*trimmed_path;
 	char	*path;
 	int		status;
 
