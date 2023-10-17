@@ -1,10 +1,8 @@
 set -e
 if [ $# != 1 ]
 then
-	echo "Updating submodule..."
-	git submodule update --remote
-	echo "Done updating..."
-	exit
+	make -C src/libft re
+	make -C src/minishell_builtins/ re
 fi
 
 make fclean

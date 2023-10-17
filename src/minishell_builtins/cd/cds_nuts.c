@@ -6,7 +6,7 @@
 /*   By: afatimi <afatimi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:36:07 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/17 14:50:20 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/17 15:17:13 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <executor.h>
 
 int	change_directory(char *dir)
 {
@@ -23,30 +24,24 @@ int	change_directory(char *dir)
 	char	*path;
 	int		status;
 
-	if (!dir)
-		return (1);
-	if (chdir(dir) == -1)
+	if (!dir || chdir(dir) == -1)
 	{
-		perror("chdir");
+		if (dir)
+			perror("chdir");
 		return (1);
 	}
 	path = structure_path(pwd_trolling(NULL), dir);
-	if (closedir(opendir(path)))
+	if (!is_dir(path))
 	{
 		joined_paths = join_paths(pwd_trolling(NULL), dir);
 		print_err(dir, -5);
 		trimmed_path = trim_path(joined_paths);
 		pwd_trolling(trimmed_path);
-		free(joined_paths);
-		free(trimmed_path);
+		(free(joined_paths), free(trimmed_path), free(path));
 		status = 1;
 	}
 	else
-	{
-		pwd_trolling(path);
-		status = 0;
-	}
-	free(path);
+		return (pwd_trolling(path), free(path), 0);
 	return (status);
 }
 
