@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:09:31 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/16 16:12:14 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/17 16:02:18 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ int	handle_exit_status(int used, int res)
 	if (res == 69)
 		used = 0;
 	if (used)
-		set_exit_status(res);
+	{
+		if (res == 420)
+			set_exit_status(255);
+		else
+			set_exit_status(res);
+	}
 	return (used);
 }
 

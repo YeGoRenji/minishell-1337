@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/10/16 03:27:24 by afatimi          ###   ########.fr        #
+#    Updated: 2023/10/17 15:54:26 by afatimi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ endif
 
 LIB = -L $(RL_PATH)/lib -lreadline
 
-CFLAGS = -Wall -Wextra -Werror -Iinclude -I$(RL_PATH)/include -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -Iinclude -I$(RL_PATH)/include # -fsanitize=address -g
 
 OBJSFOLDER = objs/
 
