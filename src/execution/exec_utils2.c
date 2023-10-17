@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:01:03 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/17 16:37:44 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:39:19 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool	check_absolute_path(char **cmd, t_env *env)
 			exit(126);
 		else
 		{
-			if (access(cmd[0], F_OK))
+			if (!access(cmd[0], F_OK))
 				exit(126);
 			exit(127);
 		}
