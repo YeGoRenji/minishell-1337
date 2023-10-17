@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:35:51 by afatimi           #+#    #+#             */
-/*   Updated: 2023/10/17 16:00:13 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/17 16:08:45 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,17 @@ static int	check_arg(char *arg)
 
 int	my_exit(int argc, char *arg)
 {
+	if (arg && !check_arg(arg))
+	{
+		print_err(arg, -6);
+		exit(255);
+	}
+
 	if (argc > 1)
 	{
 		ft_putendl_fd("shell69: exit: too many arguments", 2);
-		return (420);
+		return (1);
 	}
-	if (arg && !check_arg(arg))
-		print_err(arg, -6);
 	else if (arg)
 		set_exit_status(ft_atoi(arg));
 	exit(get_exit_status() % 256);
