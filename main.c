@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/15 19:39:41 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/17 09:31:28 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <termios.h>
 #include <hacks.h>
 
-#define RED "\033[91m"
+#define RED "\033[0;91m"
 #define NOCOL "\033[0m"
 
 enum {
@@ -31,7 +31,9 @@ int		g_last_signal;
 
 void	prompt_pwd(void)
 {
-	printf("[" RED "%s" NOCOL "]\n", pwd_trolling(NULL));
+	ft_putstr_fd("["RED, 1);
+	ft_putstr_fd(pwd_trolling(NULL), 1);
+	ft_putendl_fd(""NOCOL"]", 1);
 }
 
 void	tty_attr(struct termios *attrs, int action)
