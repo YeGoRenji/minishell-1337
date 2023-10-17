@@ -47,6 +47,8 @@ bool	check_absolute_path(char **cmd, t_env *env)
 			envp = consume_env(env);
 			return (execve(cmd[0], cmd, envp), free_list(envp), true);
 		}
+		else
+			exit(126);
 		if (errno == ENOTDIR)
 			exit(126);
 		else

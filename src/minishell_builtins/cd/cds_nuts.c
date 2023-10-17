@@ -26,17 +26,14 @@ int	change_directory(char *dir)
 
 	if (!dir)
 		return (1);
-
 	if (chdir(dir) == -1)
 	{
 		perror("chdir");
 		return (1);
 	}
-	puts("zbi");
 	path = structure_path(pwd_trolling(NULL), dir);
 	if (!is_dir(path))
 	{
-		puts("zbi2");
 		joined_paths = join_paths(pwd_trolling(NULL), dir);
 		print_err(dir, -5);
 		trimmed_path = trim_path(joined_paths);
@@ -45,7 +42,7 @@ int	change_directory(char *dir)
 		status = 1;
 	}
 	else
-		return (pwd_trolling(path), free(path), puts("9lawi"), 0);
+		return (pwd_trolling(path), free(path), 0);
 	return (status);
 }
 

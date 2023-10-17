@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:40:54 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/17 15:43:57 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:16:49 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@ static	void	wait_and_exit_status(int pid)
 
 	waitpid(pid, &exit_status, 0);
 	set_exit_status(WEXITSTATUS(exit_status));
-	if (WIFSIGNALED(exit_status) == 1 && WTERMSIG(exit_status) == 3)
+	if (WIFSIGNALED(exit_status) == 1)
 	{
-		ft_putendl_fd("Quit : 3", 2);
-		set_exit_status(131);
+		if (WTERMSIG(exit_status) == 3)
+			ft_putendl_fd("Quit : 3", 2);
+		set_exit_status(128 + exit_status);
 	}
-	else if (g_last_signal == 6969)
-		set_exit_status(130);
 }
 
 void	exec_redir(t_ast_redir *tree, bool forked)

@@ -16,10 +16,7 @@ void	sigint_handler(int sig)
 {
 	(void)sig;
 	if (waitpid(-1, &sig, WNOHANG) == 0)
-	{
-		g_last_signal = 6969;
 		return ;
-	}
 	printf("\n");
 	prompt_pwd();
 	rl_on_new_line();
