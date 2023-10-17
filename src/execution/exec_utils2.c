@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 19:01:03 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/17 14:46:34 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/17 16:33:13 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ bool	check_absolute_path(char **cmd, t_env *env)
 			envp = consume_env(env);
 			return (execve(cmd[0], cmd, envp), free_list(envp), true);
 		}
-		else
-			exit(126);
 		if (errno == ENOTDIR)
 			exit(126);
 		else
+		{
+			if (check_file(cmd[0], F_OK))
+				exit(126);
 			exit(127);
+		}
 	}
 	return (false);
 }
