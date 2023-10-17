@@ -6,11 +6,18 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 17:40:54 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/17 14:41:40 by afatimi          ###   ########.fr       */
+/*   Updated: 2023/10/17 15:43:57 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <executor.h>
+
+void	exit_if_forked(bool forked)
+{
+	if (forked)
+		exit(get_exit_status());
+	return ;
+}
 
 static	void	wait_and_exit_status(int pid)
 {
@@ -35,10 +42,11 @@ void	exec_redir(t_ast_redir *tree, bool forked)
 
 	file_name = check_file_tok(tree->file_tok);
 	if (!file_name)
-		return ;
+		return (exit_if_forked(forked));
 	fd_to_dup = open(file_name, tree->mode, 0644);
 	if (fd_to_dup < 0)
-		return (print_err(file_name, 0), set_exit_status(1), free(file_name));
+		return (print_err(file_name, 0), set_exit_status(1),
+			exit_if_forked(forked));
 	else
 	{
 		fd_backup = dup(tree->fd);
@@ -65,8 +73,7 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	envp = get_envp(NULL);
 	if (check_builtins(split_len(argv) - 1, argv[0], argv + 1))
 	{
-		if (forked)
-			exit(get_exit_status());
+		exit_if_forked(forked);
 		return (free_list(argv));
 	}
 	if (!forked)
@@ -79,8 +86,7 @@ void	exec_exe(t_ast_exec *exe, bool forked)
 	}
 	wait_and_exit_status(pid);
 	free_list(argv);
-	if (forked)
-		exit(get_exit_status());
+	exit_if_forked(forked);
 }
 
 void	exec_subsh(t_ast_subsh *tree, bool forked)

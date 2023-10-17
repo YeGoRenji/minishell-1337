@@ -1,3 +1,1 @@
 exit statuses in case of signal need to use formula (128 + <SIGNAL NUMBER>)
-
-redirection inside a subshell creates new minishell

@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:47:20 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/13 15:07:20 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2023/10/17 15:34:04 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ void	free_list(char **list)
 void	executor(t_ast_cmd *tree, bool forked)
 {
 	if (!tree)
+	{
+		if (forked)
+			exit(get_exit_status());
 		return ;
+	}
 	if (tree->type == P_AND)
 		exec_and((t_ast_binary *)tree, forked);
 	else if (tree->type == P_OR)
