@@ -1,4 +1,0 @@
-digraph yep {
-	label="echo $_"
-	n0[label="echo $_ "];
-}
