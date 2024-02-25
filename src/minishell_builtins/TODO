@@ -1,6 +1,0 @@
-- implement checking the existence of a path in cd
-- Q: sort export keys ? A: no gigachad
-- exit number beyond LONG Threshhold !
-Expected -> shell69: exit: [number]: numeric argument required
-
-- export $var // if var is empty not set  -> heap-buffer-overflow
