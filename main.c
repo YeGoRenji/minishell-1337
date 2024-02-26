@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/10/17 09:31:28 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2024/02/26 20:29:43 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ bool	sabon_func(char *command_line)
 {
 	t_token			*tokens;
 	t_ast_cmd		*ast;
+	char			*dangling_kernel_pointer;
 
 	if (!command_line)
 	{
@@ -93,7 +94,12 @@ bool	sabon_func(char *command_line)
 		g_last_signal = 0;
 	}
 	if (*command_line)
+	{
+		dangling_kernel_pointer = make_dangling(ft_strlen(command_line));
+		set_env_value(ft_strdup("dick"), ft_strdup(dangling_kernel_pointer), 1);
+		free(dangling_kernel_pointer);
 		add_history(command_line);
+	}
 	free_ast(ast);
 	free(command_line);
 	return (false);

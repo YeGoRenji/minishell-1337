@@ -23,7 +23,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include "../src/minishell_builtins/global_utils.h"
+# include "../src/minishell_builtins/include/global_utils.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <hacks.h>

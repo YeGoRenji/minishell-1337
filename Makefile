@@ -60,24 +60,25 @@ SRCS_SIGNALS = signals.c
 BUILTINS_FOLD = src/minishell_builtins/
 
 BUILTINS_FILES = builtin_dispatcher.c \
-				cd/cd.c \
-				cd/cds_nuts.c \
-				cd/path_utils.c \
-				echo/echo.c \
-				echo/echo_utils.c \
-				env/env.c \
-				env/env_utils.c \
-				exit/exit.c \
-				export/export.c \
-				export/export_utils.c \
-				export/validation_utils.c \
 				global_utils.c \
 				global_utils2.c \
 				lst_operations.c \
-				pwd/pwd.c \
-				pwd/pwd_utils.c \
-				unset/unset.c \
-				unset/unset_utils.c
+				parse_utils.c \
+				src/cd/cd.c \
+				src/cd/cds_nuts.c \
+				src/cd/path_utils.c \
+				src/echo/echo.c \
+				src/echo/echo_utils.c \
+				src/env/env.c \
+				src/env/env_utils.c \
+				src/exit/exit.c \
+				src/export/export.c \
+				src/export/export_utils.c \
+				src/export/validation_utils.c \
+				src/pwd/pwd.c \
+				src/pwd/pwd_utils.c \
+				src/unset/unset.c \
+				src/unset/unset_utils.c
 
 SRCS_HACKS		= hacks.c
 
