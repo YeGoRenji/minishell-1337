@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 14:58:33 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/29 15:07:49 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2024/02/26 21:36:41 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include "libft.h"
 
-typedef struct s_stringbuilder {
+typedef struct s_stringbuilder
+{
 	size_t	capacity;
 	size_t	used_len;
 	char	*str;

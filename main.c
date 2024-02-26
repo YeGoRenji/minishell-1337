@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2024/02/26 20:29:43 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2024/02/26 21:37:04 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@
 
 #define RED "\033[0;91m"
 #define NOCOL "\033[0m"
-
-enum {
-	ATTR_SET,
-	ATTR_GET,
-	ATTR_CHG
-};
 
 int		g_last_signal;
 
@@ -82,8 +76,7 @@ bool	sabon_func(char *command_line)
 	if (!command_line)
 	{
 		ft_putendl_fd("exit", 1);
-		free(command_line);
-		return (true);
+		return (free(command_line), true);
 	}
 	lexer(command_line, &tokens);
 	if (parser(tokens, &ast))
@@ -100,9 +93,7 @@ bool	sabon_func(char *command_line)
 		free(dangling_kernel_pointer);
 		add_history(command_line);
 	}
-	free_ast(ast);
-	free(command_line);
-	return (false);
+	return (free_ast(ast), free(command_line), false);
 }
 
 int	main(int _, char **__, char **envp)

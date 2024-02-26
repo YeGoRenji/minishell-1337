@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:01:47 by ylyoussf          #+#    #+#             */
-/*   Updated: 2023/08/28 19:50:52 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2024/02/26 21:36:23 by afatimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "globals.h"
 # include "error.h"
 
-typedef enum e_token_type {
+typedef enum e_token_type
+{
 	WORD = 0,
 	STR,
 	DQSTR,
@@ -33,7 +34,8 @@ typedef enum e_token_type {
 	NEW_LINE
 }	t_token_type;
 
-typedef struct s_token {
+typedef struct s_token
+{
 	t_token_type	type;
 	char			*value;
 	int				len;
