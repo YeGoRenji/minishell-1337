@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/20 00:33:51 by ylyoussf          #+#    #+#             */
-/*   Updated: 2024/02/27 17:43:24 by ylyoussf         ###   ########.fr       */
+/*   Created: 2024/02/27 17:38:12 by ylyoussf          #+#    #+#             */
+/*   Updated: 2024/02/27 20:49:40 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include <parser.h>
 
-# include "ast.h"
-# include "debug.h"
-# include "lexer.h"
-# include "error.h"
-# include "heredoc.h"
+# define DEBUG
 
-bool	parser(t_token *tokens, char *cmd, t_ast_cmd **tree);
+void	debug_ast(t_ast_cmd *head, char *cmd);
+void	debug_tree(t_ast_cmd *head, FILE *f, int index);
 
-#endif // PARSER_H
+/* Utils */
+void	debug_binary(t_ast_binary *head, FILE *f, int index);
+void	debug_redir(t_ast_redir *head, FILE *f, int index);
+void	debug_exec(t_ast_exec *head, FILE *f, int index);
+void	debug_subsh(t_ast_subsh *head, FILE *f, int index);

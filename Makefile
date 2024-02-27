@@ -6,7 +6,7 @@
 #    By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/14 00:52:37 by ylyoussf          #+#    #+#              #
-#    Updated: 2023/10/17 15:54:26 by afatimi          ###   ########.fr        #
+#    Updated: 2024/02/27 20:26:19 by ylyoussf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,9 @@ SRCS_HEREDOC = heredoc.c
 
 SRCS_SIGNALS = signals.c
 
+SRCS_DEBUG = debug_tree.c \
+			 debug_tree_utils.c
+
 BUILTINS_FOLD = src/minishell_builtins/
 
 BUILTINS_FILES = builtin_dispatcher.c \
@@ -94,6 +97,7 @@ OBJS_FILES = $(SRCS_LEXER:.c=.o) \
 			 $(SRCS_HEREDOC:.c=.o) \
 			 $(SRCS_SIGNALS:.c=.o) \
 			 $(SRCS_HACKS:.c=.o) \
+			 $(SRCS_DEBUG:.c=.o) \
 			 main.o
 
 LIBFT = src/libft/libft.a
@@ -159,6 +163,10 @@ $(OBJSFOLDER)%.o: src/signals/%.c include/signals.h $(GLOBAL_HEADERS)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJSFOLDER)%.o: src/hacks/%.c include/hacks.h $(GLOBAL_HEADERS)
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJSFOLDER)%.o: src/debug/%.c include/debug.h $(GLOBAL_HEADERS)
 	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) -c $< -o $@
 

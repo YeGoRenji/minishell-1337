@@ -6,7 +6,7 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 19:53:08 by ylyoussf          #+#    #+#             */
-/*   Updated: 2024/02/26 21:37:04 by afatimi          ###   ########.fr       */
+/*   Updated: 2024/02/27 17:19:07 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ bool	sabon_func(char *command_line)
 		return (free(command_line), true);
 	}
 	lexer(command_line, &tokens);
-	if (parser(tokens, &ast))
+	if (parser(tokens, command_line, &ast))
 		executor(ast, false);
 	else
 	{
