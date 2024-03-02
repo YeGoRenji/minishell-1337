@@ -6,12 +6,14 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 11:12:06 by ylyoussf          #+#    #+#             */
-/*   Updated: 2024/02/27 17:46:14 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:17:50 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBALS_H
 # define GLOBALS_H
+
+# define DEBUG
 
 # include <stdio.h>
 # include <errno.h>

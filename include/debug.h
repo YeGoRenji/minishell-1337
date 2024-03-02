@@ -6,13 +6,11 @@
 /*   By: ylyoussf <ylyoussf@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 17:38:12 by ylyoussf          #+#    #+#             */
-/*   Updated: 2024/02/27 20:49:40 by ylyoussf         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:17:35 by ylyoussf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
-
-# define DEBUG
 
 void	debug_ast(t_ast_cmd *head, char *cmd);
 void	debug_tree(t_ast_cmd *head, FILE *f, int index);
