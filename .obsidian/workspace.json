@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "87977669a86b41bb",
@@ -146,8 +147,19 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "07ca9a286848c25e",
+  "active": "236696f252f4c956",
   "lastOpenFiles": [
+    "minishell",
+    "objs/main.o",
+    "objs/main-2ba17310.o.tmp",
+    "objs/debug_tree_utils.o",
+    "objs/debug_tree_utils-c44919c7.o.tmp",
+    "objs/debug_tree.o",
+    "objs/debug_tree-0a3d01bc.o.tmp",
+    "objs/hacks.o",
+    "objs/hacks-ae1b7890.o.tmp",
+    "objs/signals.o",
+    "objs/signals-92b84be2.o.tmp",
     "README.md",
     "resources/unexpected_token.png",
     "resources/unclosed_quote.png",
@@ -156,19 +168,9 @@
     "resources/ScreenShots/Screen Shot 2024-02-15 at 12.04.51 AM.png",
     "resources/ScreenShots/Screen Shot 2023-12-13 at 9.04.00 PM.png",
     "resources/ScreenShots/Screen Shot 2023-11-08 at 3.05.50 PM.png",
-    "resources/ScreenShots",
     "resources/Screen Shot 2024-03-02 at 8.38.54 PM.png",
     "resources/Screen Shot 2024-03-02 at 8.38.32 PM.png",
     "resources.md",
-    "Pasted image 20240302203015.png",
-    "objs/lexer-344b6133.o.tmp",
-    "resources",
-    "file",
-    "tree.dot",
-    "minishell",
-    "objs/main.o",
-    "objs/main-91fa8cdb.o.tmp",
-    "objs/debug_tree_utils.o",
-    "objs/debug_tree.o"
+    "Pasted image 20240302203015.png"
   ]
 }

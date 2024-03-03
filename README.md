@@ -20,10 +20,10 @@ Our Shell69 has the following features :
 
 ## How it works ⚙️
 
-The project follows this pipeline to make the code as organized as possible :
+The project follows this pipeline to make the code as organized as possible : \
 `Lexer` -> `Parser` -> `Expander` \*-> `Executor`
 
-> (\*) in case of precedence there is another `Expanding` that is done while`Executing`.
+(\*) in case of precedence there is another `Expanding` that is done while`Executing`.
 ```bash
 export TEST=42 && echo $TEST # Should output: 42
 ```
@@ -37,4 +37,10 @@ The main role of this step is :
 	![Tokenizer display](resources/unclosed_quote.png)
 	Unknown character :
 	![Unexpected Token](resources/unexpected_token.png)
-TODO: I will do this one day...
+### The Parser 📄 :
+This part is where the tokens start having a structural meaning.
+The `Executor`'s complexity is highly dependent on this part.
+##### The Recursive Descent Parser 🌲  : 
+The structure we used is a tree or more specifically its called **Abstract Syntax Tree** :
+This data structure is the one used for parsing programming languages, Its utility comes when Trying to define Syntactical errors.
+`TODO: Work in progress...`
