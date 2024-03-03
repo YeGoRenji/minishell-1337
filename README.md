@@ -42,5 +42,5 @@ This part is where the tokens start having a structural meaning.
 The `Executor`'s complexity is highly dependent on this part.
 ##### The Recursive Descent Parser 🌲  : 
 The structure we used is a tree or more specifically its called **Abstract Syntax Tree** :
-This data structure is the one used for parsing programming languages, Its utility comes when Trying to define Syntactical errors.
+This data structure is the one used for parsing programming languages, Its utility comes when Trying to define Syntactical errors. \
 `TODO: Work in progress...`
