@@ -13,7 +13,7 @@ Our Shell69 has the following features :
 - Bash builtins `echo, cd, pwd, export, unset and exit`
 - Here_doc `<<` with signals
 - Exit statuses follows bash conventions
-- **BONUS**: 
+- **BONUS**:
   - `&&` and `||` with **parenthesis** for priorities
   - Wildcards \* in the current directory
   - Subshells ! (*Yes not a part of subject but why not*)
@@ -30,9 +30,9 @@ export TEST=42 && echo $TEST # Should output: 42
 ### The Lexer (Tokenizer) 🧩 :
 This is where the baby steps start.
 The main role of this step is :
-- Identify Tokens : 
+- Identify Tokens :
   ![Tokenizer display](resources/Tokenizer.png)
-  Example command is: 
+  Example command is:
 ```bash
 echo "Hello"$HOME && ls' -la' | > file cat
 ```
@@ -45,14 +45,14 @@ echo "Hello"$HOME && ls' -la' | > file cat
 ### The Parser 📄 :
 This part is where the tokens start having a structural meaning.
 The `Executor`'s complexity is highly dependent on this part.
-#### The Recursive Descent Parser 🌲  : 
+#### The Recursive Descent Parser 🌲  :
 The structure we used is a tree or more specifically its called **Abstract Syntax Tree** :
 This data structure is the one used for parsing programming languages, Its utility comes when Trying to define Syntactical errors.
 This is the example of the abstract syntax tree generated from the command above in lexer example :
  ![AST1](resources/AST.png)
 > The command (executable + arguments) and the filenames are left as tokens so they are expanded later.
 
- Another example : 
+ Another example :
 ```bash
  echo "Salam" || ls -la && cat /etc/passwd | grep 'yego'
 ```
