@@ -14,7 +14,7 @@ Our Shell69 has the following features :
 - Here_doc `<<` with signals
 - Exit statuses follows bash conventions
 - **BONUS**: 
-  - `&&` and `||` with parenthesis for priorities
+  - `&&` and `||` with **parenthesis** for priorities
   - Wildcards \* in the current directory
   - Subshells ! (*Yes not a part of subject but why not*)
 
@@ -23,15 +23,20 @@ Our Shell69 has the following features :
 The project follows this pipeline to make the code as organized as possible : \
 `Lexer` -> `Parser` -> `Expander` \*-> `Executor`
 
-(\*) in case of precedence there is another `Expanding` that is done while`Executing`.
+> (\*) in case of precedence there is another `Expanding` that is done while`Executing`.
 ```bash
 export TEST=42 && echo $TEST # Should output: 42
 ```
 ### The Lexer (Tokenizer) 🧩 :
 This is where the baby steps start.
 The main role of this step is :
-- Identify Tokens :
-  ![Tokenizer display](resources/Tokenizer.png)Using a linked list that has two pointers one for token next **after space** and **after no space**.
+- Identify Tokens : 
+  ![Tokenizer display](resources/Tokenizer.png)
+  Example command is: 
+```bash
+echo "Hello"$HOME && ls' -la' | > file cat
+```
+  Using a linked list that has two pointers one for token next **after space** and **after no space**.
 - Check for Lexing errors :
     Unclosed `'` or `"` :
 	![Tokenizer display](resources/unclosed_quote.png)
@@ -40,7 +45,16 @@ The main role of this step is :
 ### The Parser 📄 :
 This part is where the tokens start having a structural meaning.
 The `Executor`'s complexity is highly dependent on this part.
-##### The Recursive Descent Parser 🌲  : 
+#### The Recursive Descent Parser 🌲  : 
 The structure we used is a tree or more specifically its called **Abstract Syntax Tree** :
 This data structure is the one used for parsing programming languages, Its utility comes when Trying to define Syntactical errors.
-`TODO: Work in progress...`
+This is the example of the abstract syntax tree generated from the command above in lexer example :
+ ![AST1](resources/AST.png)
+> The command (executable + arguments) and the filenames are left as tokens so they are expanded later.
+
+ Another example : 
+```bash
+ echo "Salam" || ls -la && cat /etc/passwd | grep 'yego'
+```
+  ![AST1](resources/AST2.png)
+`🚧 work in progress...`
