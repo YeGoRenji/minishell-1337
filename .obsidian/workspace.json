@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "35c4b1aedf1e0469",
+        "id": "47ffce0e6b8b7c2d",
         "type": "tabs",
         "children": [
           {
-            "id": "7ba17c8e8a4d0f93",
+            "id": "6dc135ec473ab1a3",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "preview",
+                "source": false
+              }
             }
           }
         ]
@@ -65,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "87977669a86b41bb",
@@ -82,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -98,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -119,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "README.md"
+              }
             }
           }
         ]
@@ -139,9 +146,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "7ba17c8e8a4d0f93",
+  "active": "6dc135ec473ab1a3",
   "lastOpenFiles": [
+    "The.md",
     "README.md",
+    "Lexer.md",
+    "resources/1.gif",
+    "resources/execAnimation.gif",
+    "resources/Execution Animation.gif",
     "resources/AST2.png",
     "resources/Screen Shot 2024-03-24 at 5.05.37 PM.png",
     "file2",
@@ -159,9 +171,6 @@
     "resources/unexpected_token.png",
     "resources/unclosed_quote.png",
     "resources/ScreenShots/Screen Shot 2024-02-15 at 12.05.01 AM.png",
-    "resources/ScreenShots/Screen Shot 2024-02-15 at 12.05.00 AM.png",
-    "resources/ScreenShots/Screen Shot 2024-02-15 at 12.04.51 AM.png",
-    "resources/ScreenShots/Screen Shot 2023-12-13 at 9.04.00 PM.png",
     "resources.md"
   ]
 }
