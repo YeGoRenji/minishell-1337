@@ -2,6 +2,16 @@
 This is a Project of The 42 Cursus Common Core in 1337 school that I worked on with my Teammate [@Jeffy](https://github.com/0x00Jeff)
 
 The project consists of making an \**almost*\* complete POSIX shell (Bash'ish) using barebone C (The only external library is `readline`).
+
+## How To Use 💅🏽
+```bash
+$ git clone --recursive git@github.com:YeGoRenji/minishell-1337.git && cd minishell-1337
+$ make
+$ ./minishell
+[/tmp/lab/minishell-1337]
+➤
+```
+
 ## The Features ✨
 Our Shell69 has the following features :
 - Commands with absolute and relative paths
