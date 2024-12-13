@@ -2,4 +2,4 @@ tasks:
   - before: git clone 'https://github.com/0x00Jeff/minishell_builtins' src/minishell_builtins
     init: sudo apt update && sudo apt install -y libreadline-dev && make
     command: ./minishell
-    openMode: tab
+    openMode: tab-after
