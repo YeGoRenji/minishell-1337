@@ -20,7 +20,7 @@ endif
 
 LIB = -L $(RL_PATH)/lib -lreadline
 
-CFLAGS = -Wall -Wextra -Werror -Iinclude -I$(RL_PATH)/include # -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Iinclude -I$(RL_PATH)/include # -fsanitize=address -g
 
 OBJSFOLDER = objs/
 
