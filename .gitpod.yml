@@ -4,3 +4,11 @@ tasks:
     init: sudo apt update && sudo apt install -y libreadline-dev && make
     command: ./minishell
     openMode: split-right
+vscode:
+  settings:
+    workbench.colorTheme: "Gitpod Dark"
+    workbench.startupEditor: "none"
+    workbench.panel.defaultLocation: "bottom"
+    workbench.layoutControl.enabled: false
+    terminal.integrated.defaultLocation: "editor"
+    terminal.integrated.tabs.enabled: true
